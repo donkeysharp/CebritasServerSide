@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E76726B3-4F53-4BA7-8C5A-3A0CEE205C18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cebritas.BusinessLogic</RootNamespace>
+    <AssemblyName>Cebritas.BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlertaModule\IAlertaRepository.cs" />
+    <Compile Include="AlertaModule\ISolicitudAlertaRepository.cs" />
+    <Compile Include="AlertaModule\Services\AlertaService.cs" />
+    <Compile Include="AlertaModule\Services\IAlertaService.cs" />
+    <Compile Include="AlertaModule\Services\ISolicitudAlertaService.cs" />
+    <Compile Include="AlertaModule\Services\SolicitudAlertaService.cs" />
+    <Compile Include="Entities\AccessToken.cs" />
+    <Compile Include="Entities\AlertaUrbana.cs" />
+    <Compile Include="Entities\Precio.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\SolicitudAlerta.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="PrecioModule\IPrecioRepository.cs" />
+    <Compile Include="PrecioModule\Services\IPrecioService.cs" />
+    <Compile Include="PrecioModule\Services\PrecioService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserModule\IAccessTokenRepository.cs" />
+    <Compile Include="UserModule\IRoleRepository.cs" />
+    <Compile Include="UserModule\IUserRepository.cs" />
+    <Compile Include="UserModule\Services\AccessTokenService.cs" />
+    <Compile Include="UserModule\Services\IAccessTokenService.cs" />
+    <Compile Include="UserModule\Services\IRoleService.cs" />
+    <Compile Include="UserModule\Services\IUserService.cs" />
+    <Compile Include="UserModule\Services\RoleService.cs" />
+    <Compile Include="UserModule\Services\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cebritas.General\Cebritas.General.csproj">
+      <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>
+      <Name>Cebritas.General</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

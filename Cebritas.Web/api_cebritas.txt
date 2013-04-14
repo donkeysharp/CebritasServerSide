@@ -1,0 +1,279 @@
+										API CEBRITAS
+
+Modulo para Usuario
+===================
+
+- Registro de Usuario (POST)
+	URL: http://stcbolivia.net/api/usuario/registro
+	DATOS DE ENVÍO:
+		data=[datos encriptados con clave pública RSA]
+	Ej.:
+		data=CJEyCMLFNOZ%2BIXP6SysPC%2B7PyX4ga04bOY9D9zPMhnc6Hs5gsPERMEQ77%2BXClJpzS1AsQTJOvD9ATWCMv35ozHUzXiDPihUePI2vQ01QiQw4BOVNvJYHXdFPCSp1ieHkk6qIhFU4%2BO0nZ4gGM%2B%2B%2B7K7klFJVK999Z0Fy5uIx0Fc=
+		Esta cadena es la encriptación del siguiente texto:
+			'{
+				Nombre: [nombre del usuario],
+				Email: [email del usuario],
+				Password: [password del usuario]
+			}'
+         
+		El valor de %2B es el valor codificado del signo "+" los datos no puede viajar con este símbolo, 
+		ver http://www.ietf.org/rfc/rfc1630.txt
+         
+	TIP:
+		Solo reemplazar "+" por "%2B" para enviar estos datos.
+	RESULTADO:
+		Si el registro fue realizado con éxito, el resultado será un objeto JSON con la siguiente forma:
+			{
+				Success: 'ok'
+			}
+		esto significa que el usuario puede ya puede iniciar sesión.
+            
+		En caso que exista alguno problema el resultado será:
+			{
+				Error: '[Mensaje de error]'
+			}
+            
+		El mensaje de error puede ser:
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'error_parsing_data': significa que los datos encriptados estan mal formados o estan corruptos se debe volver a intentar
+		'user_already_exists': el usuario ya existe, es decir alguien con ese email ya esta registrado
+
+- Inicio de sesión de Usuario (POST)
+	URL: http://stcbolivia.net/api/usuario/login
+	DATOS DE ENVÍO:
+		data=[datos encriptados con clave pública RSA]
+	Ej.:
+		data=CJEyCMLFNOZ%2BIXP6SysPC%2B7PyX4ga04bOY9D9zPMhnc6Hs5gsPERMEQ77%2BXClJpzS1AsQTJOvD9ATWCMv35ozHUzXiDPihUePI2vQ01QiQw4BOVNvJYHXdFPCSp1ieHkk6qIhFU4%2BO0nZ4gGM%2B%2B%2B7K7klFJVK999Z0Fy5uIx0Fc=
+	Esta cadena es la encriptación del siguiente texto:
+		'{
+			Email: [email de usuario],
+			Password: [password del usuario]
+		}'
+	El valor de %2B es el valor codificado del signo "+" los datos no puede viajar con este símbolo, 
+	ver http://www.ietf.org/rfc/rfc1630.txt
+         
+	TIP:
+		Solo reemplazar "+" por "%2B" para enviar estos datos.
+	RESULTADO:
+		Si el inicio de sesión fue exitoso, el resultado será:
+			{
+				AuthenticationCode: '[código de autenticación unico del usuario, debe ser utilizada junto con un access token válido]',
+				AccessToken: '[token de acceso solo válido por una sesión, debe ser utilizado con AuthenticationCode válido]'
+			}
+		teniendo los dos datos anteriores, el usuario ya puede utilizar los diferentes metodos de la API enviando siempre estos datos.   
+         
+		En caso que exista algún problema el resultado será:
+			{
+				Error: '[Mensaje de error]'
+			}
+         
+		El mensaje de error puede ser:
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'error_parsing_data': significa que los datos encriptados estan mal formados o estan corruptos se debe volver a intentar
+		'user_credentials_are_invalid': significa que el email y/o password son incorrectos
+
+- Obtener información de Usuario (GET)
+	URL: http://stcbolivia.net/api/usuario/get?authenticationcode=[authenticationCode]&accesstoken=[accessToken]
+	DATOS DE ENVÍO:
+		Ya se encuentran en la url
+	Ej.:
+		http://stcbolivia.net/api/usuario/get?authenticationcode=798b1058f7e0b244db48afa00d10f8689e36199f&accesstoken=59282c8d520ead95a42cdec121fa1ce2
+
+	RESULTADO:
+		Si los datos de sesión son válidos, entonces el resultado será:
+			{
+				Email: '[email del usuario]',
+				Nombre: '[nombre del usuario]'
+			}
+
+		Si se produjo un error, el resultado será:
+			{
+				Error: '[mesaje de error]'
+			}
+
+		El mensaje de error puede ser:
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'invalid_session': los datos pasados son incorrectos, no pertenecen a un usuario o a una sesión activa
+
+- Actualizar información de Usuario (PUT)
+	URL: http://stcbolivia.net/api/usuario/update
+	DATOS DE ENVÍO:
+		authenticationCode=[codigo de autenticacion]&accessToken=[token de acceso]&data=[datos encriptados con clave pública RSA]
+	Ej.:
+		authenticationCode=798b1058f7e0b244db48afa00d10f8689e36199f&accessToken=59282c8d520ead95a42cdec121fa1ce2&data=CJEyCMLFNOZ%2BIXP6SysPC%2B7PyX4ga04bOY9D9zPMhnc6Hs5gsPERMEQ77%2BXClJpzS1AsQTJOvD9ATWCMv35ozHUzXiDPihUePI2vQ01QiQw4BOVNvJYHXdFPCSp1ieHkk6qIhFU4%2BO0nZ4gGM%2B%2B%2B7K7klFJVK999Z0Fy5uIx0Fc=
+
+	El valor de"data" es la encriptación del siguiente texto:
+		'{
+			Email: [email de usuario],   <-------- No es tomado en cuenta, el email no se puede modificar
+			Nombre: [posible nuevo nombre de usuario]
+			Password: [posible nuevo password de usuario]
+		}'
+
+	El valor de %2B es el valor codificado del signo "+" los datos no puede viajar con este símbolo, 
+	ver http://www.ietf.org/rfc/rfc1630.txt
+         
+	TIP:
+		Solo reemplazar "+" por "%2B" para enviar estos datos.
+
+	RESULTADO:
+		Si los datos de sesión son válidos y los datos están bien encriptados, el resultado será:
+			{
+				Success: 'ok'
+			}
+
+		Si se produjo un error, el resultado será:
+			{
+				Error: '[mensaje de error]'
+			}
+
+		El mensaje de error puede ser:
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'invalid_session': los datos pasados son incorrectos, no pertenecen a un usuario o a una sesión activa
+
+- Cerrar sesión de Usuario (POST)
+	URL: http://stcbolivia.net/api/usuario/logout
+	DATOS DE ENVÍO:
+		authenticationCode=[codigo de autenticacion]&accessToken=[token de acceso]
+	Ej.:
+		authenticationCode=798b1058f7e0b244db48afa00d10f8689e36199f&accessToken=59282c8d520ead95a42cdec121fa1ce2
+      
+	RESULTADO:
+		Si el cierre de sesión es correcto, entonces el resultado sera:
+			{
+				Success: 'successfully_logged_out'
+			}
+         
+		Si se produjo un error, el resultado sera:
+			{
+				Error: '[mensaje de error]'
+			}
+         
+		El mensaje de error puede ser
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'invalid_session': los datos pasados son incorrectos, no pertenecen a un usuario o a una sesión activa
+
+
+Modulo para Usuario
+===================
+
+- Reportar una alerta (POST)
+	URL: http://stcbolivia.net/api/alertas/reportar
+	DATOS DE ENVÍO:
+		authenticationcode=[codigo de autenticacion]
+		accesstoken=[token de acceso]
+		latitud=[latitud]
+		longitud=[longitud]
+		descripcion=[descripcion]
+		tipo=[tipo]
+		tiempoestimado=[tiempo estimado]
+	Ej.:
+		authenticationcode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accesstoken=a9e91859c26fddd5ec8b47284b752abe&latitud=23.3&longitud=544.4&descripcion=algo&tipo=bloqueo&tiempoestimado=15m
+
+	TIP:
+		El formato de la latitud y longitud debe ser "x.xxx" saldrá un error si se envia "x,xxx"
+		La variable "tipo" puede tener los siguientes valores:
+			- trafico
+			- manifestacion
+			- desfile
+			- bloqueo
+			- otro
+		La variable "tiempoestimado" puede tener los siguientes valores:
+			- 15m
+			- 30m
+			- 1h
+			- 2h
+			- 3hh
+
+		Cada valor indica el tiempo estimado de la alerta solicitada, 3hh significa que puede durar mas de 3hrs
+
+	RESULTADO:
+		Si los datos de sesión son correctos y los datos de envio son válidos se tendra el sgte resultado:
+			{
+				Success: 'ok'
+			}
+
+		Si se produjo un error, el resultado será:
+			{
+				Error: '[mensaje de error]'
+			}
+		El mensaje de error puede ser
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'invalid_session': los datos pasados son incorrectos, no pertenecen a un usuario o a una sesión activa
+		'alerta_formato_coordenadas_incorrecto': el formato de latitud o longitud son incorrectos
+		'alerta_tipo_invalido': la variable tipo no tiene los valores que deberia tener
+		'alerta_tiempo_estimado_invalido': la variable tiempo estimado no tiene los valores que deberia tener
+
+- Obtener lista de alertas oficiales(GET)
+	URL: URL: http://stcbolivia.net/api/alertas/get?latitud=[latitud]&longitud=[longitud]
+	DATOS DE ENVÍO:
+		Ya se encuentran en la url
+	Ej.:
+		http://stcbolivia.net/api/alertas/get?latitud=-16.434343&longitud=-68.23123
+
+	RESULTADO:
+		Se devolvera un array JSON con los siguientes datos:
+		[
+			{
+				 Code: '',
+				 Latitud: 123,
+				 Longitud: 123,
+				 Descripcion: '', 
+				 Tipo: '',
+				 TiempoEstimado: ''
+			},
+			{
+				 Code: '',
+				 Latitud: 123,
+				 Longitud: 123,
+				 Descripcion: '', 
+				 Tipo: '',
+				 TiempoEstimado: ''
+			}
+		]
+		En caso de error se devolvera el siguiente resultado
+			Si se produjo un error, el resultado será:
+			{
+				Error: '[mensaje de error]'
+			}
+		El mensaje de error puede ser
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema
+		'alerta_formato_coordenadas_incorrecto': el formato de latitud o longitud son incorrectos
+
+Modulo de Precios
+=================
+	URL: http://stcbolivia.net/api/precios/get
+	DATOS DE ENVÍO: 
+		Ninguno
+
+	RESULTADO:
+		Si los datos son buenos devolvera una lista json de la siguiente forma:
+			[{"FourSquareFirstCategoryId":"2d001558236f68626224fc",
+			  "FourSquareVenueId":"76cc5c87284b752ab",
+			  "MinPrice":25,
+			  "MaxPrice":25,
+			  "Capacity":200
+			  "Parking":"True",
+			  "Holidays":"True",
+			  "SmokingArea":"False",
+			  "KidsArea":"False",
+			  "Delivery":"False"
+			  },
+			  {"FourSquareFirstCategoryId":"2ab2390faaec78236f68626224fc",
+			  "FourSquareVenueId":"76cc236f686262ab","MinPrice":10,"MaxPrice":200,
+			  "Capacity":1000,"Parking":"True","Holidays":"True",
+			  "SmokingArea":"False","KidsArea":"True","Delivery":"True"
+			  }]
+		Si se produjo un error el resultado sera:
+			{
+				Error: '[mensaje de error]'
+			}
+		El mensaje de error puede ser
+		'undefined_error': no se sabe que eror es =P
+		'there_was_a_problemo_jefe': significa que es un error interno del sistema

@@ -1,0 +1,185 @@
+﻿METHOD: POST
+http://localhost:51024/api/usuario/registro
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+REQUEST BODY:
+data=MLOFv6EoB2i8ucW/pxEfwMe6wmrYwSVF%2BC3dhXKkP8KMs4e0Y1J0tCD0iGJotOOdfYaLE176V/r48emWn1JJ%2BelFqjbAtKyzUK4WS35vHLir3eufFYhMxttroBaWOdEBH6plaUjX12uVQsi7ru2/rpegd5yMKEUXN1Suf3a5U5k=
+{
+Nombre: 'sergio guillen mantilla',
+Email:'danieloo_123@hotmail.com',
+Password:'12345'
+}
+
+METHOD: POST
+http://localhost:51024/api/usuario/login
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+REQUEST BODY:
+data=WJeVcSysT4kPAvF3D9ho46ZNhU%2BU/sga1GFwFgwmgmiE9qlB4LoNq1qfjCNxIpGky5oDAOVo5z3qnOhSlVu7LaAzKfuijmtQnj/s/JKvRdNTU8GpKrlRF0ON9xI8C6ntEf1NM%2BFDfIVwirVPSK6/PV68QTnY%2BK%2BkzWKji2TkgMQ=
+{
+Email: 'danieloo_123@hotmail.com',
+Password: '12345'
+}
+
+RESULT: 
+AuthenticationCode: 49c63b76cc5c878f7936f68626224fc7d73d78f3
+AccessToken: a9e91859c26fddd5ec8b47284b752abe
+
+METHOD: GET
+http://localhost:51024/api/usuario/get?authenticationcode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accesstoken=a9e91859c26fddd5ec8b47284b752abe
+http://stcbolivia.net/api/usuario/get?authenticationcode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accesstoken=a9e91859c26fddd5ec8b47284b752abe
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+
+RESULT:
+Email: danieloo_123@hotmail.com
+Nombre: sergio guillen mantilla
+
+METHOD: PUT
+http://localhost:51024/api/usuario/update
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+
+authenticationcode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accesstoken=a9e91859c26fddd5ec8b47284b752abe&data=GL1KUb7xxEkj7JdLgOIIch0NLxPDQOKlQCDhuu33uXxb9iv3KCeNZVz7LbQZwpal1rMZTFd%2BG3AQLkHwzetOYqml1zUfDqy%2B/YmFmqsDlDlIAUcDiAErsUaqAQQIyL1cQOHvPDzJz1pP5okaTiylSr3D9xJuEGsULJzq787Ndk0=
+{
+Email: 'danieloo_123@hotmail.com',
+Nombre:'Sergio Gabriel Guillen Mantilla',
+Password: 'none'
+}
+
+RESULT:
+Success:ok
+
+METHOD: POST
+http://localhost:51024/api/usuario/logout
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+
+authenticationCode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accessToken=a9e91859c26fddd5ec8b47284b752abe
+
+RESULT:
+Success:successfully_logged_out
+
+
+
+
+MODULO DE ALERTAS
+=================
+
+METHOD: POST
+http://localhost:51024/api/alertas/reportar
+http://stcbolivia.net/api/alertas/reportar
+Host: localhost:51024
+Connection: keep-alive
+Content-Length: 71
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Origin: http://localhost:51024
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.152 Safari/537.22
+Content-Type: application/x-www-form-urlencoded
+Referer: http://localhost:51024/Api/Usuario/Registro
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+
+REQUEST BODY:
+
+// -16.485187,-68.121905
+// -16.486167,-68.121814
+// -16.486718,-68.117077
+// -16.48636,-68.11719
+authenticationcode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accesstoken=a9e91859c26fddd5ec8b47284b752abe&latitud=-16.485187&longitud=-68.121905&descripcion=algo cerca de la plaza&tipo=bloqueo&tiempoestimado=15m
+
+RESULT: 
+AuthenticationCode: 49c63b76cc5c878f7936f68626224fc7d73d78f3
+AccessToken: a9e91859c26fddd5ec8b47284b752abe
+
+
+Datos otro usuario:
+             Email: ferdo@hotmail.com
+          Password: 12345
+AuthenticationCode: d9e8f550336a6f55a7c33be0c4505fb3499f6d0d
+       AccessToken: 578d613fc2c7761c01654c5e9e7205c6
+
+http://stcbolivia.net/api/usuario/get?authenticationcode=d9e8f550336a6f55a7c33be0c4505fb3499f6d0d&accesstoken=9c4b0b6baa3cca8122e732d9409d304f
+
+Usuario 1:
+authenticationCode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accessToken=a9e91859c26fddd5ec8b47284b752abe
+
+Usuario 2:
+authenticationCode=c1f4e32d7dcb728949873279ea326d1fe2d1cc2e&accessToken=578d613fc2c7761c01654c5e9e7205c6
+
+Usuario 3:
+authenticationCode=e71c3cd2462528968ae10ece093d7eb13bfc35bb&accessToken=496c3adf99d7210a53df63e89b387a0a
+
+Usuario 4:
+authenticationCode=ced63a128a98fb7641e2792a671ad55fa60ad8e8&accessToken=dda31ca75634818de080443f2bb6d950
+
+
+authenticationCode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accessToken=a9e91859c26fddd5ec8b47284b752abe&
+latitud=-16.499077&longitud=-68.124349&descripcion=reporte1&tipo=bloqueo&tiempoestimado=15m
+
+authenticationCode=c1f4e32d7dcb728949873279ea326d1fe2d1cc2e&accessToken=578d613fc2c7761c01654c5e9e7205c6&
+latitud=-16.499152&longitud=-68.124019&descripcion=reporte2&tipo=bloqueo&tiempoestimado=15m
+
+authenticationCode=49c63b76cc5c878f7936f68626224fc7d73d78f3&accessToken=a9e91859c26fddd5ec8b47284b752abe&
+latitud=-16.497275&longitud=-68.123134&descripcion=reporte3&tipo=bloqueo&tiempoestimado=15m
+
+authenticationCode=e71c3cd2462528968ae10ece093d7eb13bfc35bb&accessToken=496c3adf99d7210a53df63e89b387a0a&
+latitud=-16.498949&longitud=-68.124247&descripcion=reporte4&tipo=bloqueo&tiempoestimado=15m
+
+
+authenticationCode=ced63a128a98fb7641e2792a671ad55fa60ad8e8&accessToken=dda31ca75634818de080443f2bb6d950&
+latitud=-16.499188&longitud=-68.124448&descripcion=reporte5&tipo=bloqueo&tiempoestimado=15m
+
+
+http://localhost:51024/api/alertas/get?latitud=-16.499152&longitud=-68.124019
