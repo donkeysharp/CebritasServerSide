@@ -49,6 +49,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
         [HttpGet]
         public JsonResult GetByMinPriceBetween(string low, string high) {
+        // Needs a better review
             try {
                 int lowValue, highValue;
                 lowValue = Convert.ToInt32(low);
