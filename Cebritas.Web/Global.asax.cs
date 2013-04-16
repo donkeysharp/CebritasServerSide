@@ -27,6 +27,7 @@ namespace Cebritas.Web {
         }
 
         protected void Application_Start() {
+            // Must call the job scheduler to update alertas
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
