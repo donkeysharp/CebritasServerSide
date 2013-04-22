@@ -5,7 +5,13 @@ using System.Web;
 
 namespace Cebritas.Web.Areas.Api {
     public class ApiData {
+        /// <summary>
+        /// RSA Private key
+        /// </summary>
         public string PrivateKey { get; set; }
+        /// <summary>
+        /// RSA Public key
+        /// </summary>
         public string PublicKey { get; set; }
 
         private static ApiData context = new ApiData();

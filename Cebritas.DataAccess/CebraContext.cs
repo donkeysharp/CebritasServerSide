@@ -17,6 +17,10 @@ namespace Cebritas.DataAccess {
         public DbSet<AlertaUrbana> Alertas { get; set; }
         public DbSet<Precio> Precios { get; set; }
 
+        // Places Module
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Place> Places { get; set; }
+
         private CebraContext() {
         }
 
