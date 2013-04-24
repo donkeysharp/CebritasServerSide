@@ -57,6 +57,12 @@
     <Compile Include="Entities\SolicitudAlerta.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="PlacesModule\ICategoryRepository.cs" />
+    <Compile Include="PlacesModule\IPlaceRepository.cs" />
+    <Compile Include="PlacesModule\Services\CategoryService.cs" />
+    <Compile Include="PlacesModule\Services\ICategoryService.cs" />
+    <Compile Include="PlacesModule\Services\IPlaceService.cs" />
+    <Compile Include="PlacesModule\Services\PlaceService.cs" />
     <Compile Include="PrecioModule\IPrecioRepository.cs" />
     <Compile Include="PrecioModule\Services\IPrecioService.cs" />
     <Compile Include="PrecioModule\Services\PrecioService.cs" />

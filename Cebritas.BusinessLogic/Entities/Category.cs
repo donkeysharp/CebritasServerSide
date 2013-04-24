@@ -7,6 +7,7 @@ using System.Text;
 namespace Cebritas.BusinessLogic.Entities {
     public class Category {
         public long Id { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
         public string SpanishName { get; set; }
 

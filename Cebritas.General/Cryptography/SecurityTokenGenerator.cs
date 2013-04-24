@@ -16,5 +16,9 @@ namespace Cebritas.General.Cryptography {
             string token = DateTime.Now.ToString("F") + "&" + Guid.NewGuid();
             return HashSumUtil.GetHashSum(token, HashSumType.MD5);
         }
+
+        public static string GenerateGuid() {
+            return Guid.NewGuid().ToString("N");
+        }
     }
 }

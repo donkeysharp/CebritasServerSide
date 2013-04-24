@@ -53,6 +53,7 @@
     <None Include="packages.config" />
     <Compile Include="Repositories\AccessTokenRepository.cs" />
     <Compile Include="Repositories\AlertaRepository.cs" />
+    <Compile Include="Repositories\CategoryRepostitory.cs" />
     <Compile Include="Repositories\PrecioRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SolicitudAlertaRepository.cs" />

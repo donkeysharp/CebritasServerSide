@@ -58,5 +58,8 @@ namespace Cebritas.General {
         public const string ALERTA_FORMATO_COORDENADAS_INCORRECTO = "alerta_formato_coordenadas_incorrecto";
 
         public const string PRECIOS_INVALID_PARAMETER_FORMAT = "precios_invalid_parameter_format";
+
+        public const string CATEGORY_ALREADY_EXISTS = "category_already_exists";
+        public const string CATEGORY_NAMES_ARE_EMPTY = "category_names_are_empty";
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Cebritas.BusinessLogic.Entities;
 using Cebritas.General;
+using Cebritas.General.Cryptography;
 using Cebritas.General.Geo;
 
 namespace Cebritas.BusinessLogic.AlertaModule.Services {
@@ -34,7 +35,7 @@ namespace Cebritas.BusinessLogic.AlertaModule.Services {
         public SolicitudAlerta Insert(SolicitudAlerta solicitudAlerta) {
             ValidateInsert(solicitudAlerta);
 
-            solicitudAlerta.Code = Guid.NewGuid().ToString("N");
+            solicitudAlerta.Code = SecurityTokenGenerator.GenerateGuid();
             solicitudAlerta.Fecha = DateTime.Now;
 
             return db.Insert(solicitudAlerta);
