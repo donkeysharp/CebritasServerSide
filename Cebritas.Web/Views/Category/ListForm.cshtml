@@ -1,0 +1,80 @@
+﻿@model List<Cebritas.BusinessLogic.Entities.Category>
+@{
+    ViewBag.Title = "Category List Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header {
+    <style type="text/css">
+        html, body {
+            min-height: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+        table thead {
+            font-weight: bold;
+        }
+        td {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+        #main {
+            margin: auto;
+            width: 800px;
+        }
+        .table-row-alt {
+            background: #efefef;
+        }
+        .table-row:hover {
+            background: #feea2d;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('.table-row').click(function (event) {
+                //alert();
+                window.location.href = '/temp/category/edit?id=' + event.currentTarget.id;
+            });
+        });
+    </script>
+}
+<div id="main">
+    <h2>Category List</h2>
+    @*<a class="btn" href="asd">Create Category</a>*@
+    @Html.ActionLink("Create Category", "Add", null, new { @class = "btn" })
+    <br />
+    <br />
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Spanish Name</td>
+                <td>Parent Name</td>
+                <td>Parent Spanish Name</td>
+            </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Count; ++i) {
+            if (i % 2 == 0) {
+                @:<tr class="table-row" id="@Model[i].Id">
+            } else {
+                @:<tr class="table-row table-row-alt" id="@Model[i].Id">
+            }
+                <td>@Model[i].Name</td>
+                <td>@Model[i].SpanishName</td>
+                <td>
+                    @if (Model[i].Parent != null) {
+                        @Model[i].Parent.Name
+                    }
+                </td>
+                <td>
+                    @if (Model[i].Parent != null) {
+                        @Model[i].Parent.SpanishName
+                    }
+                </td>
+            @:</tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -10,9 +10,9 @@ namespace Cebritas.BusinessLogic.Entities {
         public string Code { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string WebSite { get; set; }
         public double MinPrice { get; set; }
         public double MaxPrice { get; set; }
-        public int Capacity { get; set; }
         public bool Parking { get; set; }
         public bool Holidays { get; set; }
         public bool SmokingArea { get; set; }

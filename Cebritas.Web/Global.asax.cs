@@ -20,9 +20,27 @@ namespace Cebritas.Web {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "ListCategories",
+                "temp/category/list",
+                new { controller = "Category", action = "List" }
+            );
+            routes.MapRoute(
+                "AddCategory",
+                "temp/category/add",
+                new { controller = "Category", action = "Add" }
+            );
+            routes.MapRoute("SaveCategory", "temp/category/save",
+                new { controller = "Category", action = "Save" }
+            );
+            routes.MapRoute(
+                "EditCategory",
+                "temp/category/edit",
+                new { controller = "Category", action = "Edit" }
+            );
+            routes.MapRoute(
+                "DeleteCategory",
+                "temp/category/delete",
+                new { controller = "Category", action = "Delete"}
             );
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Cebritas.BusinessLogic;
+using Cebritas.General;
 using Cebritas.General.Geo;
 
 namespace Cebritas.DataAccess {
@@ -50,6 +51,9 @@ namespace Cebritas.DataAccess {
         }
 
         public int Update(T item) {
+            if(item == null) {
+                throw new CebraException("Null item not allowed");
+            }
             dbSet.Attach(item);
             context.Entry(item).State = System.Data.EntityState.Modified;
             return context.SaveChanges();

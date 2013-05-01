@@ -13,6 +13,6 @@ namespace Cebritas.BusinessLogic.Entities {
 
         public long? ParentId { get; set; }
         [ForeignKey("ParentId")]
-        public Category Parent { get; set; }
+        public virtual Category Parent { get; set; }
     }
 }

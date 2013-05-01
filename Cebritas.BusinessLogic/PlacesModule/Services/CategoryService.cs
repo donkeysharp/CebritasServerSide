@@ -52,7 +52,7 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
         }
 
         public int Delete(long id) {
-            Category category = new Category() { Id = id };
+            Category category = Get(id);
             return db.Delete(category);
         }
 

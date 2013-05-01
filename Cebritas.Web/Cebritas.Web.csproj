@@ -76,13 +76,23 @@
     <Compile Include="Areas\Api\Controllers\UserUtils.cs" />
     <Compile Include="Areas\Api\Models\PrecioViewModel.cs" />
     <Compile Include="Areas\Api\Models\SolicitudAlertaViewModel.cs" />
+    <Compile Include="Controllers\CebraControllerBase.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryModule\CategoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="api_cebritas.txt" />
+    <Content Include="Cebra_Places.sql" />
+    <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.js" />
     <Content Include="DatosIniciales.sql" />
     <Content Include="Global.asax" />
     <Content Include="http headers.txt" />
@@ -103,9 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Shared\" />
-    <Folder Include="Content\themes\base\images\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +134,12 @@
       <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>
       <Name>Cebritas.General</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Category\ListForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Category\EditForm.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

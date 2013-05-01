@@ -6,6 +6,6 @@ using Cebritas.BusinessLogic.Entities;
 using Cebritas.BusinessLogic.PlacesModule;
 
 namespace Cebritas.DataAccess.Repositories {
-    public class CategoryRepostitory : GenericRepository<Category>, ICategoryRepository {
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository {
     }
 }
