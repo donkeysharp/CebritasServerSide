@@ -1,0 +1,73 @@
+﻿@model Cebritas.Web.Models.PlacesModule.PlaceModel
+@{
+    ViewBag.Title = "EditForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Header { }
+@{
+    bool isUpdate = Model.Id != 0;
+}
+@if (isUpdate) {
+    @: <h2>Edit Place</h2>
+} else {
+    @: <h2>New Place</h2>
+}
+@using (Html.BeginForm("Save", "Place", FormMethod.Post)) {
+    @Html.HiddenFor(x => x.Id)
+    <div style="width: 380px;">
+        <table>
+            <tr>
+                <td>Category: </td>
+                <td>
+                    @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList)
+                </td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>@Html.TextBoxFor(x => x.Name)</td>
+            </tr>
+            <tr>
+                <td>Address: </td>
+                <td>@Html.TextBoxFor(x => x.Address)</td>
+            </tr>
+            <tr>
+                <td>Website: </td>
+                <td>@Html.TextBoxFor(x => x.WebSite)</td>
+            </tr>
+            <tr>
+                <td>Minimum Price: </td>
+                <td>@Html.TextBoxFor(x => x.MinPrice)</td>
+            </tr>
+            <tr>
+                <td>Maximum Price: </td>
+                <td>@Html.TextBoxFor(x => x.MaxPrice)</td>
+            </tr>
+            <tr>
+                <td>Latitude</td>
+                <td>@Html.TextBoxFor(x => x.Latitude)</td>
+            </tr>
+            <tr>
+                <td>Longitude</td>
+                <td>@Html.TextBoxFor(x => x.Longitude)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Parking: @Html.CheckBoxFor(x => x.Parking) &nbsp;
+                    Holidays: @Html.CheckBoxFor(x => x.Holidays) &nbsp;
+                    Smoking Area: @Html.CheckBoxFor(x => x.SmokingArea) &nbsp;
+                    Kids Area: @Html.CheckBoxFor(x => x.KidsArea) &nbsp;
+                    Delivery: @Html.CheckBoxFor(x => x.Delivery)
+                </td>
+            </tr>
+        </table>
+        <br />
+
+        @if (!isUpdate) {
+            @: <input class="btn" type="submit" value="Create" />&nbsp;
+        } else {
+            @: <input class="btn" type="submit" value="Update" /> &nbsp;
+            @: <input class="btn" onclick="location.href='@Url.Action("Delete", "Place", new { Id = Model.Id })'" type="button" value="Delete" /> &nbsp;
+        }
+        <input class="btn" onclick="location.href='@Url.Action("List", "Place")'" type="button" value="Back to list" />
+    </div>
+}

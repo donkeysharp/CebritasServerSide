@@ -54,6 +54,7 @@
     <Compile Include="Repositories\AccessTokenRepository.cs" />
     <Compile Include="Repositories\AlertaRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\PlaceRepository.cs" />
     <Compile Include="Repositories\PrecioRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SolicitudAlertaRepository.cs" />

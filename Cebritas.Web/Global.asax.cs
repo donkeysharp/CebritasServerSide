@@ -18,29 +18,68 @@ namespace Cebritas.Web {
 
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            RegisterPlacesModule(routes);
+        }
 
+        private static void RegisterPlacesModule(RouteCollection routes) {
+            // For Category CRUD
             routes.MapRoute(
                 "ListCategories",
                 "temp/category/list",
-                new { controller = "Category", action = "List" }
+                new { controller = "Category", action = "List" },
+                new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute(
                 "AddCategory",
                 "temp/category/add",
-                new { controller = "Category", action = "Add" }
+                new { controller = "Category", action = "Add" },
+                new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute("SaveCategory", "temp/category/save",
-                new { controller = "Category", action = "Save" }
+                new { controller = "Category", action = "Save" },
+                new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute(
                 "EditCategory",
                 "temp/category/edit",
-                new { controller = "Category", action = "Edit" }
+                new { controller = "Category", action = "Edit" },
+                new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute(
                 "DeleteCategory",
                 "temp/category/delete",
-                new { controller = "Category", action = "Delete"}
+                new { controller = "Category", action = "Delete" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+
+            // For Place CRUD
+            routes.MapRoute(
+                "ListPlaces",
+                "temp/places/list",
+                new { controller = "Place", action = "List" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "AddPlace",
+                "temp/places/add",
+                new { controller = "Place", action = "Add" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute("SavePlace", "temp/places/save",
+                new { controller = "Place", action = "Save" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "EditPlace",
+                "temp/places/edit",
+                new { controller = "Place", action = "Edit" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "DeletePlace",
+                "temp/places/delete",
+                new { controller = "Place", action = "Delete" },
+                new string[] { "Cebritas.Web.Controllers" }
             );
         }
 

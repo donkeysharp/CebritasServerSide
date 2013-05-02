@@ -9,8 +9,11 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
     public interface IPlaceService {
         Place Get(long id);
         Place Get(string code);
-        IEnumerable<Place> Filter(Expression<Func<Place, bool>> filter = null,
-            Func<IQueryable<Place>, IOrderedQueryable<Place>> orderBy = null);
+        IEnumerable<Place> List();
+        IEnumerable<Place> GetByCategoryId(long categoryId);
+        IEnumerable<Place> GetByCategoryCode(string categoryCode);
+        IEnumerable<Place> GetByCategoryIdNear(long categoryId, double latitude, double longitude);
+        IEnumerable<Place> GetByCategoryCodeNear(string categoryCode, double latitud, double longitude);
         Place Insert(Place place);
         int Update(Place place);
         int Delete(long id);

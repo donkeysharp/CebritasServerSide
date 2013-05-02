@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\ApiData.cs" />
+    <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\PrecioController.cs" />
     <Compile Include="Areas\Api\Controllers\RestControllerBase.cs" />
     <Compile Include="Areas\Api\Controllers\SolicitudAlertaController.cs" />
@@ -78,10 +79,12 @@
     <Compile Include="Areas\Api\Models\SolicitudAlertaViewModel.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoryModule\CategoryModel.cs" />
+    <Compile Include="Models\PlacesModule\CategoryModel.cs" />
+    <Compile Include="Models\PlacesModule\PlaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Category\EditForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Place\ListForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Place\EditForm.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

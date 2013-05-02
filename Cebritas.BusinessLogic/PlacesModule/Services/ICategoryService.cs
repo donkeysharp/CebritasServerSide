@@ -9,9 +9,10 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
     public interface ICategoryService {
         Category Get(long id);
         Category Get(string code);
+        IEnumerable<Category> List();
+        IEnumerable<Category> GetParentCategories();
+        IEnumerable<Category> GetParentCategories(long excludeCategoryId);
         IEnumerable<Category> GetByName(string name, string spanishName);
-        IEnumerable<Category> Filter(Expression<Func<Category, bool>> filter = null,
-            Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null);
         Category Insert(Category category);
         int Update(Category category);
         int Delete(long id);

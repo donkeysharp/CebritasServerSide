@@ -26,6 +26,9 @@ namespace Cebritas.General {
         public const double ALERTA_KILOMETER_NEAR_RADIUS = 10.0;
         // In order to report an alert, other reported alerts should be in a 300 meters radius
         public const double ALERTA_METERS_REPORT_RADIUS = 100;
+
+        // Maximum place distance to be considered
+        public const double MAX_NEAR_PLACE_DISTANCE = 0.5;
     }
 
     public class Messages {

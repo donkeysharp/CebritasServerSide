@@ -29,6 +29,18 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
             return null;
         }
 
+        public IEnumerable<Category> List() {
+            return db.Filter(null, x => x.OrderBy(y => y.ParentId));
+        }
+
+        public IEnumerable<Category> GetParentCategories() {
+            return db.Filter(x => x.ParentId == null);
+        }
+
+        public IEnumerable<Category> GetParentCategories(long excludeCategoryId) {
+            return db.Filter(x => x.ParentId == null && x.Id != excludeCategoryId);
+        }
+
         public IEnumerable<Category> GetByName(string name, string spanishName) {
             var result = db.Filter(x => x.Name.Equals(name) || x.SpanishName.Equals(spanishName)).ToList();
             return result;

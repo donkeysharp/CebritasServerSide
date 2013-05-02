@@ -7,20 +7,20 @@ using Cebritas.BusinessLogic.Entities;
 using Cebritas.BusinessLogic.PlacesModule.Services;
 using Cebritas.DataAccess.Repositories;
 using Cebritas.General;
-using Cebritas.Web.Models.CategoryModule;
+using Cebritas.Web.Models.PlacesModule;
 
 namespace Cebritas.Web.Controllers {
     public class CategoryController : CebraControllerBase {
         public ActionResult List() {
             ICategoryService categoryService = CategoryService.CreateCategoryService(new CategoryRepository());
-            List<Category> categoryList = (List<Category>)categoryService.Filter();
+            List<Category> categoryList = (List<Category>)categoryService.List();
 
             return View("ListForm", categoryList);
         }
 
         public ActionResult Add() {
             ICategoryService categoryService = CategoryService.CreateCategoryService(new CategoryRepository());
-            IEnumerable<Category> parents = categoryService.Filter(x => x.ParentId == null);
+            IEnumerable<Category> parents = categoryService.GetParentCategories();
             ViewBag.Parents = new SelectList(parents, "Id", "Name");
 
             return View("EditForm", new CategoryModel());
@@ -45,7 +45,7 @@ namespace Cebritas.Web.Controllers {
                 categoryService.Update(category);
             }
             // Sets the request attribute to populate parent categories
-            IEnumerable<Category> parents = categoryService.Filter(x => x.ParentId == null);
+            IEnumerable<Category> parents = categoryService.GetParentCategories();
             ViewBag.Parents = new SelectList(parents, "ParentId", "Name", category.ParentId);
 
             return RedirectToAction("edit", new { Id = category.Id });
@@ -65,7 +65,7 @@ namespace Cebritas.Web.Controllers {
             }
 
             // Sets the request attribute to populate parent categories
-            IEnumerable<Category> parents = categoryService.Filter(x => x.ParentId == null && x.Id != category.Id);
+            IEnumerable<Category> parents = categoryService.GetParentCategories(category.Id);
             ViewBag.Parents = new SelectList(parents, "Id", "Name", category.ParentId);
 
             return View("EditForm", model);

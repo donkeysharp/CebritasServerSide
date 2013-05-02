@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Cebritas.BusinessLogic.Entities;
 
-namespace Cebritas.Web.Models.CategoryModule {
+namespace Cebritas.Web.Models.PlacesModule {
     public class CategoryModel {
         public long Id { get; set; }
         public string Name { get; set; }

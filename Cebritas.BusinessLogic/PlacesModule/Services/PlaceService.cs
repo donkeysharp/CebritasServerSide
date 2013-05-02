@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cebritas.BusinessLogic.Entities;
+using Cebritas.General;
+using Cebritas.General.Geo;
 
 namespace Cebritas.BusinessLogic.PlacesModule.Services {
     public class PlaceService : IPlaceService {
@@ -28,8 +30,8 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
             return null;
         }
 
-        public IEnumerable<Place> Filter(System.Linq.Expressions.Expression<Func<Place, bool>> filter = null, Func<IQueryable<Place>, IOrderedQueryable<Place>> orderBy = null) {
-            return db.Filter(filter, orderBy);
+        public IEnumerable<Place> List() {
+            return db.Filter(null, x => x.OrderBy(y => y.Category.Name));
         }
 
         public Place Insert(Place place) {
@@ -43,8 +45,35 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
         }
 
         public int Delete(long id) {
-            Place place = new Place() { Id = id };
+            Place place = Get(id);
             return db.Delete(place);
+        }
+
+        public IEnumerable<Place> GetByCategoryId(long categoryId) {
+            return db.Filter(x => x.CategoryId == categoryId);
+        }
+
+        public IEnumerable<Place> GetByCategoryCode(string categoryCode) {
+            return db.Filter(x => x.Code.Equals(categoryCode));
+        }
+
+        public IEnumerable<Place> GetByCategoryIdNear(long categoryId, double latitude, double longitude) {
+            return FilterNearPlaces(GetByCategoryId(categoryId), latitude, longitude);
+        }
+
+        public IEnumerable<Place> GetByCategoryCodeNear(string categoryCode, double latitude, double longitude) {
+            return FilterNearPlaces(GetByCategoryCode(categoryCode), latitude, longitude);
+        }
+
+        private List<Place> FilterNearPlaces(IEnumerable<Place> placeList, double latitude, double longitude) {
+            List<Place> result = new List<Place>();
+            foreach (Place place in placeList) {
+                double distance = GeoCodeCalc.CalcDistance(place.Latitude, place.Longitude, latitude, longitude, GeoCodeCalcMeasurement.Kilometers);
+                if (distance <= Constants.MAX_NEAR_PLACE_DISTANCE) {
+                    result.Add(place);
+                }
+            }
+            return result;
         }
     }
 }
