@@ -39,5 +39,9 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
         public int Update(Role role) {
             return db.Update(role);
         }
+
+        public string[] GetRoleNames() {
+            return db.GetRoleNames();
+        }
     }
 }

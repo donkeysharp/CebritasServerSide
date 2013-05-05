@@ -113,5 +113,17 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
             }
             return null;
         }
+
+        public string[] GetRolesByUsername(string username) {
+            return db.GetRolesByUsername(username);
+        }
+
+        public bool IsUserInRole(string username, string roleName) {
+            List<Usuario> usuarioList = (List<Usuario>)db.Filter(x => x.Email.Equals(username) && x.Rol.Name.Equals(roleName));
+            if (usuarioList.Count > 0) {
+                return true;
+            }
+            return false;
+        }
     }
 }

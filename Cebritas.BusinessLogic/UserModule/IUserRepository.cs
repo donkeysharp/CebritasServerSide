@@ -6,5 +6,6 @@ using Cebritas.BusinessLogic.Entities;
 
 namespace Cebritas.BusinessLogic.UserModule {
     public interface IUserRepository : IRepository<Usuario> {
+        string[] GetRolesByUsername(string username);
     }
 }

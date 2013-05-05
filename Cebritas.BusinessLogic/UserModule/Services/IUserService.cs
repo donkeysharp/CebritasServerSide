@@ -14,11 +14,14 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
         Usuario GetByUsername(string username);
         Usuario GetByEmail(string email);
         Usuario GetByAuthenticationCode(string authenticationCode);
+        string[] GetRolesByUsername(string username);
         void ChangeStatus(long id, bool isActive);
         Usuario Insert(Usuario user);
         int Delete(long id);
         int Update(Usuario user);
 
         Usuario AuthenticateUser(string email, string password);
+
+        bool IsUserInRole(string username, string roleName);
     }
 }
