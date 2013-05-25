@@ -10,6 +10,10 @@ namespace Cebritas.General {
         public const string SMTP_SENDER = "SmtpSender";
         public const string SMTP_PASSWORD = "SmtpPassword";
 
+        public const int HTTP_OK = 200;
+        public const int HTTP_BAD_REQUEST = 400;
+        public const int HTTP_NOT_AUTHORIZED = 403;
+
         public const string ALERTA_TIPO_TRAFICO = "trafico";
         public const string ALERTA_TIPO_MANIFESTACION = "manifestacion";
         public const string ALERTA_TIPO_DESFILE = "desfile";
