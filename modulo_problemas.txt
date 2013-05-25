@@ -1,0 +1,114 @@
+                API CEBRITAS
+
+Modulo "What's going on?":
+==========================
+
+Reportar problema:
+
+URL: http://gay.com/api/problems/report
+Method: POST
+Data:
+    latitude: Latitud donde uno se encuentra
+    longitude: Longitud donde uno se encuentra
+    fbUserCode: Codigo de usuario de facebook
+    type: Tipo de problema, ya los teniamos definidos ahora hay categoria accidente
+          los valores que puede tomar son
+            + trafico
+            + manifestacion
+            + desfile
+            + bloqueo
+            + accidente (NEW)
+            + otro
+    description: Cadena que dice la descripcion del problema
+
+Deprecated:
+    El tiempo estimado ya no sera toamdo en cuenta por que quedamos que seran cada 24h
+Resultado:
+    {
+        Success: 'ok'
+    }
+    si hay error: 
+    {
+         Error: '[Mensaje de error]' >>>>> hay que definir los nuevos mensajes, pero ya de entrada si hay error la matas XD
+    }
+
+
+Obtener problemas reportados por amigos:
+Para este metodo tanto como ReportCount y Verified tendran 0 y false, ya que son las
+cosas que reportaron los amigos, nada mas.
+URL: http://gay.com/api/problems/getbyfriends?friends=123123,543534,1232312,432423
+Method: GET
+Data: Ninguno
+Resultado:
+[
+    {
+        ReportCount: 0, (NEW)
+        Verified: false, (NEW)
+        FbCode: '123123',
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    },
+    {
+        ReportCount: 0,
+        Verified: false,
+        FbCode: '123123',
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    },
+    ...
+    {
+        ReportCount: 0,
+        Verified: false,
+        FbCode: '123123',
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    }
+]
+
+Obtener todos los problemas, basados en region(automatico)
+Obtener problemas reportados por amigos:
+Aca ya devuelve los reportes con el count o el verified
+Si Verified es true, entonces fue verificado por alguien con privilegios
+Si es false, entonces basarse en el ReportCount para mostrar el color,
+el report count indican cuantos reportaron cerca del lugar esto para veracidad.
+URL: http://gay.com/api/problems/get?latitude=[tu_latitud]&longitude=[tu_longitud]
+Method: GET
+Data: Ninguno
+
+Resultado:
+[
+    {
+        ReportCount: 32, (NEW)
+        Verified: false, (NEW)
+        FbCode: '123123',
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    },
+    {
+        ReportCount: 0,
+        Verified: true,
+        FbCode: '',   >>>>>>> por que fue reportado directo de la web
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    },
+    ...
+    {
+        ReportCount: 100,
+        Verified: true,
+        FbCode: '123123',
+        Latitude: 12.3332,
+        Longitude: -23.2312,
+        Type: '[tipo]',
+        Description
+    }
+]
