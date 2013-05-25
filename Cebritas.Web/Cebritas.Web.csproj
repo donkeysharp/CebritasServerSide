@@ -70,9 +70,7 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\ApiData.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Api\Controllers\PrecioController.cs" />
     <Compile Include="Areas\Api\Controllers\RestControllerBase.cs" />
-    <Compile Include="Areas\Api\Controllers\SolicitudAlertaController.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\UserUtils.cs" />
     <Compile Include="Areas\Api\Models\PrecioViewModel.cs" />

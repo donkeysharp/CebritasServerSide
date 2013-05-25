@@ -42,19 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlertaModule\IAlertaRepository.cs" />
-    <Compile Include="AlertaModule\ISolicitudAlertaRepository.cs" />
-    <Compile Include="AlertaModule\Services\AlertaService.cs" />
-    <Compile Include="AlertaModule\Services\IAlertaService.cs" />
-    <Compile Include="AlertaModule\Services\ISolicitudAlertaService.cs" />
-    <Compile Include="AlertaModule\Services\SolicitudAlertaService.cs" />
     <Compile Include="Entities\AccessToken.cs" />
-    <Compile Include="Entities\AlertaUrbana.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Place.cs" />
     <Compile Include="Entities\Precio.cs" />
     <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\SolicitudAlerta.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="PlacesModule\ICategoryRepository.cs" />
@@ -63,9 +55,9 @@
     <Compile Include="PlacesModule\Services\ICategoryService.cs" />
     <Compile Include="PlacesModule\Services\IPlaceService.cs" />
     <Compile Include="PlacesModule\Services\PlaceService.cs" />
-    <Compile Include="PrecioModule\IPrecioRepository.cs" />
-    <Compile Include="PrecioModule\Services\IPrecioService.cs" />
-    <Compile Include="PrecioModule\Services\PrecioService.cs" />
+    <Compile Include="ProblemsModule\IProblemRepository.cs" />
+    <Compile Include="ProblemsModule\Services\IProblemService.cs" />
+    <Compile Include="ProblemsModule\Services\ProblemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserModule\IAccessTokenRepository.cs" />
     <Compile Include="UserModule\IRoleRepository.cs" />
@@ -78,6 +70,10 @@
     <Compile Include="UserModule\Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cebritas.BusinessModel\Cebritas.BusinessModel.csproj">
+      <Project>{0BEF10CF-A6E9-41B7-9268-76B9D9F7632C}</Project>
+      <Name>Cebritas.BusinessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cebritas.General\Cebritas.General.csproj">
       <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>
       <Name>Cebritas.General</Name>

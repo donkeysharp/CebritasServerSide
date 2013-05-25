@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F98DCF56-32D9-42AC-B3B0-ED0A8B1D09E3}</ProjectGuid>
+    <ProjectGuid>{0BEF10CF-A6E9-41B7-9268-76B9D9F7632C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cebritas.DataAccess</RootNamespace>
-    <AssemblyName>Cebritas.DataAccess</AssemblyName>
+    <RootNamespace>Cebritas.BusinessModel</RootNamespace>
+    <AssemblyName>Cebritas.BusinessModel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,48 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CebraContext.cs" />
-    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Problem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <Compile Include="Repositories\AccessTokenRepository.cs" />
-    <Compile Include="Repositories\CategoryRepository.cs" />
-    <Compile Include="Repositories\PlaceRepository.cs" />
-    <Compile Include="Repositories\ProblemRepository.cs" />
-    <Compile Include="Repositories\RoleRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cebritas.BusinessLogic\Cebritas.BusinessLogic.csproj">
-      <Project>{E76726B3-4F53-4BA7-8C5A-3A0CEE205C18}</Project>
-      <Name>Cebritas.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cebritas.BusinessModel\Cebritas.BusinessModel.csproj">
-      <Project>{0BEF10CF-A6E9-41B7-9268-76B9D9F7632C}</Project>
-      <Name>Cebritas.BusinessModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cebritas.General\Cebritas.General.csproj">
-      <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>
-      <Name>Cebritas.General</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
