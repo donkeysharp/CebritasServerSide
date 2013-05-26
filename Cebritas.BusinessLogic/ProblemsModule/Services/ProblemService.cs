@@ -27,7 +27,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <returns></returns>
         public IEnumerable<Problem> List(double latitude, double longitude) {
             IEnumerable<Problem> problems;
-            problems = db.Filter(x => x.ReportedAt.Equals(DateTime.Now.Date)
+            DateTime today = DateTime.Now.Date;
+            problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && (x.Verified || x.Importance > 0)
                                      );
             List<Problem> result = new List<Problem>();
@@ -50,7 +51,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <returns></returns>
         public bool IsReportedByUserNear(string facebookCode, double latitude, double longitude) {
             IEnumerable<Problem> problems;
-            problems = db.Filter(x => x.ReportedAt.Equals(DateTime.Now.Date)
+            DateTime today = DateTime.Now.Date;
+            problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && x.FacebookCode.Equals(facebookCode)
                                 );
 
@@ -71,17 +73,21 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <returns></returns>
         public IEnumerable<Problem> ListByFriends(string[] facebookFriends) {
             IEnumerable<Problem> problems;
-            problems = db.Filter(x => x.ReportedAt.Equals(DateTime.Now.Date)
+            DateTime today = DateTime.Now.Date;
+            problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && facebookFriends.Contains(x.FacebookCode)
                                 );
             return problems;
         }
 
         public Problem Insert(Problem problem) {
+            problem.ReportedAt = DateTime.Now;
+            problem.Code = General.Cryptography.SecurityTokenGenerator.GenerateGuid();
             if (!IsReportedByUserNear(problem.FacebookCode, problem.Latitude, problem.Longitude)) {
-                return db.Insert(problem);
+                problem.Importance = 1;
             }
-            return null;
+
+            return db.Insert(problem);
         }
 
         public int Update(Problem problem) {

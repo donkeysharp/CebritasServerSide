@@ -7,16 +7,25 @@ namespace Cebritas.Web.Areas.Api {
         }
 
         public override void RegisterArea(AreaRegistrationContext context) {
-            AlertaUrbanaModuleRoutes(context);
+            ProblemModuleRoutes(context);
             UserModuleRoutes(context);
-            PrecioModuleRoutes(context);
         }
 
-        private void PrecioModuleRoutes(AreaRegistrationContext context) {
+        private void ProblemModuleRoutes(AreaRegistrationContext context) {
             context.MapRoute(
-                "GetPrecios",
-                "api/precios/get",
-                new { controller = "Precio", action = "Get" }
+                "GetProblems",
+                "api/problems/get",
+                new { controller = "Problem", action = "GetProblems" }
+            );
+            context.MapRoute(
+                "GetProblemsReportedByFriends",
+                "api/problems/getbyfriends",
+                new { controller = "Problem", action = "GetProblemsReportedByFriends" }
+            );
+            context.MapRoute(
+                "RerpotProblem",
+                "api/problems/report",
+                new { controller = "Problem", action = "Report" }
             );
         }
 
@@ -48,20 +57,6 @@ namespace Cebritas.Web.Areas.Api {
                 "UpdateUser",
                 "api/usuario/update",
                 new { controller = "User", action = "UpdateUser" }
-            );
-        }
-
-        private void AlertaUrbanaModuleRoutes(AreaRegistrationContext context) {
-            context.MapRoute(
-                "ReportarActividadUrbana",
-                "api/alertas/reportar",
-                new { controller = "SolicitudAlerta", action = "Reportar" }
-            );
-
-            context.MapRoute(
-                "ObtenerActividadUrbana",
-                "api/alertas/get",
-                new { controller = "SolicitudAlerta", action = "GetAlertas" }
             );
         }
     }

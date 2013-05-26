@@ -74,8 +74,7 @@
     <Compile Include="Areas\Api\Controllers\RestControllerBase.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\UserUtils.cs" />
-    <Compile Include="Areas\Api\Models\PrecioViewModel.cs" />
-    <Compile Include="Areas\Api\Models\SolicitudAlertaViewModel.cs" />
+    <Compile Include="Areas\Api\Models\ProblemViewModel.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
@@ -127,6 +126,10 @@
     <ProjectReference Include="..\Cebritas.BusinessLogic\Cebritas.BusinessLogic.csproj">
       <Project>{E76726B3-4F53-4BA7-8C5A-3A0CEE205C18}</Project>
       <Name>Cebritas.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cebritas.BusinessModel\Cebritas.BusinessModel.csproj">
+      <Project>{0BEF10CF-A6E9-41B7-9268-76B9D9F7632C}</Project>
+      <Name>Cebritas.BusinessModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cebritas.DataAccess\Cebritas.DataAccess.csproj">
       <Project>{F98DCF56-32D9-42AC-B3B0-ED0A8B1D09E3}</Project>

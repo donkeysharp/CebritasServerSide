@@ -45,7 +45,6 @@
     <Compile Include="Entities\AccessToken.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Place.cs" />
-    <Compile Include="Entities\Precio.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="IRepository.cs" />
