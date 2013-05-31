@@ -17,22 +17,8 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
             Problem problem = new Problem();
             ViewModelToEntity(problemViewModel, problem);
-            problemService.Insert(problem);
 
             return SuccessResult(null, Messages.OK);
-        }
-
-        private void ViewModelToEntity(ProblemViewModel problemViewModel, Problem problem) {
-            try {
-                CultureInfo usCulture = new CultureInfo("en-US");
-                problem.Latitude = double.Parse(problemViewModel.Latitude, usCulture);
-                problem.Longitude = double.Parse(problemViewModel.Longitude, usCulture);
-                problem.FacebookCode = problemViewModel.FacebookCode;
-                problem.Type = problemViewModel.Type;
-                problem.Description = problemViewModel.Description;
-            } catch(Exception) {
-                throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
-            }
         }
 
         [HttpGet]
@@ -66,5 +52,21 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             }
         }
         #endregion "Validation"
+
+        #region "Utils"
+
+        private void ViewModelToEntity(ProblemViewModel problemViewModel, Problem problem) {
+            try {
+                CultureInfo usCulture = new CultureInfo("en-US");
+                problem.Latitude = double.Parse(problemViewModel.Latitude, usCulture);
+                problem.Longitude = double.Parse(problemViewModel.Longitude, usCulture);
+                problem.FacebookCode = problemViewModel.FacebookCode;
+                problem.Type = problemViewModel.Type;
+                problem.Description = problemViewModel.Description;
+            } catch (Exception) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
+            }
+        }
+        #endregion "Utils"
     }
 }

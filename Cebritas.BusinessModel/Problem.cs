@@ -57,5 +57,7 @@ namespace Cebritas.BusinessModel {
         /// Date of problem in unix stamp
         /// </summary>
         public long ReportedAtStamp { get; set; }
+
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

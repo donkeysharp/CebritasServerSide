@@ -55,6 +55,7 @@
     <Compile Include="PlacesModule\Services\IPlaceService.cs" />
     <Compile Include="PlacesModule\Services\PlaceService.cs" />
     <Compile Include="ProblemsModule\IProblemRepository.cs" />
+    <Compile Include="ProblemsModule\IReportRepository.cs" />
     <Compile Include="ProblemsModule\Services\IProblemService.cs" />
     <Compile Include="ProblemsModule\Services\ProblemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

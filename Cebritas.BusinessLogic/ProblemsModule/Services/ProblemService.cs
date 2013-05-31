@@ -8,13 +8,23 @@ using Cebritas.General.Geo;
 namespace Cebritas.BusinessLogic.ProblemsModule.Services {
     public class ProblemService : IProblemService {
         private IProblemRepository db;
+        private IReportRepository reportDb;
 
         private ProblemService(IProblemRepository db) {
             this.db = db;
         }
 
+        private ProblemService(IProblemRepository db, IReportRepository reportDb) {
+            this.db = db;
+            this.reportDb = reportDb;
+        }
+
         public static ProblemService CreateProblemService(IProblemRepository db) {
             return new ProblemService(db);
+        }
+
+        public static ProblemService CreateProblemService(IProblemRepository db, IReportRepository reportDb) {
+            return new ProblemService(db, reportDb);
         }
 
         /// <summary>
@@ -27,7 +37,7 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <returns></returns>
         public IEnumerable<Problem> List(double latitude, double longitude) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.Now.Date;
+            DateTime today = DateTime.UtcNow.Date;
             problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && (x.Verified || x.Importance > 0)
                                      );
@@ -41,29 +51,20 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             }
             return result;
         }
-        /// <summary>
-        /// Return true if the user has already reported a problem
-        /// in 150mts ratio
-        /// </summary>
-        /// <param name="facebookCode"></param>
-        /// <param name="latitude"></param>
-        /// <param name="longitude"></param>
-        /// <returns></returns>
-        public bool IsReportedByUserNear(string facebookCode, double latitude, double longitude) {
+
+        public Problem ReportedToday(double latitude, double longitude) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.Now.Date;
-            problems = db.Filter(x => x.ReportedAt.Equals(today)
-                                      && x.FacebookCode.Equals(facebookCode)
-                                );
+            DateTime today = DateTime.UtcNow.Date;
+            problems = db.Filter(x => x.ReportedAt.Equals(today));
 
             foreach (Problem problem in problems) {
                 double distance = GeoCodeCalc.CalcDistance(latitude, longitude, problem.Latitude, problem.Longitude, GeoCodeCalcMeasurement.Kilometers);
                 distance *= 1000.0;
                 if (distance <= 150) {
-                    return true;
+                    return problem;
                 }
             }
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <returns></returns>
         public IEnumerable<Problem> ListByFriends(string[] facebookFriends) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.Now.Date;
+            DateTime today = DateTime.UtcNow.Date;
             problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && facebookFriends.Contains(x.FacebookCode)
                                 );
@@ -81,13 +82,26 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         }
 
         public Problem Insert(Problem problem) {
-            problem.ReportedAt = DateTime.Now;
-            problem.Code = General.Cryptography.SecurityTokenGenerator.GenerateGuid();
-            if (!IsReportedByUserNear(problem.FacebookCode, problem.Latitude, problem.Longitude)) {
+            problem.ReportedAt = DateTime.UtcNow;
+
+            Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude);
+
+            if (todayNearProblem == null) {
+                problem.Code = General.Cryptography.SecurityTokenGenerator.GenerateGuid();
                 problem.Importance = 1;
+                todayNearProblem = db.Insert(problem);
             }
 
-            return db.Insert(problem);
+            // Insert new reporter for today problem
+            Report report = new Report();
+            report.ReportedAt = problem.ReportedAt;
+            report.Type = problem.Type;
+            report.Description = problem.Description;
+            report.ProblemId = todayNearProblem.Id;
+
+            reportDb.Insert(report);
+
+            return todayNearProblem;
         }
 
         public int Update(Problem problem) {
@@ -100,6 +114,10 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
                 return db.Delete(problem);
             }
             return 0;
+        }
+
+        public void NewReport(Report report) {
+            // TODO: Assign report to this shit problem
         }
     }
 }
