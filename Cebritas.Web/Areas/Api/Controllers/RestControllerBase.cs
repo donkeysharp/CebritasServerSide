@@ -77,7 +77,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
             var ex = filterContext.Exception;
             string errorMessage = Messages.THERE_WAS_A_PROBLEMO_JEFE;
-            int status = Constants.HTTP_BAD_REQUEST;
+            int status = Constants.HTTP_INTERNAL_ERRROR;
             if (ex != null) {
                 if (ex is CebraException) {
                     status = ((CebraException)ex).Status;

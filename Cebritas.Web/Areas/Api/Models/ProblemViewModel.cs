@@ -14,5 +14,6 @@ namespace Cebritas.Web.Areas.Api.Models {
         public int Type { get; set; }
         public string Description { get; set; }
         public long ReportedAt { get; set; }
+        public IEnumerable<ReportViewModel> Reporters { get; set; }
     }
 }

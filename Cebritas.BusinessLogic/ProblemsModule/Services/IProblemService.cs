@@ -8,9 +8,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
     public interface IProblemService {
         IEnumerable<Problem> List(double latitude, double longitude);
         Problem ReportedToday(double latitude, double longitude);
-
         IEnumerable<Problem> ListByFriends(string[] facebookFriends);
-        Problem Insert(Problem problem);
+        Problem Insert(Problem problem, string facebookCode, string description, int type);
 
         void NewReport(Report report);
 

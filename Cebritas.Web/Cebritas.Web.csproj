@@ -75,6 +75,7 @@
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\UserUtils.cs" />
     <Compile Include="Areas\Api\Models\ProblemViewModel.cs" />
+    <Compile Include="Areas\Api\Models\ReportViewModel.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />

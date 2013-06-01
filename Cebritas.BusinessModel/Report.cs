@@ -11,6 +11,7 @@ namespace Cebritas.BusinessModel {
         public int Type { get; set; }
         public string Description { get; set; }
         public DateTime ReportedAt { get; set; }
+        public DateTime ReportedDate { get; set; }
 
         public long ProblemId { get; set; }
         [ForeignKey("ProblemId")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cebritas.BusinessModel;
+using Cebritas.General;
 using Cebritas.General.Geo;
 
 namespace Cebritas.BusinessLogic.ProblemsModule.Services {
@@ -38,9 +39,7 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         public IEnumerable<Problem> List(double latitude, double longitude) {
             IEnumerable<Problem> problems;
             DateTime today = DateTime.UtcNow.Date;
-            problems = db.Filter(x => x.ReportedAt.Equals(today)
-                                      && (x.Verified || x.Importance > 0)
-                                     );
+            problems = db.Filter(x => x.ReportedDate.Equals(today));
             List<Problem> result = new List<Problem>();
             foreach (Problem problem in problems) {
                 double distance = GeoCodeCalc.CalcDistance(latitude, longitude, problem.Latitude, problem.Longitude, GeoCodeCalcMeasurement.Kilometers);
@@ -55,9 +54,9 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         public Problem ReportedToday(double latitude, double longitude) {
             IEnumerable<Problem> problems;
             DateTime today = DateTime.UtcNow.Date;
-            problems = db.Filter(x => x.ReportedAt.Equals(today));
+            problems = db.Filter(x => x.ReportedDate.Equals(today));
 
-            foreach (Problem problem in problems) {
+            foreach(Problem problem in problems) {
                 double distance = GeoCodeCalc.CalcDistance(latitude, longitude, problem.Latitude, problem.Longitude, GeoCodeCalcMeasurement.Kilometers);
                 distance *= 1000.0;
                 if (distance <= 150) {
@@ -75,28 +74,40 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         public IEnumerable<Problem> ListByFriends(string[] facebookFriends) {
             IEnumerable<Problem> problems;
             DateTime today = DateTime.UtcNow.Date;
-            problems = db.Filter(x => x.ReportedAt.Equals(today)
+            problems = db.Filter(x => x.ReportedDate.Equals(today));
+            /*problems = db.Filter(x => x.ReportedAt.Equals(today)
                                       && facebookFriends.Contains(x.FacebookCode)
-                                );
+                                );*/
             return problems;
         }
 
-        public Problem Insert(Problem problem) {
-            problem.ReportedAt = DateTime.UtcNow;
-
+        public Problem Insert(Problem problem, string facebookCode, string description, int type) {
             Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude);
 
             if (todayNearProblem == null) {
                 problem.Code = General.Cryptography.SecurityTokenGenerator.GenerateGuid();
-                problem.Importance = 1;
+                problem.ReportedAt = DateTime.UtcNow;
+                problem.ReportedDate = DateTime.UtcNow.Date;
+
                 todayNearProblem = db.Insert(problem);
             }
-
+            // Validates whether or not a user has already
+            // reported near a problem
+            if (todayNearProblem.Reports != null && todayNearProblem.Reports.Count > 0) {
+                Report todayUserReport = (from rep in todayNearProblem.Reports
+                                          where rep.FacebookCode.Equals(facebookCode)
+                                          select rep).FirstOrDefault();
+                if (todayUserReport != null) {
+                    throw new CebraException(Messages.USER_HAS_ALREADY_REPORTED_HERE);
+                }
+            }
             // Insert new reporter for today problem
             Report report = new Report();
-            report.ReportedAt = problem.ReportedAt;
-            report.Type = problem.Type;
-            report.Description = problem.Description;
+            report.FacebookCode = facebookCode;
+            report.Description = description;
+            report.Type = type;
+            report.ReportedAt = DateTime.UtcNow;
+            report.ReportedDate = DateTime.UtcNow.Date;
             report.ProblemId = todayNearProblem.Id;
 
             reportDb.Insert(report);
