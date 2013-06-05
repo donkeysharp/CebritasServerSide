@@ -8,6 +8,8 @@ namespace Cebritas.BusinessModel {
     public class Report {
         public long Id { get; set; }
         public string FacebookCode { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public int Type { get; set; }
         public string Description { get; set; }
         public DateTime ReportedAt { get; set; }

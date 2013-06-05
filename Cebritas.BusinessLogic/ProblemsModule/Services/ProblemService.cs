@@ -77,13 +77,9 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// </summary>
         /// <param name="facebookFriends"></param>
         /// <returns></returns>
-        public IEnumerable<Problem> ListByFriends(string[] facebookFriends) {
+        public IEnumerable<Report> ListByFriends(string[] facebookFriends) {
             IEnumerable<Report> reports = reportDb.GetReportsByFriends(facebookFriends);
-
-            foreach(Report report in reports) {
-            }
-
-            return null;
+            return reports;
         }
         /// <summary>
         /// Report a new problem. If there is a problem already reported
@@ -118,6 +114,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             Report report = new Report();
             report.FacebookCode = facebookCode;
             report.Description = description;
+            report.Latitude = problem.Latitude;
+            report.Longitude = problem.Longitude;
             report.Type = type;
             report.ReportedAt = DateTime.UtcNow;
             report.ReportedDate = DateTime.UtcNow.Date;

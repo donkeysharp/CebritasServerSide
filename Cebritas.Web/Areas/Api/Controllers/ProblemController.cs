@@ -46,10 +46,19 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         [HttpGet]
         public JsonResult GetProblemsReportedByFriends(string friends) {
             string[] friendsArray = friends.Split(new char[] {','});
-            IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
-            IEnumerable<Problem> problems = problemService.ListByFriends(friendsArray);
+            List<ReportViewModel> result = new List<ReportViewModel>();
+            ReportViewModel item;
+            IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository(), new ReportRepository());
+            IEnumerable<Report> reports = problemService.ListByFriends(friendsArray);
 
-            return SuccessResult(problems, Messages.OK);
+            foreach (Report report in reports) {
+                item = new ReportViewModel();
+                EntityToViewModel(report, item);
+
+                result.Add(item);
+            }
+
+            return SuccessResult(result, Messages.OK);
         }
 
         #region "Validation"
@@ -74,6 +83,16 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             } catch (Exception) {
                 throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
             }
+        }
+
+        private void EntityToViewModel(Report report, ReportViewModel reportViewModel) {
+            CultureInfo usCulture = new CultureInfo("en-US");
+            reportViewModel.FacebookCode = report.FacebookCode;
+            reportViewModel.Type = report.Type;
+            reportViewModel.Latitude = report.Latitude.ToString(usCulture);
+            reportViewModel.Longitude = report.Longitude.ToString(usCulture);
+            reportViewModel.Description = report.Description;
+            reportViewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(report.ReportedAt, UnixTimeType.Seconds);
         }
 
         private void EntityToViewModel(Problem problem, ProblemViewModel viewModel) {
@@ -101,10 +120,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             if (problem.Reports != null) {
                 foreach (Report report in problem.Reports) {
                     reportVm = new ReportViewModel();
-                    reportVm.FacebookCode = report.FacebookCode;
-                    reportVm.ReportedAt = TimeUtil.DateTimeToUnixTime(report.ReportedAt, UnixTimeType.Seconds);
-                    reportVm.Type = report.Type;
-                    reportVm.Description = report.Description;
+                    EntityToViewModel(report, reportVm);
 
                     ((List<ReportViewModel>)viewModel.Reporters).Add(reportVm);
                 }
