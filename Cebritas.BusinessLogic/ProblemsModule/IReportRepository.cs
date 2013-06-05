@@ -6,5 +6,6 @@ using Cebritas.BusinessModel;
 
 namespace Cebritas.BusinessLogic.ProblemsModule {
     public interface IReportRepository : IRepository<Report> {
+        IEnumerable<Report> GetReportsByFriends(string[] facebookFriends);
     }
 }

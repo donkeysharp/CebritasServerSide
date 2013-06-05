@@ -26,7 +26,6 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         [HttpGet]
         public JsonResult GetProblems(string latitude, string longitude) {
             double platitude, plongitude;
-            CultureInfo usCulture = new CultureInfo("en-US");
             ValidateGetProblems(latitude, longitude, out platitude, out plongitude);
 
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
@@ -34,38 +33,9 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
             List<ProblemViewModel> result = new List<ProblemViewModel>();
             ProblemViewModel item;
-            ReportViewModel reportVm;
             foreach (Problem problem in problems) {
                 item = new ProblemViewModel();
-                item.Code = problem.Code;
-                item.Latitude = problem.Latitude.ToString(usCulture);
-                item.Longitude = problem.Longitude.ToString(usCulture);
-                item.Verified = problem.Verified;
-                if (problem.Reports != null) {
-                    item.Importance = problem.Reports.ToList().Count;
-                    item.FacebookCode = problem.Reports.ToList()[0].FacebookCode;
-                    item.Type = problem.Reports.ToList()[0].Type;
-                    item.Description = problem.Reports.ToList()[0].Description;
-                } else {
-                    item.Importance = 0;
-                    item.FacebookCode = "asd";
-                    item.Type = 1;
-                    item.Description = "XD";
-                }
-
-                item.ReportedAt = 123123;
-                item.Reporters = new List<ReportViewModel>();
-                if (problem.Reports != null) {
-                    foreach (Report report in problem.Reports) {
-                        reportVm = new ReportViewModel();
-                        reportVm.FacebookCode = report.FacebookCode;
-                        reportVm.ReportedAt = 123123123;
-                        reportVm.Type = report.Type;
-                        reportVm.Description = report.Description;
-
-                        ((List<ReportViewModel>)item.Reporters).Add(reportVm);
-                    }
-                }
+                EntityToViewModel(problem, item);
 
                 result.Add(item);
             }
@@ -103,6 +73,41 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 problem.Longitude = double.Parse(problemViewModel.Longitude, usCulture);
             } catch (Exception) {
                 throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
+            }
+        }
+
+        private void EntityToViewModel(Problem problem, ProblemViewModel viewModel) {
+            CultureInfo usCulture = new CultureInfo("en-US");
+            ReportViewModel reportVm;
+
+            viewModel.Code = problem.Code;
+            viewModel.Latitude = problem.Latitude.ToString(usCulture);
+            viewModel.Longitude = problem.Longitude.ToString(usCulture);
+            viewModel.Verified = problem.Verified;
+            if (problem.Reports != null) {
+                viewModel.Importance = problem.Reports.ToList().Count;
+                viewModel.FacebookCode = problem.Reports.ToList()[0].FacebookCode;
+                viewModel.Type = problem.Reports.ToList()[0].Type;
+                viewModel.Description = problem.Reports.ToList()[0].Description;
+            } else {
+                viewModel.Importance = 0;
+                viewModel.FacebookCode = "";
+                viewModel.Type = 1;
+                viewModel.Description = "";
+            }
+
+            viewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(problem.ReportedAt, UnixTimeType.Seconds);
+            viewModel.Reporters = new List<ReportViewModel>();
+            if (problem.Reports != null) {
+                foreach (Report report in problem.Reports) {
+                    reportVm = new ReportViewModel();
+                    reportVm.FacebookCode = report.FacebookCode;
+                    reportVm.ReportedAt = TimeUtil.DateTimeToUnixTime(report.ReportedAt, UnixTimeType.Seconds);
+                    reportVm.Type = report.Type;
+                    reportVm.Description = report.Description;
+
+                    ((List<ReportViewModel>)viewModel.Reporters).Add(reportVm);
+                }
             }
         }
         #endregion "Utils"

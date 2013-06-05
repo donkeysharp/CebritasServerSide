@@ -50,7 +50,13 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             }
             return result;
         }
-
+        /// <summary>
+        /// Get the problem in a radio of 150mts from latitude and longitude
+        /// parameters.
+        /// </summary>
+        /// <param name="latitude">Current latitude</param>
+        /// <param name="longitude">Current longitude</param>
+        /// <returns></returns>
         public Problem ReportedToday(double latitude, double longitude) {
             IEnumerable<Problem> problems;
             DateTime today = DateTime.UtcNow.Date;
@@ -72,15 +78,22 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <param name="facebookFriends"></param>
         /// <returns></returns>
         public IEnumerable<Problem> ListByFriends(string[] facebookFriends) {
-            IEnumerable<Problem> problems;
-            DateTime today = DateTime.UtcNow.Date;
-            problems = db.Filter(x => x.ReportedDate.Equals(today));
-            /*problems = db.Filter(x => x.ReportedAt.Equals(today)
-                                      && facebookFriends.Contains(x.FacebookCode)
-                                );*/
-            return problems;
-        }
+            IEnumerable<Report> reports = reportDb.GetReportsByFriends(facebookFriends);
 
+            foreach(Report report in reports) {
+            }
+
+            return null;
+        }
+        /// <summary>
+        /// Report a new problem. If there is a problem already reported
+        /// it will add a new reporter to that problem
+        /// </summary>
+        /// <param name="problem"></param>
+        /// <param name="facebookCode"></param>
+        /// <param name="description"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public Problem Insert(Problem problem, string facebookCode, string description, int type) {
             Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude);
 
@@ -125,10 +138,6 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
                 return db.Delete(problem);
             }
             return 0;
-        }
-
-        public void NewReport(Report report) {
-            // TODO: Assign report to this shit problem
         }
     }
 }
