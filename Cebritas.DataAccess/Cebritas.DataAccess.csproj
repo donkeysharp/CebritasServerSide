@@ -52,18 +52,21 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Compile Include="Repositories\AccessTokenRepository.cs" />
-    <Compile Include="Repositories\AlertaRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\PlaceRepository.cs" />
-    <Compile Include="Repositories\PrecioRepository.cs" />
+    <Compile Include="Repositories\ProblemRepository.cs" />
+    <Compile Include="Repositories\ReportRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
-    <Compile Include="Repositories\SolicitudAlertaRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cebritas.BusinessLogic\Cebritas.BusinessLogic.csproj">
       <Project>{E76726B3-4F53-4BA7-8C5A-3A0CEE205C18}</Project>
       <Name>Cebritas.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cebritas.BusinessModel\Cebritas.BusinessModel.csproj">
+      <Project>{0BEF10CF-A6E9-41B7-9268-76B9D9F7632C}</Project>
+      <Name>Cebritas.BusinessModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cebritas.General\Cebritas.General.csproj">
       <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>

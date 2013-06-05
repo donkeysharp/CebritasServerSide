@@ -34,7 +34,7 @@
         jQuery(document).ready(function () {
             jQuery('.table-row').click(function (event) {
                 //alert();
-                window.location.href = '/temp/category/edit?id=' + event.currentTarget.id;
+                window.location.href = '@Url.Content("~/temp/category/edit?id=")' + event.currentTarget.id;
             });
         });
     </script>
@@ -46,6 +46,7 @@
     @Html.ActionLink("Create Category", "Add", null, new { @class = "btn" })
     <br />
     <br />
+
     <table border="1">
         <thead>
             <tr>

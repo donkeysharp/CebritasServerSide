@@ -5,6 +5,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using Cebritas.BusinessLogic.Entities;
+using Cebritas.BusinessModel;
 
 namespace Cebritas.DataAccess {
     public class CebraContext : DbContext, IDisposable {
@@ -13,9 +14,8 @@ namespace Cebritas.DataAccess {
         public DbSet<Usuario> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<AccessToken> AccessTokens { get; set; }
-        public DbSet<SolicitudAlerta> Solicitudes { get; set; }
-        public DbSet<AlertaUrbana> Alertas { get; set; }
-        public DbSet<Precio> Precios { get; set; }
+        public DbSet<Problem> Problems { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         // Places Module
         public DbSet<Category> Categories { get; set; }

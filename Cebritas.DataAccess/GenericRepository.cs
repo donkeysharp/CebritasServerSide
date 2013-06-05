@@ -18,11 +18,11 @@ namespace Cebritas.DataAccess {
             this.dbSet = context.Set<T>();
         }
 
-        public T Get(long id) {
+        public virtual T Get(long id) {
             return dbSet.Find(id);
         }
 
-        public IEnumerable<T> Filter(Expression<Func<T, bool>> filter = null,
+        public virtual IEnumerable<T> Filter(Expression<Func<T, bool>> filter = null,
                                      Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null) {
             IQueryable<T> query = this.dbSet;
 
@@ -36,13 +36,13 @@ namespace Cebritas.DataAccess {
             }
         }
 
-        public T Insert(T item) {
+        public virtual T Insert(T item) {
             T newEntry = this.dbSet.Add(item);
             this.context.SaveChanges();
             return newEntry;
         }
 
-        public int Delete(T item) {
+        public virtual int Delete(T item) {
             if (context.Entry(item).State == System.Data.EntityState.Detached) {
                 this.dbSet.Attach(item);
             }
@@ -50,7 +50,7 @@ namespace Cebritas.DataAccess {
             return context.SaveChanges();
         }
 
-        public int Update(T item) {
+        public virtual int Update(T item) {
             if(item == null) {
                 throw new CebraException("Null item not allowed");
             }

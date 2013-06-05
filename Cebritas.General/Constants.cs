@@ -10,6 +10,11 @@ namespace Cebritas.General {
         public const string SMTP_SENDER = "SmtpSender";
         public const string SMTP_PASSWORD = "SmtpPassword";
 
+        public const int HTTP_OK = 200;
+        public const int HTTP_BAD_REQUEST = 400;
+        public const int HTTP_NOT_AUTHORIZED = 403;
+        public const int HTTP_INTERNAL_ERRROR = 500;
+
         public const string ALERTA_TIPO_TRAFICO = "trafico";
         public const string ALERTA_TIPO_MANIFESTACION = "manifestacion";
         public const string ALERTA_TIPO_DESFILE = "desfile";
@@ -58,7 +63,8 @@ namespace Cebritas.General {
 
         public const string ALERTA_TIPO_INVALIDO = "alerta_tipo_invalido";
         public const string ALERTA_TIEMPO_ESTIMADO_INVALIDO = "alerta_tiempo_estimado_invalido";
-        public const string ALERTA_FORMATO_COORDENADAS_INCORRECTO = "alerta_formato_coordenadas_incorrecto";
+        public const string ALERTA_FORMATO_COORDENADAS_INCORRECTO = "formato_coordenadas_incorrecto";
+        public const string USER_HAS_ALREADY_REPORTED_HERE = "user_has_already_reported_here";
 
         public const string PRECIOS_INVALID_PARAMETER_FORMAT = "precios_invalid_parameter_format";
 
