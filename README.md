@@ -36,13 +36,19 @@ The methods for the Cebritas API are the next:
   </li>
   <li>
     <i>type(integer)</i> - it's the type of the problem. This number has the next "meaning" mapping:
-    <ul>
-      <li>
-        1 - Traffic problem
-      </li>
-      <li>
-        2 - 
-      </li>
+    <ol>
+      <li>Traffic problem</li>
+      <li>Manifestation problem</li>
+      <li>Parade</li>
+      <li>Block</li>
+      <li>Accident</li>
+      <li>Others</li>
     </ol>
   </li> 
 </ul>
+<b>Response:</b>
+{
+  Status: [status-code],
+  Message: [response-message],
+  Data: []
+}
