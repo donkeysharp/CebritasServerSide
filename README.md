@@ -57,7 +57,7 @@ status-code: 200 -> response-message: "ok"
 status-code: 400 -> response-message: "formato_coordenadas_incorrecto | user_has_already_reported_here"
 status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 ```
-#### Report Problem
+#### Get problems
 <p>Get all today's problems around the user's position with a radio of 20 kilometers</p>
 <b>URL:</b> http://example.com/api/problems/get?latitude={latitude}&longitude={longitude} <br>
 <b>Method:</b> GET <br>
@@ -106,6 +106,44 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
         ...
       }
     }
+  ]
+}
+status-code: 200 -> response-message: "ok"
+status-code: 400 -> response-message: "formato_coordenadas_incorrecto"
+status-code: 500 -> response-message: "there_was_a_problemo_jefe"
+```
+#### Get friends reported problems
+<p>Get all today's problems from the user's facebook friends who use the same app.</p>
+<b>URL:</b> http://example.com/api/problems/getbyfriends?friends={list of facebook codes} <br>
+<b>Method:</b> GET <br>
+<b>Parameters:</b>
+<ul>
+  <li>
+    <i>friends(string)</i> - contains a list of facebook codes from our friends who are using the same app, it must be in th format: friends={fb_code1},fb_code2,... e.g. friends=11111,22222,33333
+  </li>
+</ul>
+<b>Response:</b>
+```
+{
+  Status: [status-code],
+  Message: [response-message],
+  Data: [
+    {
+      FacebookCode: {string},
+      Latiude: {string},
+      Longitude: {string},
+      Type: {integer},
+      Description: {string},
+      ReportedAt: {long}
+    },
+    {
+      FacebookCode: {string},
+      Latiude: {string},
+      Longitude: {string},
+      Type: {integer},
+      Description: {string},
+      ReportedAt: {long}
+    },
   ]
 }
 status-code: 200 -> response-message: "ok"
