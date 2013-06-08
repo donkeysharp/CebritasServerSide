@@ -105,7 +105,8 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
         },
         ...
       }
-    }
+    },
+    ...
   ]
 }
 status-code: 200 -> response-message: "ok"
@@ -144,6 +145,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       Description: {string},
       ReportedAt: {long}
     },
+    ...
   ]
 }
 status-code: 200 -> response-message: "ok"
