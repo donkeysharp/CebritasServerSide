@@ -21,24 +21,28 @@ The methods for the Cebritas API are the next:
 <b>URL:</b> http://example.com/api/problems/report <br>
 <b>Method:</b> POST <br>
 <b>Data:</b>
-* <i>facebookcode</i> - as the application will use facebook authentication, the user's facebook code will be necessary
-* <i>latitude</i> - latitude from where the problem has been reported, it must be in the en-US format e.g. 123.3232; 0.32; -16.232412 and not like 16,232; 32,232
-* <i>longitude</i> - latitude from where the problem has been reported
-
-<table>
-  <tr>
-    <td>URL:</td>
-    <td>http://example.com/api/problems/report</td>
-  </tr>
-  <tr>
-    <td>Method:</td>
-    <td>POST</td>
-  </tr>
-  <tr>
-    <td>Data:</td>
-    <td>
-      * asd<br>
-      * asdasd
-    </td>
-  </tr>
-</table>
+<ul>
+  <li>
+    <i>facebookcode(string)</i> - as the application will use facebook authentication, the user's facebook code will be necessary
+  </li>
+  <li>
+    <i>latitude(double)</i> - latitude from where the problem has been reported, it must be in the en-US format e.g. 123.3232; 0.32; -16.232412 and not like 16,232; 32,232
+  </li>
+  <li>
+    <i>longitude(double)</i> - latitude from where the problem has been reported, it has the same latitude's format
+  </li>
+  <li>
+    <i>description(string)</i> - it's the problems description described by the user
+  </li>
+  <li>
+    <i>type(integer)</i> - it's the type of the problem. This number has the next "meaning" mapping:
+    <ul>
+      <li>
+        1 - Traffic problem
+      </li>
+      <li>
+        2 - 
+      </li>
+    </ol>
+  </li> 
+</ul>
