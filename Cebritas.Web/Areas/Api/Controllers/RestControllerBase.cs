@@ -45,7 +45,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         /// <summary>
         /// Generic method that returns a json with the format
         /// {
-        ///     Status: 200|400|403,
+        ///     Status: 200|400|403|500,
         ///     Message: "message",
         ///     Data: []
         /// }

@@ -10,9 +10,11 @@ namespace Cebritas.BusinessLogic.Entities {
         public string Code { get; set; }
         public string Name { get; set; }
         public string SpanishName { get; set; }
+        public string Icon { get; set; }
 
         public long? ParentId { get; set; }
         [ForeignKey("ParentId")]
         public virtual Category Parent { get; set; }
+        public virtual ICollection<Category> SubCategories { get; set; }
     }
 }
