@@ -35,11 +35,13 @@ namespace Cebritas.Web.Controllers {
                 category.Name = categoryModel.Name;
                 category.SpanishName = categoryModel.SpanishName;
                 category.ParentId = categoryModel.ParentId;
+                category.Icon = categoryModel.Icon;
                 category = categoryService.Insert(category);
             } else {
                 category = categoryService.Get(categoryModel.Id);
                 category.Name = categoryModel.Name;
                 category.SpanishName = categoryModel.SpanishName;
+                category.Icon = categoryModel.Icon;
                 category.ParentId = categoryModel.ParentId;
 
                 categoryService.Update(category);
@@ -86,6 +88,7 @@ namespace Cebritas.Web.Controllers {
             categoryModel.Name = category.Name;
             categoryModel.SpanishName = category.SpanishName;
             categoryModel.ParentId = category.ParentId;
+            categoryModel.Icon = category.Icon;
         }
     }
 }

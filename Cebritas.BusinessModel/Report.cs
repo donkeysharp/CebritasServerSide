@@ -11,6 +11,7 @@ namespace Cebritas.BusinessModel {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int Type { get; set; }
+
         public string Description { get; set; }
         public DateTime ReportedAt { get; set; }
         public DateTime ReportedDate { get; set; }

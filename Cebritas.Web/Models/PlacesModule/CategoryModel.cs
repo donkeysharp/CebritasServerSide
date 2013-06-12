@@ -9,6 +9,7 @@ namespace Cebritas.Web.Models.PlacesModule {
         public long Id { get; set; }
         public string Name { get; set; }
         public string SpanishName { get; set; }
+        public string Icon { get; set; }
         public long? ParentId { get; set; }
 
         public CategoryModel(Category category) {
