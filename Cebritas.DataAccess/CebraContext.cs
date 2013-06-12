@@ -14,6 +14,8 @@ namespace Cebritas.DataAccess {
         public DbSet<Usuario> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<AccessToken> AccessTokens { get; set; }
+
+        // Problems Module
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Report> Reports { get; set; }
 
