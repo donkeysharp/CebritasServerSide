@@ -6,13 +6,19 @@ using System.Web.Mvc;
 using Cebritas.BusinessLogic.Entities;
 using Cebritas.BusinessLogic.PlacesModule.Services;
 using Cebritas.DataAccess.Repositories;
+using Cebritas.General;
 using Cebritas.Web.Areas.Api.Models;
 
 namespace Cebritas.Web.Areas.Api.Controllers {
     public class CategoryController : RestControllerBase {
+        /// <summary>
+        /// Get all categories with children categories included
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public JsonResult GetCategories() {
             ICategoryService categoryService = CategoryService.CreateCategoryService(new CategoryRepository());
-            IEnumerable<Category> categories = categoryService.List();
+            IEnumerable<Category> categories = categoryService.GetParentCategories();
             List<CategoryViewModel> result = new List<CategoryViewModel>();
             CategoryViewModel viewModel;
 
@@ -35,16 +41,22 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 result.Add(viewModel);
             }
 
-            return SuccessResult(result);
+            return SuccessResult(result, Messages.OK);
         }
 
         #region "Utils"
         private void EntityToViewModel(Category category, CategorySingleViewModel viewModel) {
             viewModel.Code = category.Code;
             viewModel.Name = category.Name;
+            if (category.Parent != null) {
+                viewModel.ParentCode = category.Parent.Code;
+            } else {
+                viewModel.ParentCode = string.Empty;
+            }
             viewModel.SpanishName = category.SpanishName;
             viewModel.Icon = category.Icon;
         }
+
         #endregion "Utils"
     }
 }

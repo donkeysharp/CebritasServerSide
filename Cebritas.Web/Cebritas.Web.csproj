@@ -70,11 +70,13 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\ApiData.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\PlaceController.cs" />
     <Compile Include="Areas\Api\Controllers\ProblemController.cs" />
     <Compile Include="Areas\Api\Controllers\RestControllerBase.cs" />
     <Compile Include="Areas\Api\Controllers\UserController.cs" />
     <Compile Include="Areas\Api\Controllers\UserUtils.cs" />
     <Compile Include="Areas\Api\Models\CategoryViewModel.cs" />
+    <Compile Include="Areas\Api\Models\PlaceViewModel.cs" />
     <Compile Include="Areas\Api\Models\ProblemViewModel.cs" />
     <Compile Include="Areas\Api\Models\ReportViewModel.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />

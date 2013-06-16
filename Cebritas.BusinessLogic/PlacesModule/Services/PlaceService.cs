@@ -30,6 +30,60 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
             return null;
         }
 
+        /// <summary>
+        /// It will get all places filtered by the most parent category code
+        /// </summary>
+        /// <param name="code">Most parent category code</param>
+        /// <returns></returns>
+        public IEnumerable<Place> GetByParentCategory(long parentCategoryId, double latitude, double longitude, double? radius) {
+            // Calculate the radius distance whether or not it is defined
+            double nearDistanceRadius;
+            if (radius.HasValue) {
+                // The given radius cannot be greater than 100000 mts
+                if (radius > 0 && radius <= Constants.MAX_NEAR_PLACE_DISTANCE_METERS) {
+                    nearDistanceRadius = radius.Value;
+                } else {
+                    nearDistanceRadius = Constants.MAX_NEAR_PLACE_DISTANCE_METERS;
+                }
+            } else {
+                nearDistanceRadius = Constants.MAX_NEAR_PLACE_DISTANCE_METERS;
+            }
+
+            IEnumerable<Place> places = db.GetByParentCategory(parentCategoryId);
+            List<Place> result = new List<Place>();
+            foreach (Place place in places) {
+                double distance = General.Geo.GeoCodeCalc.CalcDistance(latitude, longitude, place.Latitude, place.Longitude, General.Geo.GeoCodeCalcMeasurement.Kilometers);
+                distance *= 1000;
+                if (distance <= nearDistanceRadius) {
+                    result.Add(place);
+                }
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Get Places inside a between radius so it accepts a query
+        /// with name or spanish name
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
+        public IEnumerable<Place> GetByQuery(string query, double latitude, double longitude) {
+            IEnumerable<Place> places = db.Filter(x => x.Name.Contains(query));
+            List<Place> result = new List<Place>();
+            foreach (Place place in places) {
+                double distance = GeoCodeCalc.CalcDistance(latitude, longitude, place.Latitude, place.Longitude, GeoCodeCalcMeasurement.Kilometers);
+                distance *= 1000; // Converts distance to meters
+                if (distance <= Constants.MAX_NEAR_PLACE_DISTANCE_METERS) {
+                    result.Add(place);
+                }
+            }
+
+            return result;
+        }
+
+        #region "Common"
         public IEnumerable<Place> List() {
             return db.Filter(null, x => x.OrderBy(y => y.Category.Name));
         }
@@ -69,11 +123,13 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
             List<Place> result = new List<Place>();
             foreach (Place place in placeList) {
                 double distance = GeoCodeCalc.CalcDistance(place.Latitude, place.Longitude, latitude, longitude, GeoCodeCalcMeasurement.Kilometers);
-                if (distance <= Constants.MAX_NEAR_PLACE_DISTANCE) {
+                if (distance <= Constants.MAX_NEAR_PLACE_DISTANCE_METERS) {
                     result.Add(place);
                 }
             }
             return result;
         }
+
+        #endregion "Common"
     }
 }
