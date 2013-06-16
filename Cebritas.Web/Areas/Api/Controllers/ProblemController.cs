@@ -68,9 +68,10 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 latitude = double.Parse(pLatitude, usCulture);
                 longitude = double.Parse(pLongitude, usCulture);
             } catch (Exception) {
-                throw new CebraException(Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
+                throw new CebraException(Messages.FORMATO_COORDENADAS_INCORRECTO);
             }
         }
+
         #endregion "Validation"
 
         #region "Utils"
@@ -81,16 +82,15 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 problem.Latitude = double.Parse(problemViewModel.Latitude, usCulture);
                 problem.Longitude = double.Parse(problemViewModel.Longitude, usCulture);
             } catch (Exception) {
-                throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ALERTA_FORMATO_COORDENADAS_INCORRECTO);
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.FORMATO_COORDENADAS_INCORRECTO);
             }
         }
 
         private void EntityToViewModel(Report report, ReportViewModel reportViewModel) {
-            CultureInfo usCulture = new CultureInfo("en-US");
             reportViewModel.FacebookCode = report.FacebookCode;
             reportViewModel.Type = report.Type;
-            reportViewModel.Latitude = report.Latitude.ToString(usCulture);
-            reportViewModel.Longitude = report.Longitude.ToString(usCulture);
+            reportViewModel.Latitude = report.Latitude;
+            reportViewModel.Longitude = report.Longitude;
             reportViewModel.Description = report.Description;
             reportViewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(report.ReportedAt, UnixTimeType.Seconds);
         }
@@ -126,6 +126,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 }
             }
         }
+
         #endregion "Utils"
     }
 }

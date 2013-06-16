@@ -27,13 +27,14 @@ namespace Cebritas.General {
         public const string ALERTA_TIEMPO_2H = "2h";
         public const string ALERTA_TIEMPO_3HH = "3hh";
 
-        // In order to get alerts, those will be in a 10 kilomenters radius
-        public const double ALERTA_KILOMETER_NEAR_RADIUS = 10.0;
         // In order to report an alert, other reported alerts should be in a 300 meters radius
-        public const double ALERTA_METERS_REPORT_RADIUS = 100;
+        public const double REPORTED_PROBLEM_RADIUS = 150;
+
+        // The max radius where application can get problems
+        public const double PROBLEM_MAX_NEAR_RADIUS_KM = 15.0;
 
         // Maximum place distance to be considered
-        public const double MAX_NEAR_PLACE_DISTANCE = 0.5;
+        public const double MAX_NEAR_PLACE_DISTANCE_METERS = 3000;
     }
 
     public class Messages {
@@ -63,12 +64,15 @@ namespace Cebritas.General {
 
         public const string ALERTA_TIPO_INVALIDO = "alerta_tipo_invalido";
         public const string ALERTA_TIEMPO_ESTIMADO_INVALIDO = "alerta_tiempo_estimado_invalido";
-        public const string ALERTA_FORMATO_COORDENADAS_INCORRECTO = "formato_coordenadas_incorrecto";
+        public const string FORMATO_COORDENADAS_INCORRECTO = "formato_coordenadas_incorrecto";
         public const string USER_HAS_ALREADY_REPORTED_HERE = "user_has_already_reported_here";
 
         public const string PRECIOS_INVALID_PARAMETER_FORMAT = "precios_invalid_parameter_format";
 
         public const string CATEGORY_ALREADY_EXISTS = "category_already_exists";
         public const string CATEGORY_NAMES_ARE_EMPTY = "category_names_are_empty";
+
+        // New messages
+        public const string ERROR_PARAM_REQUIRED = "{0}_param_is_required";
     }
 }

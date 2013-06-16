@@ -43,13 +43,14 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             List<Problem> result = new List<Problem>();
             foreach (Problem problem in problems) {
                 double distance = GeoCodeCalc.CalcDistance(latitude, longitude, problem.Latitude, problem.Longitude, GeoCodeCalcMeasurement.Kilometers);
-                // All problems in a 5000mts ratio or 5kms
-                if (distance <= 5.0) {
+                // All problems in a 15000mts ratio or 5kms
+                if (distance <= Constants.PROBLEM_MAX_NEAR_RADIUS_KM) {
                     result.Add(problem);
                 }
             }
             return result;
         }
+
         /// <summary>
         /// Get the problem in a radio of 150mts from latitude and longitude
         /// parameters.
@@ -65,7 +66,7 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             foreach(Problem problem in problems) {
                 double distance = GeoCodeCalc.CalcDistance(latitude, longitude, problem.Latitude, problem.Longitude, GeoCodeCalcMeasurement.Kilometers);
                 distance *= 1000.0;
-                if (distance <= 150) {
+                if (distance <= Constants.REPORTED_PROBLEM_RADIUS) {
                     return problem;
                 }
             }
@@ -91,6 +92,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <param name="type"></param>
         /// <returns></returns>
         public Problem Insert(Problem problem, string facebookCode, string description, int type) {
+            // Get today's report with central point latitude and longitude
+            // in a 150mts radio
             Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude);
 
             if (todayNearProblem == null) {
