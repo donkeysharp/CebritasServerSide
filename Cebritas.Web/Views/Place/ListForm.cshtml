@@ -34,7 +34,7 @@
         jQuery(document).ready(function () {
             jQuery('.table-row').click(function (event) {
                 //alert();
-                window.location.href = '/temp/places/edit?id=' + event.currentTarget.id;
+                window.location.href = '@Url.Content("~/temp/places/edit?id=")' + event.currentTarget.id;
             });
         });
     </script>

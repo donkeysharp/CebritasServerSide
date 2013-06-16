@@ -8,7 +8,31 @@ namespace Cebritas.Web.Areas.Api {
 
         public override void RegisterArea(AreaRegistrationContext context) {
             ProblemModuleRoutes(context);
+            PlaceModuleRoutes(context);
             UserModuleRoutes(context);
+        }
+
+        private void PlaceModuleRoutes(AreaRegistrationContext context) {
+            context.MapRoute(
+                "GetCategoryTree",
+                "api/places/getcategories",
+                new { controller = "Category", action = "GetCategories" }
+            );
+            context.MapRoute(
+                "GetPlacesByCategory",
+                "api/places/getbycategory",
+                new { controller = "Place", action = "GetPlacesByCategory" }
+            );
+            context.MapRoute(
+                "GetPlacesByCategoryNear",
+                "api/places/getbycategorynear",
+                new { controller = "Place", action = "GetPlacesByCategory" }
+            );
+            context.MapRoute(
+                "GetPlacesByQuery",
+                "api/places/getbyquery",
+                new { controller = "Place", action = "GetPlacesByQuery" }
+            );
         }
 
         private void ProblemModuleRoutes(AreaRegistrationContext context) {
