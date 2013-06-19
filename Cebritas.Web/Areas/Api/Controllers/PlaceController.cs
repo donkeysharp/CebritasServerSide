@@ -67,6 +67,45 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             }
             return SuccessResult(result, Messages.OK);
         }
+        /// <summary>
+        /// Get all places that belong to a root category and its price
+        /// is between range of given min and max prices
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult GetPlacesByPrice(string code, double? latitude, double? longitude, int? minPrice, int? maxPrice) {
+            Action<string, double?, double?, int?, int?> validate = (_code, _lat, _long, _minPrice, _maxPrice) => {
+                if (string.IsNullOrEmpty(_code)) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "code"));
+                }
+                if (!_lat.HasValue || !_long.HasValue) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.FORMATO_COORDENADAS_INCORRECTO);
+                }
+                if (!_minPrice.HasValue || !_maxPrice.HasValue) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ERROR_WALLET_PRICES);
+                }
+            };
+            validate(code, latitude, longitude, minPrice, maxPrice);
+
+            IPlaceService placeService = PlaceService.CreatePlaceService(new PlaceRepository());
+            ICategoryService categoryService = CategoryService.CreateCategoryService(new CategoryRepository());
+
+            Category category = categoryService.Get(code);
+            IEnumerable<Place> places = placeService.GetByPrices(category.Id, latitude.Value, longitude.Value, minPrice.Value, maxPrice.Value);
+
+            List<PlaceViewModel> result = new List<PlaceViewModel>();
+            PlaceViewModel item;
+            foreach (Place place in places) {
+                item = new PlaceViewModel();
+                EntityToViewModel(place, item);
+
+                result.Add(item);
+            }
+            return SuccessResult(result, Messages.OK);
+        }
 
         #region "Utils"
         private void ValidateParamsGetPlacesByQuery(string query, double? latitude, double? longitude) {

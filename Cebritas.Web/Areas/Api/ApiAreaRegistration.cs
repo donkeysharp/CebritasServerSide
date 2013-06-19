@@ -9,7 +9,16 @@ namespace Cebritas.Web.Areas.Api {
         public override void RegisterArea(AreaRegistrationContext context) {
             ProblemModuleRoutes(context);
             PlaceModuleRoutes(context);
+            WalletModuleRoutes(context);
             UserModuleRoutes(context);
+        }
+
+        private void WalletModuleRoutes(AreaRegistrationContext context) {
+            context.MapRoute(
+                "GetPlacesByPrices",
+                "api/wallet/getplacesbetween",
+                new { controller = "Place", action = "GetPlacesByPrice" }
+            );
         }
 
         private void PlaceModuleRoutes(AreaRegistrationContext context) {
