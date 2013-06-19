@@ -14,8 +14,11 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
         IEnumerable<Place> GetByCategoryCode(string categoryCode);
         IEnumerable<Place> GetByCategoryIdNear(long categoryId, double latitude, double longitude);
         IEnumerable<Place> GetByCategoryCodeNear(string categoryCode, double latitud, double longitude);
+
         IEnumerable<Place> GetByParentCategory(long parentCategoryId, double latitude, double longitude, double? radius);
         IEnumerable<Place> GetByQuery(string query, double latitude, double longitude);
+        IEnumerable<Place> GetByPrices(long parentCategoryId, double latitude, double longitude, int minPrice, int maxPrice);
+
         Place Insert(Place place);
         int Update(Place place);
         int Delete(long id);
