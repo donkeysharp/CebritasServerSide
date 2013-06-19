@@ -343,3 +343,57 @@ status-code: 200 -> response-message: "ok"
 status-code: 400 -> response-message: "formato_coordenadas_incorrecto" | "query_param_is_required"
 status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 ```
+### PLACES WALLET REST API
+
+#### Get Places by Price
+<p>Get Places that belongs to a root category or category that has no parent in a default radius of 3000mt or 3km</p>
+<b>URL:</b> http://example.com/api/wallet/getplacesbetween?code={code}&latitude={latitude}&longitude={longitude}&minprice={minprice}&maxprice={maxprice} <br>
+<b>Method:</b> GET <br>
+<b>Parameters:</b>
+<ul>
+  <li>
+    <i>code(string)</i> - root category count, if this code belongs to a child category result will be empty
+  </li>
+  <li>
+    <i>latitude(double)</i> - latitude where the user is at, it must be in the en-US format e.g. 123.3232; 0.32; -16.232412 and not like 16,232; 32,232
+  </li>
+  <li>
+    <i>longitude(double)</i> - longitude where the user is at it has the same latitude's format
+  </li>
+  <li>
+    <i>minprice(integer)</i> - the minimum price in the price filter
+  </li>
+  <li>
+    <i>maxprice(integer)</i> - the maximum price in the price filter
+  </li>
+</ul>
+<b>Response:</b>
+```
+{
+  "Status": [status-code],
+  "Message": [response-message],
+  "Data": [
+    {
+      "Code": {string},
+      "Name": {string},
+      "Address": {string},
+      "WebSite": {string},
+      "MinPrice": {integer},
+      "MaxPrice": {integer},
+      "Parking": {boolean},
+      "Holidays": {boolean},
+      "SmokingArea": {boolean},
+      "KidsArea": {boolean},
+      "Delivery": {boolean},
+      "Rating": {integer},
+      "Latitude": {double},
+      "Longitude": {double},
+      "CategoryCode": {string}
+    },
+    ...
+  ]
+}
+status-code: 200 -> response-message: "ok"
+status-code: 400 -> response-message: "formato_coordenadas_incorrecto"|"query_param_is_required"|"minprice_and_maxprice_required"
+status-code: 500 -> response-message: "there_was_a_problemo_jefe"
+```
