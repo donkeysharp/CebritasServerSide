@@ -28,5 +28,37 @@ namespace Cebritas.DataAccess.Repositories {
 
             return result;
         }
+
+        /// <summary>
+        /// Get all places that belong to a root category
+        /// and has its prices are in a given range
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <returns></returns>
+        public IEnumerable<Place> GetByPrice(long parentCategoryId, int minPrice, int maxPrice) {
+            var leafCategories = (from category in context.Categories
+                                  where category.ParentId == parentCategoryId
+                                  select category.Id).ToArray();
+
+            IEnumerable<Place> result;
+            if (leafCategories.Length > 0) {
+                /* It will get those places whos id is within the
+                 * leafCategories array */
+                result = (from place in context.Places
+                          where leafCategories.Contains(place.CategoryId)
+                                && ((minPrice <= place.MinPrice && place.MinPrice <= maxPrice)|| (minPrice <= place.MaxPrice && place.MaxPrice <= maxPrice))
+
+                          select place).ToList();
+            } else {
+                result = (from place in context.Places
+                          where place.CategoryId == parentCategoryId
+                                && ((minPrice <= place.MinPrice && place.MinPrice <= maxPrice) || (minPrice <= place.MaxPrice && place.MaxPrice <= maxPrice))
+                          select place).ToList();
+            }
+
+            return result;
+        }
     }
 }
