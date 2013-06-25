@@ -14,6 +14,7 @@ namespace Cebritas.BusinessLogic.Entities {
         public string AuthenticationCode { get; set; }
         public string ActivationCode { get; set; }
         public bool Active { get; set; }
+        public string Country { get; set; }
 
         public long RoleId { get; set; }
         [ForeignKey("RoleId")]

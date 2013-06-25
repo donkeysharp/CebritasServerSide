@@ -16,6 +16,11 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
         public static RoleService CreateRoleService(IRoleRepository db) {
             return new RoleService(db);
         }
+
+        public IEnumerable<Role> List() {
+            return db.Filter();
+        }
+
         public Role Get(long id) {
             return db.Get(id);
         }

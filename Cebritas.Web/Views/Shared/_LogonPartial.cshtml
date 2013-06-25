@@ -1,0 +1,37 @@
+﻿@model Cebritas.Web.Models.Home.LogonViewModel
+@if (Request.IsAuthenticated) {
+    <div class="dropdown">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+            href="#">Sergio Guillen Mantilla <i class="icon-user icon-white"></i></a>
+        <ul style="float: left; left: -150px" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><a href="@Url.Content("~/profile")">Profile</a></li>
+            <li class="divider"></li>
+            @if (User.IsInRole("admin")) {
+                @: <li><a href="#">User Manager</a></li>
+            }
+            @if (User.IsInRole("media")) {
+                @: <li><a href="#">Report Problem</a> </li>
+            }
+            <li class="divider"></li>
+            <li>
+                @Html.ActionLink("Logout", "Logout", "Home")
+            </li>
+        </ul>
+    </div>
+} else {
+    <div class="dropdown">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+            href="#">Login <b class="icon-chevron-down icon-white"></b></a>
+        <ul style="left: -180px" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+                <div style="padding: 7px">
+                @using (Html.BeginForm("Logon", "Home", FormMethod.Post)) {
+                    @:<input type="email" id="Email "name="Email" value="" placeholder="Email" autocomplete="off" /><br>
+                    @:<input type="password" id="Password" name="Password" value="" placeholder="Password" autocomplete="off" /><br>
+                    @:<input style="width: 100%" class="btn btn-success" type="submit" name="" value="Login" />
+                }
+                </div>
+            </li>
+        </ul>
+    </div>
+}

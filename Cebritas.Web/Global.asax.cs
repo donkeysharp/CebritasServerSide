@@ -19,6 +19,33 @@ namespace Cebritas.Web {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             RegisterPlacesModule(routes);
+            RegisterWebModules(routes);
+        }
+
+        private static void RegisterWebModules(RouteCollection routes) {
+            routes.MapRoute(
+                "HomePage",
+                "",
+                new { controller = "Home", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Logon",
+                "logon/",
+                new { controller = "Home", action = "Logon" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Profile",
+                "profile/",
+                new { controller = "Profile", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}",
+                new { controller = "Home", action = "Index" }
+            );
         }
 
         private static void RegisterPlacesModule(RouteCollection routes) {

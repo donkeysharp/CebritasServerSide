@@ -10,6 +10,7 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
         string[] GetRoleNames();
         Role GetByName(string name);
         Role Insert(Role role);
+        IEnumerable<Role> List();
         int Delete(long id);
         int Update(Role role);
     }

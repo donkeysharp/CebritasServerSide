@@ -15,6 +15,8 @@ namespace Cebritas.General {
         public const int HTTP_NOT_AUTHORIZED = 403;
         public const int HTTP_INTERNAL_ERRROR = 500;
 
+        public const string SESSION_USER = "CebritaUser";
+
         public const string ALERTA_TIPO_TRAFICO = "trafico";
         public const string ALERTA_TIPO_MANIFESTACION = "manifestacion";
         public const string ALERTA_TIPO_DESFILE = "desfile";
