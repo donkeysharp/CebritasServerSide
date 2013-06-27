@@ -22,6 +22,22 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
             return SuccessResult(null, Messages.OK);
         }
+        [HttpGet]
+        public JsonResult GetAllProblems() {
+            IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
+            IEnumerable<Problem> problems = problemService.GetAll();
+
+            List<ProblemViewModel> result = new List<ProblemViewModel>();
+            ProblemViewModel item;
+            foreach (Problem problem in problems) {
+                item = new ProblemViewModel();
+                EntityToViewModel(problem, item);
+
+                result.Add(item);
+            }
+
+            return SuccessResult(result, Messages.OK);
+        }
 
         [HttpGet]
         public JsonResult GetProblems(string latitude, string longitude) {

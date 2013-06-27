@@ -46,6 +46,11 @@ namespace Cebritas.Web.Areas.Api {
 
         private void ProblemModuleRoutes(AreaRegistrationContext context) {
             context.MapRoute(
+                "GetAllProblems",
+                "api/problems/getall",
+                new { controller = "Problem", action = "GetAllProblems" }
+            );
+            context.MapRoute(
                 "GetProblems",
                 "api/problems/get",
                 new { controller = "Problem", action = "GetProblems" }

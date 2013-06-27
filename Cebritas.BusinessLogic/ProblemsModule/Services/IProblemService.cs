@@ -12,5 +12,7 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         Problem Insert(Problem problem, string facebookCode, string description, int type);
         int Update(Problem problem);
         int Delete(long id);
+
+        IEnumerable<Problem> GetAll();
     }
 }

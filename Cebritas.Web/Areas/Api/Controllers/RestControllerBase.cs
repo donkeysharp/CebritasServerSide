@@ -84,6 +84,10 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                     errorMessage = ex.Message;
                 }
             }
+            // TODO: Remove this concat when remote "debugging" finished
+            if(status == Constants.HTTP_INTERNAL_ERRROR) {
+                errorMessage += "-------- " + ex.Message + " --- " + ex.StackTrace;
+            }
 
             filterContext.ExceptionHandled = true;
             filterContext.Result = ErrorResult(status, errorMessage);

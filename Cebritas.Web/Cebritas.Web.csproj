@@ -108,9 +108,17 @@
     <Content Include="Content\img\help.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logoweb.png" />
+    <Content Include="Content\img\ppaccident.png" />
+    <Content Include="Content\img\ppblockade.png" />
+    <Content Include="Content\img\ppother.png" />
+    <Content Include="Content\img\ppparade.png" />
+    <Content Include="Content\img\ppriot.png" />
+    <Content Include="Content\img\pptraffic.png" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\maps.js" />
+    <Content Include="Content\js\maputils.js" />
     <Content Include="DatosIniciales.sql" />
     <Content Include="Global.asax" />
     <Content Include="http headers.txt" />

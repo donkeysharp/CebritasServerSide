@@ -8,3 +8,7 @@
 .menu-container .is-selected div:hover {
   background: #2E84B1;
 }
+/*------Problems------*/
+.problem:hover {
+  cursor: pointer;
+}

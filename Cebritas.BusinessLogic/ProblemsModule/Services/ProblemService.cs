@@ -29,6 +29,18 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         }
 
         /// <summary>
+        /// Get all problems reported today around the world
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Problem> GetAll() {
+            IEnumerable<Problem> problems;
+            DateTime today = DateTime.UtcNow.Date;
+            problems = db.Filter(x => x.ReportedDate.Equals(today));
+
+            return problems;
+        }
+
+        /// <summary>
         /// Will list all problems created today
         /// in a 5000mts ratio(default), with importance greater than 0
         /// or are verified
