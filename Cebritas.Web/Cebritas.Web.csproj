@@ -84,12 +84,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Home\LogonViewModel.cs" />
     <Compile Include="Models\PlacesModule\CategoryModel.cs" />
     <Compile Include="Models\PlacesModule\PlaceModel.cs" />
+    <Compile Include="Models\Problems\ProblemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +120,7 @@
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\maps.js" />
+    <Content Include="Content\js\mapuser.js" />
     <Content Include="Content\js\maputils.js" />
     <Content Include="DatosIniciales.sql" />
     <Content Include="Global.asax" />
@@ -191,6 +194,7 @@
     <Content Include="Views\Shared\_LogonPartial.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Home\Logon.cshtml" />
+    <Content Include="Views\UserReport\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

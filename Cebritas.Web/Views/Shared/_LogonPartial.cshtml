@@ -2,7 +2,8 @@
 @if (Request.IsAuthenticated) {
     <div class="dropdown">
         <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
-            href="#">Sergio Guillen Mantilla <i class="icon-user icon-white"></i></a>
+            href="#">@Cebritas.Web.Authentication.Security.SessionManager.GetAuthenticatedUser().Name
+             <i class="icon-user icon-white"></i></a>
         <ul style="float: left; left: -150px" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><a href="@Url.Content("~/profile")">Profile</a></li>
             <li class="divider"></li>
@@ -10,7 +11,7 @@
                 @: <li><a href="#">User Manager</a></li>
             }
             @if (User.IsInRole("media")) {
-                @: <li><a href="#">Report Problem</a> </li>
+                @: <li><a href="@Url.Content("~/reporter")">Report Problem</a> </li>
             }
             <li class="divider"></li>
             <li>

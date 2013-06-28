@@ -27,12 +27,18 @@ function drawCircle(location, radius) {
   return polygon;
 }
 function addPushPin(map, location, info, clickCallback) {
-  var polygon = drawCircle(location, 0.078);
-  var icon = window.icons[info.Type];
-  var options = { icon: window.virtualPath + icon, width: 30, height: 50 };
-  map.entities.push(polygon);
-  var pushpin= new Microsoft.Maps.Pushpin(location, options);
-  pushpin.Problem = info;
-  Microsoft.Maps.Events.addHandler(pushpin, 'click', clickCallback);
-  map.entities.push(pushpin);
+    var polygon = drawCircle(location, 0.078);
+    map.entities.push(polygon);
+    var options = null;
+    if (info) {
+        var icon = window.icons[info.Type];
+        options = { icon: window.virtualPath + icon, width: 30, height: 50 };
+    }
+    var pushpin = new Microsoft.Maps.Pushpin(location, options);
+    pushpin.Problem = info;
+
+    if (clickCallback) {
+        Microsoft.Maps.Events.addHandler(pushpin, 'click', clickCallback);
+    }
+    map.entities.push(pushpin);
 }

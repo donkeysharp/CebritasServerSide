@@ -60,6 +60,10 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/maputils.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/maps.js")"></script>
+    @if (ViewBag.PageName != null) {
+        <script type="text/javascript" src="@Url.Content("~/Content/js/mapuser.js")"></script>
+    } else {
+        <script type="text/javascript" src="@Url.Content("~/Content/js/maps.js")"></script>
+    }
 </body>
 </html>

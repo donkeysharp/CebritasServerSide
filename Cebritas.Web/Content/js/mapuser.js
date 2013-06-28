@@ -5,12 +5,12 @@ window.onload = function () {
  * Maps problem type with an icon
  */
 window.icons = {
-  '1': 'img/pptraffic.png',
-  '2': 'img/ppriot.png',
-  '3': 'img/ppparade.png',
-  '4': 'img/ppblockade.png',
-  '5': 'img/ppaccident.png',
-  '6': 'img/ppother.png'
+    '1': 'img/pptraffic.png',
+    '2': 'img/ppriot.png',
+    '3': 'img/ppparade.png',
+    '4': 'img/ppblockade.png',
+    '5': 'img/ppaccident.png',
+    '6': 'img/ppother.png'
 };
 window.types = {
   '1': 'Traffic Jam',
@@ -21,6 +21,7 @@ window.types = {
   '6': 'Other'
 };
 window.Problems = [];
+window.doneReport = false;
 
 function getMap() {
   var key = 'ApC8X7yE7vUrNbXZ72k68l9PoN0on80GyfOVMJKbsdtZuwqDUKy4HH6PKSnL0VrD';
@@ -36,31 +37,29 @@ function getMap() {
     center: centerLocation
   });
   handleEvents();
-  $.ajax({
-    url: "api/problems/getall",
-    cache: false,
-    success: loadProblems,
-    error: function() { alert('there was a problemo :P');}
-  });
-  setInterval(function() {
-    console.log('Loading problems by interval');
-    $.ajax({
-      url: "api/problems/getall",
-      cache: false,
-      success: loadProblems,
-      error: function() { alert('there was a problemo :P');}
-    });
-  }, 120000);
 }
 
 function handleEvents() {
   Microsoft.Maps.Events.addHandler(window.map, 'dblclick', function(e) {
     if(e.targetType == 'map') {
       e.handled = true;
+      if (window.doneReport) { return; }
       var point = new Microsoft.Maps.Point(e.getX(), e.getY());
       var location = e.target.tryPixelToLocation(point);
 
-      addPushPin(window.map, location);
+      var position = (location.latitude + '').substring(0, 8) + ', ' + (location.longitude + '').substring(0, 8);
+      $('#position').val(position);
+      $('#latitude').val(location.latitude);
+      $('#longitude').val(location.longitude);
+
+      window.doneReport = true;
+      var type = $('#type').val();
+
+      // Enable remove button
+      $('#remove').attr('disabled', false);
+      $('#submit-report').attr('disabled', false);
+
+      addPushPin(window.map, location, {Type: type});
     }
   });
 }
@@ -73,18 +72,12 @@ function getProblemByCode(code) {
   return null;
 }
 $(document).ready(function(){
-  // Add pushpin
-  $(document).on('click','.problem', function(e) {
-    var problem = getProblemByCode(e.currentTarget.id);
-    if (problem !== null) {
-      console.log('Trying to center map at: ' + problem.Latitude + ", " + problem.Longitude);
-      centerMap(problem.Latitude, problem.Longitude);
-    }
-  });
-  $('#filter').change(function(e) {
-    console.log('filtering by type ...');
-    var type = $('#filter').val();
-    renderProblems(type);
+  $('#remove').click(function(e) {
+    $('#remove').attr('disabled', true);
+    $('#submit-report').attr('disabled', true);
+    window.map.entities.clear();
+    $('#position').val('');
+    window.doneReport = false;
   });
 });
 function centerMap(latitude, longitude) {
@@ -115,12 +108,6 @@ function renderProblems(type) {
       addPushPin(window.map, location, problems[i], pushPinClicked);
     }
   }
-}
-function loadProblems(data, status, xhr) {
-  $('#filter').val('0');
-  var problems = data.Data;
-  window.Problems = problems;
-  renderProblems(0);
 }
 function addProblemDescription(problem) {
   var time = timeStampToTime(problem.ReportedAt*1000);

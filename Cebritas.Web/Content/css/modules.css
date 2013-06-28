@@ -60,28 +60,17 @@
   padding: 20px 0 0 0;
 }
 /*------Problems------*/
-.problem-report {
-  color: #fff;
-}
-.problem-details {
-  background-color:rgba(255,255,255,0.1);
-  width: 20%;
-  height: 430px;
-  float: right;
-  padding: 0 10px 0 10px;
-  margin: 0 20px 0 0;
-}
-.problem-list {
-  overflow: auto;
-  height: 300px;
-}
-.problem-list .problem {
-  color: #fff;
-  background: #262626;
-}
-.problem h4 {
-  color: #479FCF;
-}
-.problem b {
-  color: #56D65C;
-}
+.problem-report {color: #fff;}
+.problem-details {background-color:rgba(255,255,255,0.1);width: 20%;height: 430px;float: right;padding: 0 10px 0 10px;margin: 0 20px 0 0;}
+.problem-list {overflow: auto;height: 300px;}
+.problem-list .problem {color: #fff;background: #262626;}
+.problem h4 {color: #479FCF;}
+.problem b {color: #56D65C;}
+
+/*------Report problem------*/
+.report-problem textarea {width: 95%;}
+.report-problem select {width: 100%;}
+.report-problem .input-append input {width: 94%;}
+.report-problem .input-append .btn {width: 8px;}
+.report-problem .input-append i {margin: 3px 0 0 -6px;}
+.report-problem input[type="submit"]{width: 100%;}

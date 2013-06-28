@@ -16,9 +16,9 @@ namespace Cebritas.Tests {
             IRoleService roleService = RoleService.CreateRoleService(new RoleRepository());
             Usuario x = new Usuario();
             x.Active = false;
-            x.Email = "serguimant@hotmail.com";
-            x.Name = "Sergio Guillen Mantilla";
-            x.Rol = roleService.GetByName("admin");
+            x.Email = "danieloo_123@hotmail.com";
+            x.Name = "Daniel Mendoza";
+            x.Rol = roleService.GetByName("media");
             x.Password = "none";
             x.Country = "BO";
 

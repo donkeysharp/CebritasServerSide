@@ -33,10 +33,10 @@ namespace Cebritas.General {
         public const double REPORTED_PROBLEM_RADIUS = 150;
 
         // The max radius where application can get problems
-        public const double PROBLEM_MAX_NEAR_RADIUS_KM = 15.0;
+        public const double PROBLEM_MAX_NEAR_RADIUS_KM = 20.0;
 
         // Maximum place distance to be considered
-        public const double MAX_NEAR_PLACE_DISTANCE_METERS = 3000;
+        public const double MAX_NEAR_PLACE_DISTANCE_METERS = 20000;
     }
 
     public class Messages {
