@@ -28,22 +28,22 @@ The methods for the Cebritas API are the next:
   "Data": [
     {
       TimeZone: 1,
-      Name: '(UTC-12:00) Línea internacional de cambio de fecha'      
+      Name: 'UTC-12:00'      
+    },
+    ...
+    {
+      TimeZone: 10,
+      Name: 'UTC-4'
     },
     ...
     {
       TimeZone: 20,
-      Name: '(UTC-04:00) Georgetown, La Paz, Manaos, San Juan'
+      Name: 'UTC-4'
     },
     ...
     {
-      TimeZone: 62,
-      Name: '(UTC+04:00) Moscú, S. Petersburgo, Volgogrado'
-    },
-    ...
-    {
-      TimeZone: 101,
-      Name: '(UTC+13:00) Samoa'
+      TimeZone: 34,
+      Name: 'UTC+13'
     }
   ]
 ```
@@ -82,107 +82,40 @@ The methods for the Cebritas API are the next:
   <li>
     <i>timezone(integer)</i> - it's the reporter's timezone in which time will be reported, the mapping is the next:
     <ol>
-<li>(UTC-12:00) Línea internacional de cambio de fecha          </li>
-<li>(UTC-11:00) Hora universal coordinada-11                    </li>
-<li>(UTC-10:00) Hawai                                           </li>
-<li>(UTC-09:00) Alaska                                          </li>
-<li>(UTC-08:00) Baja California                                 </li>
-<li>(UTC-08:00) Hora del Pacífico (EE.UU. y Canadá)             </li>
-<li>(UTC-07:00) Arizona                                         </li>
-<li>(UTC-07:00) Chihuahua, La Paz, Mazatlán                     </li>
-<li>(UTC-07:00) Hora de las Montañas Rocosas (EE.UU. y Canadá)  </li>
-<li>(UTC-06:00) América Central                                 </li>
-<li>(UTC-06:00) Guadalajara, Ciudad de México, Monterrey        </li>
-<li>(UTC-06:00) Hora central (EE.UU. y Canadá)                  </li>
-<li>(UTC-06:00) Saskatchewan                                    </li>
-<li>(UTC-05:00) Bogotá, Lima, Quito                             </li>
-<li>(UTC-05:00) Hora del este (EE.UU. y Canadá)                 </li>
-<li>(UTC-05:00) Indiana (este)                                  </li>
-<li>(UTC-04:30) Caracas                                         </li>
-<li>(UTC-04:00) Asunción                                        </li>
-<li>(UTC-04:00) Cuiabá                                          </li>
-<li>(UTC-04:00) Georgetown, La Paz, Manaos, San Juan            </li>
-<li>(UTC-04:00) Hora del Atlántico (Canadá)                     </li>
-<li>(UTC-04:00) Santiago                                        </li>
-<li>(UTC-03:30) Terranova                                       </li>
-<li>(UTC-03:00) Brasilia                                        </li>
-<li>(UTC-03:00) Buenos Aires                                    </li>
-<li>(UTC-03:00) Cayena, Fortaleza                               </li>
-<li>(UTC-03:00) Groenlandia                                     </li>
-<li>(UTC-03:00) Montevideo                                      </li>
-<li>(UTC-03:00) Salvador                                        </li>
-<li>(UTC-02:00) Atlántico Central                               </li>
-<li>(UTC-02:00) Hora universal coordinada-02                    </li>
-<li>(UTC-01:00) Azores                                          </li>
-<li>(UTC-01:00) Islas de Cabo Verde                             </li>
-<li>(UTC) Casablanca                                            </li>
-<li>(UTC) Dublín, Edimburgo, Lisboa, Londres                    </li>
-<li>(UTC) Hora universal coordinada                             </li>
-<li>(UTC) Monrovia, Reikiavik                                   </li>
-<li>(UTC+01:00) Amsterdam, Berlín, Berna, Roma, Estocolmo, Viena</li>
-<li>(UTC+01:00) Belgrado, Bratislava, Budapest, Liubliana, Praga</li>
-<li>(UTC+01:00) Bruselas, Copenhague, Madrid, París             </li>
-<li>(UTC+01:00) Sarajevo, Skopie, Varsovia, Zagreb              </li>
-<li>(UTC+01:00) Windhoek                                        </li>
-<li>(UTC+01:00) África Central Occidental                       </li>
-<li>(UTC+02:00) Ammán                                           </li>
-<li>(UTC+02:00) Atenas, Bucarest                                </li>
-<li>(UTC+02:00) Beirut                                          </li>
-<li>(UTC+02:00) Damasco                                         </li>
-<li>(UTC+02:00) El Cairo                                        </li>
-<li>(UTC+02:00) Estambul                                        </li>
-<li>(UTC+02:00) Harare, Pretoria                                </li>
-<li>(UTC+02:00) Helsinki, Kiev, Riga, Sofía, Tallin, Vilna      </li>
-<li>(UTC+02:00) Jerusalén                                       </li>
-<li>(UTC+02:00) Nicosia                                         </li>
-<li>(UTC+03:00) Bagdad                                          </li>
-<li>(UTC+03:00) Kaliningrado, Minsk                             </li>
-<li>(UTC+03:00) Kuwait, Riad                                    </li>
-<li>(UTC+03:00) Nairobi                                         </li>
-<li>(UTC+03:30) Teherán                                         </li>
-<li>(UTC+04:00) Abu Dabi, Muscat                                </li>
-<li>(UTC+04:00) Bakú                                            </li>
-<li>(UTC+04:00) Ereván                                          </li>
-<li>(UTC+04:00) Moscú, S. Petersburgo, Volgogrado               </li>
-<li>(UTC+04:00) Port Louis                                      </li>
-<li>(UTC+04:00) Tiflis                                          </li>
-<li>(UTC+04:30) Kabul                                           </li>
-<li>(UTC+05:00) Islamabad, Karachi                              </li>
-<li>(UTC+05:00) Tashkent                                        </li>
-<li>(UTC+05:30) Chennai, Calcuta, Mumbai, Nueva Delhi           </li>
-<li>(UTC+05:30) Sri Jayawardenepura                             </li>
-<li>(UTC+05:45) Katmandú                                        </li>
-<li>(UTC+06:00) Astana                                          </li>
-<li>(UTC+06:00) Dacca                                           </li>
-<li>(UTC+06:00) Ekaterimburgo                                   </li>
-<li>(UTC+06:30) Rangún                                          </li>
-<li>(UTC+07:00) Bangkok, Hanói, Yakarta                         </li>
-<li>(UTC+07:00) Novosibirsk                                     </li>
-<li>(UTC+08:00) Krasnoyarsk                                     </li>
-<li>(UTC+08:00) Kuala Lumpur, Singapur                          </li>
-<li>(UTC+08:00) Pekín, Chongqing, Hong Kong, Urumqi             </li>
-<li>(UTC+08:00) Perth                                           </li>
-<li>(UTC+08:00) Taipéi                                          </li>
-<li>(UTC+08:00) Ulán Bator                                      </li>
-<li>(UTC+09:00) Irkutsk                                         </li>
-<li>(UTC+09:00) Osaka, Sapporo, Tokio                           </li>
-<li>(UTC+09:00) Seúl                                            </li>
-<li>(UTC+09:30) Adelaida                                        </li>
-<li>(UTC+09:30) Darwin                                          </li>
-<li>(UTC+10:00) Brisbane                                        </li>
-<li>(UTC+10:00) Canberra, Melbourne, Sídney                     </li>
-<li>(UTC+10:00) Guam, Port Moresby                              </li>
-<li>(UTC+10:00) Hobart                                          </li>
-<li>(UTC+10:00) Yakutsk                                         </li>
-<li>(UTC+11:00) Islas Salomón, Nueva Caledonia                  </li>
-<li>(UTC+11:00) Vladivostok                                     </li>
-<li>(UTC+12:00) Auckland, Wellington                            </li>
-<li>(UTC+12:00) Fiyi                                            </li>
-<li>(UTC+12:00) Hora universal coordinada+12                    </li>
-<li>(UTC+12:00) Magadán                                         </li>
-<li>(UTC+12:00) Petropavlovsk-Kamchatsky - antiguo              </li>
-<li>(UTC+13:00) Nuku'alofa                                      </li>
-<li>(UTC+13:00) Samoa                                           </li>
+<li>UTC-12</li>
+<li>UTC-11</li>
+<li>UTC-10</li>
+<li>UTC-9</li>
+<li>UTC-8</li>
+<li>UTC-7</li>
+<li>UTC-6</li>
+<li>UTC-5</li>
+<li>UTC-4:30</li>
+<li>UTC-4</li>
+<li>UTC-3:30</li>
+<li>UTC-3</li>
+<li>UTC-2</li>
+<li>UTC-1</li>
+<li>UTC 0</li>
+<li>UTC+1</li>
+<li>UTC+2</li>
+<li>UTC+3</li>
+<li>UTC+3:30</li>
+<li>UTC+4</li>
+<li>UTC+4:30</li>
+<li>UTC+5</li>
+<li>UTC+5:30</li>
+<li>UTC+5:45</li>
+<li>UTC+6</li>
+<li>UTC+6:30</li>
+<li>UTC+7</li>
+<li>UTC+8</li>
+<li>UTC+9</li>
+<li>UTC+9:30</li>
+<li>UTC+10</li>
+<li>UTC+11</li>
+<li>UTC+12</li>
+<li>UTC+13</li>
     </ol>
   </li>
 </ul>
