@@ -14,6 +14,40 @@ It will contain an internal embedded job(Quartz.Net) that will delete past probl
 
 The methods for the Cebritas API are the next:
 
+#### Get time zones
+
+<p>Get timezone mapping by the application</p>
+<b>URL:</b> http://example.com/api/timezones <br>
+<b>Method:</b> GET <br>
+<b>Parameters:</b> None<br>
+<b>Response:</b>
+```
+{
+  "Status": [status-code],
+  "Message": [response-message],
+  "Data": [
+    {
+      TimeZone: 1,
+      Name: '(UTC-12:00) Línea internacional de cambio de fecha'      
+    },
+    ...
+    {
+      TimeZone: 20,
+      Name: '(UTC-04:00) Georgetown, La Paz, Manaos, San Juan'
+    },
+    ...
+    {
+      TimeZone: 62,
+      Name: '(UTC+04:00) Moscú, S. Petersburgo, Volgogrado'
+    },
+    ...
+    {
+      TimeZone: 101,
+      Name: '(UTC+13:00) Samoa'
+    }
+  ]
+```
+
 ### PROBLEMS MODULE REST API
 
 #### Report Problem
