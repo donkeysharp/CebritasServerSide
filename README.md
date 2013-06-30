@@ -165,7 +165,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 ```
 #### Get problems
 <p>Get all today's problems around the user's position with a radio of 20 kilometers</p>
-<b>URL:</b> http://example.com/api/problems/get?latitude={latitude}&longitude={longitude} <br>
+<b>URL:</b> http://example.com/api/problems/get?latitude={latitude}&longitude={longitude}&timezone={timezone} <br>
 <b>Method:</b> GET <br>
 <b>Parameters:</b>
 <ul>
@@ -174,6 +174,9 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
   </li>
   <li>
     <i>longitude(double)</i> - longitude where the user is at it has the same latitude's format
+  </li>
+  <li>
+    <i>timezone(integer)</i> - it's the reporter's timezone in which time will be reported
   </li>
 </ul>
 <b>Response:</b>
@@ -221,12 +224,15 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 ```
 #### Get friend's reported problems
 <p>Get all today's problems from the user's facebook friends who use the same app.</p>
-<b>URL:</b> http://example.com/api/problems/getbyfriends?friends={list_of_facebook_codes} <br>
+<b>URL:</b> http://example.com/api/problems/getbyfriends?friends={list_of_facebook_codes}&timezone={timezone} <br>
 <b>Method:</b> GET <br>
 <b>Parameters:</b>
 <ul>
   <li>
     <i>friends(string)</i> - contains a list of facebook codes from our friends who are using the same app, it must be in th format: friends={fb_code1},fb_code2,... e.g. friends=11111,22222,33333
+  </li>
+  <li>
+    <i>timezone(integer)</i> - it's the reporter's timezone in which time will be reported
   </li>
 </ul>
 <b>Response:</b>
