@@ -315,6 +315,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       "SmokingArea": {boolean},
       "KidsArea": {boolean},
       "Delivery": {boolean},
+      "RatingCount": {integer},
       "Rating": {integer},
       "Latitude": {double},
       "Longitude": {double},
@@ -364,6 +365,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       "SmokingArea": {boolean},
       "KidsArea": {boolean},
       "Delivery": {boolean},
+      "RatingCount": {integer},
       "Rating": {integer},
       "Latitude": {double},
       "Longitude": {double},
@@ -410,6 +412,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       "SmokingArea": {boolean},
       "KidsArea": {boolean},
       "Delivery": {boolean},
+      "RatingCount": {integer},
       "Rating": {integer},
       "Latitude": {double},
       "Longitude": {double},
@@ -464,6 +467,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       "SmokingArea": {boolean},
       "KidsArea": {boolean},
       "Delivery": {boolean},
+      "RatingCount": {integer},
       "Rating": {integer},
       "Latitude": {double},
       "Longitude": {double},
@@ -516,6 +520,7 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
       "SmokingArea": {boolean},
       "KidsArea": {boolean},
       "Delivery": {boolean},
+      "RatingCount": {integer},
       "Rating": {integer},
       "Latitude": {double},
       "Longitude": {double},
@@ -526,5 +531,29 @@ status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 }
 status-code: 200 -> response-message: "ok"
 status-code: 400 -> response-message: "formato_coordenadas_incorrecto"|"query_param_is_required"|"minprice_and_maxprice_required"
+status-code: 500 -> response-message: "there_was_a_problemo_jefe"
+```
+#### Rate Place
+
+<b>URL:</b> http://example.com/api/places/rateplace <br>
+<b>Method:</b> POST <br>
+<b>Data:</b>
+<ul>
+  <li>
+    <i>code(string)</i> - the place code
+  </li>
+  <li>
+    <i>rating(integer)</i> - rating for the selected place
+  </li>
+</ul>
+<b>Response:</b>
+```
+{
+  Status: [status-code],
+  Message: [response-message],
+  Data: []
+}
+status-code: 200 -> response-message: "ok"
+status-code: 400 -> response-message: "code_param_is_required" | "rating_param_is_required" | "place_not_found"
 status-code: 500 -> response-message: "there_was_a_problemo_jefe"
 ```
