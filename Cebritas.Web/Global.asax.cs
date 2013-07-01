@@ -115,7 +115,8 @@ namespace Cebritas.Web {
                 new string[] { "Cebritas.Web.Controllers" }
             );
         }
-
+        public void Application_OnBeginRequest(object sender, EventArgs e) {
+        }
         protected void Application_Start() {
             // Must call the job scheduler to update alertas
             AreaRegistration.RegisterAllAreas();

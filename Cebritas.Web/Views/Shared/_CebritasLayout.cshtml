@@ -10,11 +10,22 @@
     <link href="@Url.Content("~/Content/css/modules.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/states.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
+        @if (Request.IsAuthenticated) {
+            @: window.timeZone = @Cebritas.Web.Authentication.Security.SessionManager.GetAuthenticatedUser().TimeZone;
+        } else {
+            @: window.timeZone = 10; // UTC-4 Bolivia
+        }
         window.virtualPath = pathToAction = "@Url.Content("~/Content")/";
     </script>
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 </head>
 <body>
+    @{
+        string itemClass1 = "metro-item";
+        string itemClass2 = "metro-item";
+        string itemClass3 = "metro-item";
+
+    }
      <header id="l-wrapper">
       <div id="l-header">
         <div class="logo">

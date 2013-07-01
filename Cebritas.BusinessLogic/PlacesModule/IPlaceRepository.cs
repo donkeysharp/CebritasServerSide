@@ -9,5 +9,7 @@ namespace Cebritas.BusinessLogic.PlacesModule {
         IEnumerable<Place> GetByParentCategory(long parentCategoryId);
 
         IEnumerable<Place> GetByPrice(long parentCategoryId, int minPrice, int maxPrice);
+
+        IEnumerable<Place> GetByPriceAndQuery(int minPrice, int maxPrice, string query);
     }
 }

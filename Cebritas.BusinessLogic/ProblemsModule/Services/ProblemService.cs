@@ -32,9 +32,9 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// Get all problems reported today around the world
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Problem> GetAll() {
+        public IEnumerable<Problem> GetAll(TimeZoneInfo timeZone) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.UtcNow.Date;
+            DateTime today = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone, false);
             problems = db.Filter(x => x.ReportedDate.Equals(today));
 
             return problems;
@@ -48,9 +48,9 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns></returns>
-        public IEnumerable<Problem> List(double latitude, double longitude) {
+        public IEnumerable<Problem> List(double latitude, double longitude, TimeZoneInfo timeZone) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.UtcNow.Date;
+            DateTime today = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone, false);
             problems = db.Filter(x => x.ReportedDate.Equals(today));
             List<Problem> result = new List<Problem>();
             foreach (Problem problem in problems) {
@@ -70,9 +70,9 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <param name="latitude">Current latitude</param>
         /// <param name="longitude">Current longitude</param>
         /// <returns></returns>
-        public Problem ReportedToday(double latitude, double longitude) {
+        public Problem ReportedToday(double latitude, double longitude, TimeZoneInfo timeZone) {
             IEnumerable<Problem> problems;
-            DateTime today = DateTime.UtcNow.Date;
+            DateTime today = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone, false);
             problems = db.Filter(x => x.ReportedDate.Equals(today));
 
             foreach(Problem problem in problems) {
@@ -90,8 +90,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// </summary>
         /// <param name="facebookFriends"></param>
         /// <returns></returns>
-        public IEnumerable<Report> ListByFriends(string[] facebookFriends) {
-            IEnumerable<Report> reports = reportDb.GetReportsByFriends(facebookFriends);
+        public IEnumerable<Report> ListByFriends(string[] facebookFriends, TimeZoneInfo timeZone) {
+            IEnumerable<Report> reports = reportDb.GetReportsByFriends(facebookFriends, timeZone);
             return reports;
         }
         /// <summary>
@@ -103,15 +103,15 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
         /// <param name="description"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public Problem Insert(Problem problem, string facebookCode, string description, int type) {
+        public Problem Insert(Problem problem, string facebookCode, string description, int type, TimeZoneInfo timeZone) {
             // Get today's report with central point latitude and longitude
             // in a 150mts radio
-            Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude);
+            Problem todayNearProblem = ReportedToday(problem.Latitude, problem.Longitude, timeZone);
 
             if (todayNearProblem == null) {
                 problem.Code = General.Cryptography.SecurityTokenGenerator.GenerateGuid();
-                problem.ReportedAt = DateTime.UtcNow;
-                problem.ReportedDate = DateTime.UtcNow.Date;
+                problem.ReportedAt = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone);
+                problem.ReportedDate = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone, false); ;
 
                 todayNearProblem = db.Insert(problem);
             }
@@ -132,8 +132,8 @@ namespace Cebritas.BusinessLogic.ProblemsModule.Services {
             report.Latitude = problem.Latitude;
             report.Longitude = problem.Longitude;
             report.Type = type;
-            report.ReportedAt = DateTime.UtcNow;
-            report.ReportedDate = DateTime.UtcNow.Date;
+            report.ReportedAt = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone);
+            report.ReportedDate = TimeUtil.UtcToTimeZone(DateTime.UtcNow, timeZone, false);
             report.ProblemId = todayNearProblem.Id;
 
             reportDb.Insert(report);

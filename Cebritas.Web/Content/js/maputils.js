@@ -3,11 +3,11 @@ function timeStampToTime(stamp) {
   var result = {hh: date.getHours(), mm: date.getMinutes()};
   return result;
 }
-function drawCircle(location, radius) {
+function drawCircle(location, radius, color) {
   var R = 6371;
   var MM = Microsoft.Maps;
-  var backgroundColor = new Microsoft.Maps.Color(155, 100, 255, 0);
-  var borderColor = new Microsoft.Maps.Color(255, 200, 255, 0);
+  var backgroundColor = new Microsoft.Maps.Color(155, color.r, color.g, color.b);
+  var borderColor = new Microsoft.Maps.Color(255, 66,66,66);
   var lat = (location.latitude * Math.PI) / 180;
   var lon = (location.longitude * Math.PI) / 180;
   var d = parseFloat(radius) / R;
@@ -27,13 +27,18 @@ function drawCircle(location, radius) {
   return polygon;
 }
 function addPushPin(map, location, info, clickCallback) {
-    var polygon = drawCircle(location, 0.078);
-    map.entities.push(polygon);
     var options = null;
+    var color = { r: 50, g: 200, b: 50 };
     if (info) {
         var icon = window.icons[info.Type];
+        if (info.Verified) {
+            color = { r: 50, g: 50, b: 200 }
+        }
         options = { icon: window.virtualPath + icon, width: 30, height: 50 };
     }
+    var polygon = drawCircle(location, 0.078, color);
+    map.entities.push(polygon);
+
     var pushpin = new Microsoft.Maps.Pushpin(location, options);
     pushpin.Problem = info;
 

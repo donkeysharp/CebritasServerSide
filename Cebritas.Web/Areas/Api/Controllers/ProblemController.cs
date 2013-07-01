@@ -12,20 +12,34 @@ using Cebritas.Web.Areas.Api.Models;
 
 namespace Cebritas.Web.Areas.Api.Controllers {
     public class ProblemController : RestControllerBase {
+        [HttpGet]
+        public JsonResult GetTimeZones() {
+            List<object> result = new List<object>();
+            foreach(var zone in TimeUtil.timeZones) {
+                result.Add(new { TimeZone = zone.Key, Name = zone.Value.DisplayName });
+            }
+            return SuccessResult(result, Messages.OK);
+        }
+
         [HttpPost]
-        public JsonResult Report(ProblemViewModel problemViewModel) {
+        public JsonResult Report(ProblemViewModel problemViewModel, int timeZone) {
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository(), new ReportRepository());
+            TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone);
             Problem problem = new Problem();
             ViewModelToEntity(problemViewModel, problem);
 
-            problemService.Insert(problem, problemViewModel.FacebookCode, problemViewModel.Description, problemViewModel.Type);
+            problemService.Insert(problem, problemViewModel.FacebookCode, problemViewModel.Description, problemViewModel.Type, timeZoneInfo);
 
             return SuccessResult(null, Messages.OK);
         }
         [HttpGet]
-        public JsonResult GetAllProblems() {
+        public JsonResult GetAllProblems(int? timeZone) {
+            if (!timeZone.HasValue) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "timezone"));
+            }
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
-            IEnumerable<Problem> problems = problemService.GetAll();
+            TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone.Value);
+            IEnumerable<Problem> problems = problemService.GetAll(timeZoneInfo);
 
             List<ProblemViewModel> result = new List<ProblemViewModel>();
             ProblemViewModel item;
@@ -40,12 +54,12 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         }
 
         [HttpGet]
-        public JsonResult GetProblems(string latitude, string longitude) {
+        public JsonResult GetProblems(string latitude, string longitude, int? timeZone) {
             double platitude, plongitude;
-            ValidateGetProblems(latitude, longitude, out platitude, out plongitude);
-
+            ValidateGetProblems(latitude, longitude, timeZone, out platitude, out plongitude);
+            TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone.Value);
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository());
-            IEnumerable<Problem> problems = problemService.List(platitude, plongitude);
+            IEnumerable<Problem> problems = problemService.List(platitude, plongitude, timeZoneInfo);
 
             List<ProblemViewModel> result = new List<ProblemViewModel>();
             ProblemViewModel item;
@@ -60,12 +74,13 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         }
 
         [HttpGet]
-        public JsonResult GetProblemsReportedByFriends(string friends) {
+        public JsonResult GetProblemsReportedByFriends(string friends, int timeZone) {
             string[] friendsArray = friends.Split(new char[] {','});
+            TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone);
             List<ReportViewModel> result = new List<ReportViewModel>();
             ReportViewModel item;
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository(), new ReportRepository());
-            IEnumerable<Report> reports = problemService.ListByFriends(friendsArray);
+            IEnumerable<Report> reports = problemService.ListByFriends(friendsArray, timeZoneInfo);
 
             foreach (Report report in reports) {
                 item = new ReportViewModel();
@@ -78,7 +93,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         }
 
         #region "Validation"
-        private void ValidateGetProblems(string pLatitude, string pLongitude, out double latitude, out double longitude) {
+        private void ValidateGetProblems(string pLatitude, string pLongitude, int? timeZone, out double latitude, out double longitude) {
             try {
                 CultureInfo usCulture = new CultureInfo("en-US");
                 latitude = double.Parse(pLatitude, usCulture);
@@ -86,14 +101,17 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             } catch (Exception) {
                 throw new CebraException(Messages.FORMATO_COORDENADAS_INCORRECTO);
             }
+            if (!timeZone.HasValue) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "timezone"));
+            }
         }
 
         #endregion "Validation"
 
         #region "Utils"
-
         private void ViewModelToEntity(ProblemViewModel problemViewModel, Problem problem) {
             try {
+                problemViewModel.Latitude = problemViewModel.Latitude.Replace(",", ".");
                 CultureInfo usCulture = new CultureInfo("en-US");
                 problem.Latitude = double.Parse(problemViewModel.Latitude, usCulture);
                 problem.Longitude = double.Parse(problemViewModel.Longitude, usCulture);

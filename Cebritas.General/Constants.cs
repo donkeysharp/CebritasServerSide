@@ -77,5 +77,6 @@ namespace Cebritas.General {
         // New messages
         public const string ERROR_PARAM_REQUIRED = "{0}_param_is_required";
         public const string ERROR_WALLET_PRICES = "minprice_and_maxprice_required";
+        public const string ERROR_PLACE_NOT_FOUND = "place_not_found";
     }
 }

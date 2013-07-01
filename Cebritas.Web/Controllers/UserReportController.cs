@@ -8,6 +8,7 @@ using Cebritas.BusinessLogic.Entities;
 using Cebritas.BusinessLogic.ProblemsModule.Services;
 using Cebritas.BusinessModel;
 using Cebritas.DataAccess.Repositories;
+using Cebritas.General;
 using Cebritas.Web.Authentication.Security;
 using Cebritas.Web.Models.Problems;
 
@@ -24,10 +25,11 @@ namespace Cebritas.Web.Controllers {
             IProblemService problemService = ProblemService.CreateProblemService(new ProblemRepository(), new ReportRepository());
             Problem problem = new Problem();
             Usuario user = SessionManager.GetAuthenticatedUser();
+            TimeZoneInfo timeZone = TimeUtil.GetTimeZone(user.TimeZone);
 
             if (ViewModelToEntity(problemViewModel, problem)) {
                 problem.Verified = true;
-                problemService.Insert(problem, user.AuthenticationCode, problemViewModel.Description, problemViewModel.Type);
+                problemService.Insert(problem, user.AuthenticationCode, problemViewModel.Description, problemViewModel.Type, timeZone);
 
                 return RedirectToAction("Index", "Home");
             }

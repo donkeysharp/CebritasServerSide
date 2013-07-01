@@ -32,12 +32,11 @@ function getMap() {
     showMapTypeSelector:true,
     enableSearchLogo: false,
     mapTypeId: Microsoft.Maps.MapTypeId.road,
-    zoom: 15,
+    zoom: 2,
     center: centerLocation
   });
-  handleEvents();
   $.ajax({
-    url: "api/problems/getall",
+    url: "api/problems/getall?timezone=" + window.timeZone,
     cache: false,
     success: loadProblems,
     error: function() { alert('there was a problemo :P');}
@@ -45,7 +44,7 @@ function getMap() {
   setInterval(function() {
     console.log('Loading problems by interval');
     $.ajax({
-      url: "api/problems/getall",
+      url: "api/problems/getall?timezone=" + window.timeZone,
       cache: false,
       success: loadProblems,
       error: function() { alert('there was a problemo :P');}
@@ -53,17 +52,6 @@ function getMap() {
   }, 120000);
 }
 
-function handleEvents() {
-  Microsoft.Maps.Events.addHandler(window.map, 'dblclick', function(e) {
-    if(e.targetType == 'map') {
-      e.handled = true;
-      var point = new Microsoft.Maps.Point(e.getX(), e.getY());
-      var location = e.target.tryPixelToLocation(point);
-
-      addPushPin(window.map, location);
-    }
-  });
-}
 function getProblemByCode(code) {
   for(var i = 0; i<window.Problems.length; ++i) {
     if (window.Problems[i].Code == code) {
@@ -100,17 +88,12 @@ function renderProblems(type) {
     return;
   }
   $('#problems').html('');
-  var firstTime = true;
   for(var i = 0; i<problems.length; ++i) {
     if (type == 0 || problems[i].Type == type) {
       var location = {
         latitude: problems[i].Latitude,
         longitude: problems[i].Longitude
       };
-      if (firstTime) {
-        centerMap(location.latitude, location.longitude);
-        firstTime = false;
-      }
       addProblemDescription(problems[i]);
       addPushPin(window.map, location, problems[i], pushPinClicked);
     }
@@ -135,6 +118,6 @@ function addProblemDescription(problem) {
 }
 function pushPinClicked(e) {
   if (e.targetType == 'pushpin'){
-    alert(e.target.Problem.Type);
+    alert(e.target.Problem.Description);
   }
 }
