@@ -21,6 +21,7 @@
 .profile-container {
   background: #eaeaea;
   margin-top: 20px;
+  margin-left: 50px !important;
   width: 600px;
   padding: 0 0 20px 0;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -48,6 +49,13 @@
 }
 .profile-container table .btn {
   width: 100%;
+}
+.password-container {
+    float:right; background: #eaeaea; margin: 20px 0 0 0; padding: 10px;
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 /*------Footer------*/
 .footer {

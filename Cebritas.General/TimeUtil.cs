@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 
 namespace Cebritas.General {
+    public class CebraTimeZone {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
     public enum UnixTimeType {
         Seconds,
         Milliseconds
@@ -92,6 +96,18 @@ namespace Cebritas.General {
             timeZones.Add(zoneId, TimeZoneInfo.CreateCustomTimeZone(zoneId.ToString(), new TimeSpan(12, 0, 0), "UTC+12", "UTC+12"));
             zoneId++;
             timeZones.Add(zoneId, TimeZoneInfo.CreateCustomTimeZone(zoneId.ToString(), new TimeSpan(13, 0, 0), "UTC+13", "UTC+13"));
+        }
+
+        /// <summary>
+        /// Get all timezones within a IEnumerable
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<CebraTimeZone> GetTimeZones() {
+            List<CebraTimeZone> result = new List<CebraTimeZone>();
+            foreach (var item in timeZones) {
+                result.Add(new CebraTimeZone() { Id = item.Key, Name = item.Value.DisplayName });
+            }
+            return result;
         }
 
         /// <summary>

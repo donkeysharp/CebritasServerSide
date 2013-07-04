@@ -34,7 +34,7 @@
         <div class="header-container">
           <div class="login-container">
             <div class="login">
-                @Html.Partial("_LogonPartial")
+                @Html.Partial("_LogonPartial", new Cebritas.Web.Models.Home.LogonViewModel())
             </div>
           </div>
           <div class="menu-container">
@@ -76,5 +76,6 @@
     } else {
         <script type="text/javascript" src="@Url.Content("~/Content/js/maps.js")"></script>
     }
+    @RenderSection("CustomScripts", false)
 </body>
 </html>

@@ -16,6 +16,7 @@ namespace Cebritas.BusinessLogic.Entities {
         public bool Active { get; set; }
         public string Country { get; set; }
         public int TimeZone { get; set; }
+        public string Information { get; set; }
 
         public long RoleId { get; set; }
         [ForeignKey("RoleId")]

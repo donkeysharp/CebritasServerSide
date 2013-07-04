@@ -8,7 +8,7 @@ using Cebritas.Web.Authentication.Security;
 using Cebritas.Web.Models.Home;
 
 namespace Cebritas.Web.Controllers {
-    public class HomeController : Controller {
+    public class HomeController : CebraControllerBase {
         [HttpGet]
         public ActionResult Index() {
             return View();

@@ -14,7 +14,7 @@ using Cebritas.Web.Models.Problems;
 
 namespace Cebritas.Web.Controllers {
     [Authorize(Roles="media")]
-    public class UserReportController : Controller {
+    public class UserReportController : CebraControllerBase {
         [HttpGet]
         public ActionResult Index() {
             ViewBag.PageName = "UserReport";

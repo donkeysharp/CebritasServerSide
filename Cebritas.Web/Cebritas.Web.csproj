@@ -92,6 +92,8 @@
     <Compile Include="Models\PlacesModule\CategoryModel.cs" />
     <Compile Include="Models\PlacesModule\PlaceModel.cs" />
     <Compile Include="Models\Problems\ProblemViewModel.cs" />
+    <Compile Include="Models\Profile\ProfilePasswordViewModel.cs" />
+    <Compile Include="Models\Profile\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +124,7 @@
     <Content Include="Content\js\maps.js" />
     <Content Include="Content\js\mapuser.js" />
     <Content Include="Content\js\maputils.js" />
+    <Content Include="Content\js\profile.js" />
     <Content Include="DatosIniciales.sql" />
     <Content Include="Global.asax" />
     <Content Include="http headers.txt" />

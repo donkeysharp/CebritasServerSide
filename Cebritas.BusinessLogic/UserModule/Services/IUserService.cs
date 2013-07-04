@@ -18,7 +18,7 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
         void ChangeStatus(long id, bool isActive);
         Usuario Insert(Usuario user);
         int Delete(long id);
-        int Update(Usuario user);
+        int Update(Usuario user, bool updatePassword = false);
 
         Usuario AuthenticateUser(string email, string password);
 
