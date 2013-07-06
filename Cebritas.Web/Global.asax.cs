@@ -48,6 +48,18 @@ namespace Cebritas.Web {
                 new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute(
+                "UsersPanel",
+                "accounts/",
+                new { controller = "AccountPanel", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "GetUsers",
+                "getusers/",
+                new { controller = "AccountPanel", action = "GetUsers" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}",
                 new { controller = "Home", action = "Index" }

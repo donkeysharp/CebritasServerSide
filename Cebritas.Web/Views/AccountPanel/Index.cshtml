@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Cebritas - Accounts Panel";
+    Layout = "~/Views/Shared/_CebritasLayout.cshtml";
+}
+@section CustomScripts {
+    <script type="text/javascript" src="@Url.Content("~/Content/js/accountutils.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/account.js")"></script>
+}
+<div class="container account-container">
+    <h1>List of users</h1>
+    <table id="users" border="1" cellpadding="4" cellspacing="0">
+       <thead>
+        <tr>
+        <th style="width:35%">Email</th>
+        <th style="width:35%">Name</th>
+        <th style="width:15%">Country</th>
+        <th style="width:15%">Time Zone</th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+    </table>
+</div>
+
+<!--New User Modal-->
+<div id="new-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background:#eaeaea;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">New User</h3>
+  </div>
+  <div class="modal-body">
+      <table>
+          <tr>
+              <td>Email</td>
+              <td><input type="email" /></td>
+          </tr>
+          <tr>
+              <td>Name</td>
+              <td><input type="text" /></td>
+          </tr>
+      </table>
+  </div>
+  <div class="modal-footer" style="background:#eaeaea;">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-success">Save changes</button>
+  </div>
+</div>

@@ -79,6 +79,7 @@
     <Compile Include="Areas\Api\Models\PlaceViewModel.cs" />
     <Compile Include="Areas\Api\Models\ProblemViewModel.cs" />
     <Compile Include="Areas\Api\Models\ReportViewModel.cs" />
+    <Compile Include="Controllers\AccountPanelController.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Models\Problems\ProblemViewModel.cs" />
     <Compile Include="Models\Profile\ProfilePasswordViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModel.cs" />
+    <Compile Include="Models\UserManagement\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,8 +120,10 @@
     <Content Include="Content\img\ppparade.png" />
     <Content Include="Content\img\ppriot.png" />
     <Content Include="Content\img\pptraffic.png" />
+    <Content Include="Content\js\accountutils.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\account.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\maps.js" />
     <Content Include="Content\js\mapuser.js" />
@@ -198,6 +202,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Home\Logon.cshtml" />
     <Content Include="Views\UserReport\Index.cshtml" />
+    <Content Include="Views\AccountPanel\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

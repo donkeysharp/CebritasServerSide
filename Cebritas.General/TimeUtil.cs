@@ -4,6 +4,46 @@ using System.Linq;
 using System.Text;
 
 namespace Cebritas.General {
+    /// <summary>
+    /// Constants for all timezones, it should be an enum, but I'm lazy to
+    /// change it, and time is running :S
+    /// </summary>
+    public class TimeZones {
+        public const byte UTC_12 = 1;
+        public const byte UTC_11 = 2;
+        public const byte UTC_10 = 3;
+        public const byte UTC_9 = 4;
+        public const byte UTC_8 = 5;
+        public const byte UTC_7 = 6;
+        public const byte UTC_6 = 7;
+        public const byte UTC_5 = 8;
+        public const byte UTC_430 = 9;
+        public const byte UTC_4 = 10;
+        public const byte UTC_330 = 11;
+        public const byte UTC_3 = 12;
+        public const byte UTC_2 = 13;
+        public const byte UTC_1 = 14;
+        public const byte UTC_0 = 15;
+        public const byte UTC1 = 16;
+        public const byte UTC2 = 17;
+        public const byte UTC3 = 18;
+        public const byte UTC330 = 19;
+        public const byte UTC4 = 20;
+        public const byte UTC430 = 21;
+        public const byte UTC5 = 22;
+        public const byte UTC530 = 23;
+        public const byte UTC545 = 24;
+        public const byte UTC6 = 25;
+        public const byte UTC630 = 26;
+        public const byte UTC7 = 27;
+        public const byte UTC8 = 28;
+        public const byte UTC9 = 29;
+        public const byte UTC930 = 30;
+        public const byte UTC10 = 31;
+        public const byte UTC11 = 32;
+        public const byte UTC12 = 33;
+        public const byte UTC13 = 34;
+    }
     public class CebraTimeZone {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -163,6 +203,20 @@ namespace Cebritas.General {
             } else {
                 return EPOCH.AddSeconds(unixTime);
             }
+        }
+
+        /// <summary>
+        /// Converts a datetime that is in a given time zone to UTC timezone
+        /// </summary>
+        /// <param name="dateTime">Date to be converted</param>
+        /// <param name="timeZone">Date's timezone</param>
+        /// <returns></returns>
+        public static DateTime ConvertDateTimeToUtc(DateTime dateTime, TimeZoneInfo timeZone) {
+            DateTime input = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, DateTimeKind.Unspecified);
+            TimeZoneInfo utcTimeZone = GetTimeZone(TimeZones.UTC_0);
+            DateTime temp = TimeZoneInfo.ConvertTime(input, timeZone, utcTimeZone);
+            DateTime result = new DateTime(temp.Year, temp.Month, temp.Day, temp.Hour, temp.Minute, temp.Second, DateTimeKind.Utc);
+            return result;
         }
     }
 }

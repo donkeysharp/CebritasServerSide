@@ -1,14 +1,19 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
+@{
+    var rnd = new Random();
+    var num = rnd.Next(1000);
+    var qs = "rnd=" + num;
+}
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="@Url.Content("~/Content/css/base.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/vendor/bootstrap.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/layout.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/modules.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/states.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/vendor/bootstrap.css")?@qs" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/layout.css")?@qs" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/modules.css")?@qs" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/states.css")?@qs" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         @if (Request.IsAuthenticated) {
             @: window.timeZone = @Cebritas.Web.Authentication.Security.SessionManager.GetAuthenticatedUser().TimeZone;
@@ -17,7 +22,7 @@
         }
         window.virtualPath = pathToAction = "@Url.Content("~/Content")/";
     </script>
-    <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <!--<script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>-->
 </head>
 <body>
     @{
@@ -62,7 +67,7 @@
       <div id="l-main">
       @RenderBody()
       </div>
-      <div id="l-footer" class="footer">
+      <div id="l-footer" class="footero">
         <div>
           Cebritas - 2013
         </div>
@@ -70,12 +75,7 @@
 
     <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/maputils.js")"></script>
-    @if (ViewBag.PageName != null) {
-        <script type="text/javascript" src="@Url.Content("~/Content/js/mapuser.js")"></script>
-    } else {
-        <script type="text/javascript" src="@Url.Content("~/Content/js/maps.js")"></script>
-    }
+
     @RenderSection("CustomScripts", false)
 </body>
 </html>

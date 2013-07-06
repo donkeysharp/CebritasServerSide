@@ -57,14 +57,23 @@
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
+/*------Maps------*/
+.bing-map {
+    margin:0;
+    display: inline-block;
+    position: relative;
+    width: 75%;
+    height: 430px;
+}
 /*------Footer------*/
-.footer {
-  position: fixed;
+.footero{
+  bottom: 0;
+  position: relative;
   text-align: center;
   background: #262626;
   color: #fff;
 }
-.footer div {
+.footero div {
   padding: 20px 0 0 0;
 }
 /*------Problems------*/
@@ -82,3 +91,17 @@
 .report-problem .input-append .btn {width: 8px;}
 .report-problem .input-append i {margin: 3px 0 0 -6px;}
 .report-problem input[type="submit"]{width: 100%;}
+/*------Users panel------*/
+.account-container {
+  background: #eaeaea;  margin-top: 20px;
+
+  width: 700px;
+  padding: 20px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+.account-container table{
+    width: 100%;
+}

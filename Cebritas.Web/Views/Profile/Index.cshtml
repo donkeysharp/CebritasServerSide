@@ -5,95 +5,122 @@
 }
 @section CustomScripts {
     <script type="text/javascript" src="@Url.Content("~/Content/js/profile.js")"></script>
-    
     @if (TempData.ContainsKey("ErrorsPassword")) {
         if ((bool)TempData["ErrorsPassword"]) {
         <script>
             $(".alert").alert();
             $('#error-password').show('fast');
         </script>
+        }
     }
-}
 }
 <div class="container-fluid">
- <div class="row-fluid">
- <div class="span7 profile-container">
-    <div class="user-name">
-        <h1>
-            @Model.Name</h1>
-    </div>
-    @using (Html.BeginForm("UpdateProfile", "Profile", FormMethod.Post)) {
-        <table cellpadding="12">
-            <tbody>
-                <tr>
-                    <td style="vertical-align: middle;">Email:</td>
-                    <td><a href="mailto:@Model.Email">@Model.Email</a></td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: middle;">Role:</td>
-                    <td><div>@Model.Role</div></td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: middle;">Name:</td>
-                    <td><input value="@Model.Name" type="text" name="Name" placeholder="Select your name"
-                            autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: middle;">Country:</td>
-                    <td>
-                        @Html.DropDownList("Country", ViewBag.Countries as SelectList, "Select a country ...")
-                    </td>
-                </tr>
-                <tr>
-                    <td>Time Zone:</td>
-                    <td>
-                        @Html.DropDownList("TimeZone", ViewBag.TimeZones as SelectList, "Select a timezone ...")
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">
-                        Information:
-                    </td>
-                    <td>
-                        <textarea name="Description" rows="5"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;
-                    </td>
-                    <td>
-                        <button class="btn btn-success">
-                            Save</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    }
-</div>
-<div class="span4 password-container">
-@using (Html.BeginForm("UpdatePassword", "Profile", FormMethod.Post, new { id = "update-password" })) {
-    @: <h3>Password Information</h3>
+    <div class="row-fluid">
+        <div class="span7 profile-container">
+            <div class="user-name">
+                <h1>
+                    @Model.Name</h1>
+            </div>
+            @using (Html.BeginForm("UpdateProfile", "Profile", FormMethod.Post)) {
+                <table cellpadding="12">
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Email:
+                            </td>
+                            <td>
+                                <a href="mailto:@Model.Email">@Model.Email</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Role:
+                            </td>
+                            <td>
+                                <div>@Model.Role</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Name:
+                            </td>
+                            <td>
+                                <input value="@Model.Name" type="text" name="Name" placeholder="Select your name"
+                            autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                Country:
+                            </td>
+                            <td>
+                                @Html.DropDownList("Country", ViewBag.Countries as SelectList, "Select a country ...")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Time Zone:
+                            </td>
+                            <td>
+                                @Html.DropDownList("TimeZone", ViewBag.TimeZones as SelectList, "Select a timezone ...")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top;">
+                                Information:
+                            </td>
+                            <td>
+                                <!--<textarea name="Description" rows="5"></textarea>-->
+                                @Html.TextAreaFor(x => x.Description, new { rows = 5 })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                <button class="btn btn-success">
+                                    Save</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="span4 password-container">
+            @using (Html.BeginForm("UpdatePassword", "Profile", FormMethod.Post, new { id = "update-password" })) {
+                @: <h3>Password Information</h3>
     <table>
         <tr>
-            <td>Old Password:</td>
-            <td><input id="old-password" name="OldPassword" type="password" /></td>
+            <td>
+                Old Password:
+            </td>
+            <td>
+                <input id="old-password" name="OldPassword" type="password" />
+            </td>
         </tr>
         <tr>
-            <td>New Password:</td>
-            <td><input id="new-password" name="NewPassword" type="password" /></td>
+            <td>
+                New Password:
+            </td>
+            <td>
+                <input id="new-password" name="NewPassword" type="password" />
+            </td>
         </tr>
         <tr>
-            <td>Verify Password:</td>
-            <td><input id="verify-password" name="VerifyPassword" type="password" /></td>
+            <td>
+                Verify Password:
+            </td>
+            <td>
+                <input id="verify-password" name="VerifyPassword" type="password" />
+            </td>
         </tr>
     </table>
-    <div id="error-password" class="alert alert-error" style="display:none">
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
-        Invalid information
+                <div id="error-password" class="alert alert-error" style="display: none">
+                    <a class="close" data-dismiss="alert" href="#">&times;</a> Invalid information
+                </div>
+                <input class="btn btn-success" style="width: 100%" type="submit" value="Update Password" />
+            }
+        </div>
     </div>
-    <input class="btn btn-success" style="width:100%" type="submit" value="Update Password" />
-}
-</div>
-</div>
 </div>

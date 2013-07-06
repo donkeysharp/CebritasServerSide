@@ -22,6 +22,7 @@ namespace Cebritas.Web.Controllers {
             viewModel.Role = usuario.Rol.Name;
             viewModel.Country = usuario.Country;
             viewModel.TimeZone = usuario.TimeZone;
+            viewModel.Description = usuario.Information;
 
             ViewBag.Countries = new SelectList(Regions.GetCountries(), "Code", "Name");
             ViewBag.TimeZones = new SelectList(TimeUtil.GetTimeZones(), "Id", "Name");
@@ -35,6 +36,7 @@ namespace Cebritas.Web.Controllers {
             usuario.Name = profileViewModel.Name;
             usuario.Country = profileViewModel.Country;
             usuario.TimeZone = profileViewModel.TimeZone;
+            usuario.Information = profileViewModel.Description;
 
             userService.Update(usuario);
 

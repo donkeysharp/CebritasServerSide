@@ -16,6 +16,7 @@
                 $('#error-password').show('fast');
             }
         });
+        $('#information').modal({ show: false });
         $('#error-password').bind('close', function (e) {
             e.preventDefault();
             $('#error-password').hide();

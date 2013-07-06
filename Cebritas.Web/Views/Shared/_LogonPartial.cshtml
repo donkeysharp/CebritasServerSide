@@ -8,7 +8,7 @@
             <li><a href="@Url.Content("~/profile")">Profile</a></li>
             <li class="divider"></li>
             @if (User.IsInRole("admin")) {
-                @: <li><a href="#">User Manager</a></li>
+                @: <li><a href="@Url.Content("~/accounts")">User Manager</a></li>
             }
             @if (User.IsInRole("media")) {
                 @: <li><a href="@Url.Content("~/reporter")">Report Problem</a> </li>

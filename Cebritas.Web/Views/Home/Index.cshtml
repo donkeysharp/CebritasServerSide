@@ -2,10 +2,15 @@
     ViewBag.Title = "Cebritas";
     Layout = "~/Views/Shared/_CebritasLayout.cshtml";
 }
+@section CustomScripts{
+    <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/maputils.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/maps.js")"></script>
+}
 <div class="problem-report">
     <h3>
         What's going on?</h3>
-    <div id='mapDiv' style="position: absolute; width: 75%; height: 430px;">
+    <div id='mapDiv' class="bing-map">
     </div>
     <div class="problem-details">
         <div class="problem-list-title">
@@ -25,4 +30,18 @@
         <div class="problem-list" id="problems">
         </div>
     </div>
+</div>
+<div class="modal hide fade" id="information">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="model-problem-type"></h3>
+  </div>
+  <div class="modal-body">
+    <b>Importance: </b> <span id="modal-problem-importance"></span> <br />
+    <b>Reported at: </b> <span id="modal-problem-reportedat"></span> <br />
+    <b>Description: </b> <span id="modal-problem-description"></span> <br />
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" onclick="$('#information').modal('hide')">Close</a>
+  </div>
 </div>

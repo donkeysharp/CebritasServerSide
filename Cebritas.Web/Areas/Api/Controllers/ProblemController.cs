@@ -15,7 +15,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
         [HttpGet]
         public JsonResult GetTimeZones() {
             List<object> result = new List<object>();
-            foreach(var zone in TimeUtil.timeZones) {
+            foreach (var zone in TimeUtil.timeZones) {
                 result.Add(new { TimeZone = zone.Key, Name = zone.Value.DisplayName });
             }
             return SuccessResult(result, Messages.OK);
@@ -45,7 +45,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             ProblemViewModel item;
             foreach (Problem problem in problems) {
                 item = new ProblemViewModel();
-                EntityToViewModel(problem, item);
+                EntityToViewModel(problem, item, timeZoneInfo);
 
                 result.Add(item);
             }
@@ -65,7 +65,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             ProblemViewModel item;
             foreach (Problem problem in problems) {
                 item = new ProblemViewModel();
-                EntityToViewModel(problem, item);
+                EntityToViewModel(problem, item, timeZoneInfo);
 
                 result.Add(item);
             }
@@ -75,7 +75,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
         [HttpGet]
         public JsonResult GetProblemsReportedByFriends(string friends, int timeZone) {
-            string[] friendsArray = friends.Split(new char[] {','});
+            string[] friendsArray = friends.Split(new char[] { ',' });
             TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone);
             List<ReportViewModel> result = new List<ReportViewModel>();
             ReportViewModel item;
@@ -84,7 +84,7 @@ namespace Cebritas.Web.Areas.Api.Controllers {
 
             foreach (Report report in reports) {
                 item = new ReportViewModel();
-                EntityToViewModel(report, item);
+                EntityToViewModel(report, item, timeZoneInfo);
 
                 result.Add(item);
             }
@@ -120,16 +120,18 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             }
         }
 
-        private void EntityToViewModel(Report report, ReportViewModel reportViewModel) {
+        private void EntityToViewModel(Report report, ReportViewModel reportViewModel, TimeZoneInfo timeZone) {
             reportViewModel.FacebookCode = report.FacebookCode;
             reportViewModel.Type = report.Type;
             reportViewModel.Latitude = report.Latitude;
             reportViewModel.Longitude = report.Longitude;
             reportViewModel.Description = report.Description;
-            reportViewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(report.ReportedAt, UnixTimeType.Seconds);
+
+            DateTime reportedDate = TimeUtil.ConvertDateTimeToUtc(report.ReportedAt, timeZone);
+            reportViewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(reportedDate, UnixTimeType.Seconds);
         }
 
-        private void EntityToViewModel(Problem problem, ProblemViewModel viewModel) {
+        private void EntityToViewModel(Problem problem, ProblemViewModel viewModel, TimeZoneInfo timeZone) {
             CultureInfo usCulture = new CultureInfo("en-US");
             ReportViewModel reportVm;
 
@@ -141,20 +143,22 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 viewModel.Importance = problem.Reports.ToList().Count;
                 viewModel.FacebookCode = problem.Reports.ToList()[0].FacebookCode;
                 viewModel.Type = problem.Reports.ToList()[0].Type;
-                viewModel.Description = problem.Reports.ToList()[0].Description;
+                viewModel.Description = problem.Reports.ToList()[0].Description + "..";
             } else {
                 viewModel.Importance = 0;
-                viewModel.FacebookCode = "";
+                viewModel.FacebookCode = string.Empty;
                 viewModel.Type = 1;
-                viewModel.Description = "";
+                viewModel.Description = string.Empty;
             }
 
-            viewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(problem.ReportedAt, UnixTimeType.Seconds);
+            DateTime reportedDate = TimeUtil.ConvertDateTimeToUtc(problem.ReportedAt, timeZone);
+            viewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(reportedDate, UnixTimeType.Seconds);
+
             viewModel.Reporters = new List<ReportViewModel>();
             if (problem.Reports != null) {
                 foreach (Report report in problem.Reports) {
                     reportVm = new ReportViewModel();
-                    EntityToViewModel(report, reportVm);
+                    EntityToViewModel(report, reportVm, timeZone);
 
                     ((List<ReportViewModel>)viewModel.Reporters).Add(reportVm);
                 }
