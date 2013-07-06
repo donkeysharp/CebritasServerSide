@@ -19,6 +19,11 @@ namespace Cebritas.Web.Areas.Api {
                 "api/wallet/getplacesbetween",
                 new { controller = "Place", action = "GetPlacesByPrice" }
             );
+            context.MapRoute(
+                "GetPlacesByPriceAndQuery",
+                "api/wallet/getplacesbypriceandquery",
+                new { controller = "Place", action = "GetPlacesByPriceAndQuery" }
+            );
         }
 
         private void PlaceModuleRoutes(AreaRegistrationContext context) {
@@ -42,9 +47,24 @@ namespace Cebritas.Web.Areas.Api {
                 "api/places/getbyquery",
                 new { controller = "Place", action = "GetPlacesByQuery" }
             );
+            context.MapRoute(
+                "RatePlace",
+                "api/places/rateplace",
+                new { controller = "Place", action = "RateProblem" }
+            );
         }
 
         private void ProblemModuleRoutes(AreaRegistrationContext context) {
+            context.MapRoute(
+                "GetTimezones",
+                "api/timezones",
+                new { controller = "Problem", action = "GetTimeZones" }
+            );
+            context.MapRoute(
+                "GetAllProblems",
+                "api/problems/getall",
+                new { controller = "Problem", action = "GetAllProblems" }
+            );
             context.MapRoute(
                 "GetProblems",
                 "api/problems/get",

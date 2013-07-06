@@ -60,5 +60,12 @@ namespace Cebritas.DataAccess.Repositories {
 
             return result;
         }
+        public IEnumerable<Place> GetByPriceAndQuery(int minPrice, int maxPrice, string query) {
+            IEnumerable<Place> result = (from place in context.Places
+                                         where ((minPrice <= place.MinPrice && place.MinPrice <= maxPrice) || (minPrice <= place.MaxPrice && place.MaxPrice <= maxPrice))
+                                               && place.Name.Contains(query)
+                                         select place).ToList();
+            return result;
+        }
     }
 }

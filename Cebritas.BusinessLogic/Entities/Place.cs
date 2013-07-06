@@ -18,7 +18,7 @@ namespace Cebritas.BusinessLogic.Entities {
         public bool SmokingArea { get; set; }
         public bool KidsArea { get; set; }
         public bool Delivery { get; set; }
-        public double Rating { get; set; }
+        public string Rating { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 

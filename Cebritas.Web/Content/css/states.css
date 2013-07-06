@@ -1,0 +1,14 @@
+.menu-container .is-selected div {
+  background: #479FCF;
+  text-decoration: underline;
+}
+.menu-container .metro-item > div:hover {
+  background: #29A930;
+}
+.menu-container .is-selected div:hover {
+  background: #2E84B1;
+}
+/*------Problems------*/
+.problem:hover {
+  cursor: pointer;
+}

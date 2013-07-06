@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Security;
 using Cebritas.BusinessLogic.Entities;
 using Cebritas.BusinessLogic.UserModule.Services;
 using Cebritas.DataAccess.Repositories;
 using Cebritas.General;
+using Cebritas.Web.Authentication.Security;
 
 namespace Cebritas.Web.Authentication {
     public class CebraMembershipProvider : MembershipProvider {
+
         #region "Private Members"
         private bool enablePasswordReset;
         private bool enablePasswordRetrieval;
@@ -23,6 +26,7 @@ namespace Cebritas.Web.Authentication {
         private int minRequiredPasswordLength;
         private int passwordAttemptWindow;
         private MembershipPasswordFormat passwordFormat;
+
         #endregion "Private Members"
 
         #region "Application Name"
@@ -30,6 +34,7 @@ namespace Cebritas.Web.Authentication {
             get { return applicationName; }
             set { applicationName = value; }
         }
+
         #endregion "Application Name"
 
         #region "Password Properties"
@@ -63,12 +68,14 @@ namespace Cebritas.Web.Authentication {
         public override bool RequiresQuestionAndAnswer {
             get { return requiresQuestionAndAnswer; }
         }
+
         #endregion "Password Properties"
 
         #region "Email Properties"
         public override bool RequiresUniqueEmail {
             get { return requiresUniqueEmail; }
         }
+
         #endregion "Email Properties"
 
         #region "Configuration Methods"
@@ -77,6 +84,7 @@ namespace Cebritas.Web.Authentication {
                 return defaultValue;
             return configValue;
         }
+
         #endregion "Configuration Methods"
 
         #region "Initialization"
@@ -114,6 +122,7 @@ namespace Cebritas.Web.Authentication {
                 default: throw new Exception("Password format not found");
             }
         }
+
         #endregion "Initialization"
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline) {
@@ -139,10 +148,12 @@ namespace Cebritas.Web.Authentication {
             IUserService userService = UserService.CreateUserService(new UserRepository());
             // username and email is the same
             try {
-                // Maybe it should be better:
-                // return userService.AuthenticatUser(username, password) != null;
                 Usuario user = userService.AuthenticateUser(username, password);
-                return user != null;
+                if (user != null) {
+                    SessionManager.SetAuthenticatedUser(user);
+                    return true;
+                }
+                return false;
             } catch (Exception) {
                 return false;
             }
@@ -206,6 +217,7 @@ namespace Cebritas.Web.Authentication {
         public override void UpdateUser(MembershipUser user) {
             throw new NotImplementedException();
         }
+
         #endregion "Non-Implemented Methods"
     }
 }

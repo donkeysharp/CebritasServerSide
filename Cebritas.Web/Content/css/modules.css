@@ -1,0 +1,84 @@
+/*------Header------*/
+.logo { width: 380px; height: 150px; float: left; }
+.header-container { margin:0 0 0 380px; height: 150px;font-family: "Open Sans", sans-serif;}
+.header-container .login-container { width: 100%; height: 20px; margin: 0 0 15px 0; }
+.header-container .menu-container { width: 100%; height: 40px; }
+/*------Login------*/
+.login-container .login {float: right;margin: 0 40px 0 0;}
+.login-container .dropdown > a {color: #fff;font-size: 18px;}
+.login form { padding: 0; margin: 0;}
+/*------Menu------*/
+.menu-container ul {list-style-type: none;margin: 0;padding: 0;}
+.menu-container li {
+  display: inline-block; line-height: 40px;
+  vertical-align: middle; text-align: center; margin: 0;
+}
+/*------Menu item----*/
+.menu-container .metro-item {color: #fff;font-size: 13px;text-decoration: none; text-wrap:normal; }
+.menu-container .metro-item > div {background: #2EBA35; height: 110px; width: 110px;}
+.metro-item img {margin: 15px 27px 0 27px;float: left;}
+/*------Profile------*/
+.profile-container {
+  background: #eaeaea;
+  margin-top: 20px;
+  margin-left: 50px !important;
+  width: 600px;
+  padding: 0 0 20px 0;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+.profile-container .user-name {
+  width: 100%;
+  text-align: center;
+}
+.profile-container table {
+  margin: 0 35px 0 35px;
+}
+.profile-container table tr td:first-child{
+  width: 100px;
+}
+.profile-container table select{
+  width: 414px;
+  margin: 0;
+}
+.profile-container table input, textarea{
+  margin: 0;
+  width: 400px;
+}
+.profile-container table .btn {
+  width: 100%;
+}
+.password-container {
+    float:right; background: #eaeaea; margin: 20px 0 0 0; padding: 10px;
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+/*------Footer------*/
+.footer {
+  position: fixed;
+  text-align: center;
+  background: #262626;
+  color: #fff;
+}
+.footer div {
+  padding: 20px 0 0 0;
+}
+/*------Problems------*/
+.problem-report {color: #fff;}
+.problem-details {background-color:rgba(255,255,255,0.1);width: 20%;height: 430px;float: right;padding: 0 10px 0 10px;margin: 0 20px 0 0;}
+.problem-list {overflow: auto;height: 300px;}
+.problem-list .problem {color: #fff;background: #262626;}
+.problem h4 {color: #479FCF;}
+.problem b {color: #56D65C;}
+
+/*------Report problem------*/
+.report-problem textarea {width: 95%;}
+.report-problem select {width: 100%;}
+.report-problem .input-append input {width: 94%;}
+.report-problem .input-append .btn {width: 8px;}
+.report-problem .input-append i {margin: 3px 0 0 -6px;}
+.report-problem input[type="submit"]{width: 100%;}

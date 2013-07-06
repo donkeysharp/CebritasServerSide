@@ -104,6 +104,19 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
             }
             return result;
         }
+        public IEnumerable<Place> GetByPriceAndQuery(double latitude, double longitude, int minPrice, int maxPrice, string query) {
+            IEnumerable<Place> places = db.GetByPriceAndQuery(minPrice, maxPrice, query);
+
+            List<Place> result = new List<Place>();
+            foreach (Place place in places) {
+                double distance = GeoCodeCalc.CalcDistance(latitude, longitude, place.Latitude, place.Longitude, GeoCodeCalcMeasurement.Kilometers);
+                distance *= 1000; // Converts distance to meters
+                if (distance <= Constants.MAX_NEAR_PLACE_DISTANCE_METERS) {
+                    result.Add(place);
+                }
+            }
+            return result;
+        }
 
         #region "Common"
         public IEnumerable<Place> List() {

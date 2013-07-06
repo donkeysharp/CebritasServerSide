@@ -16,7 +16,8 @@ namespace Cebritas.Web.Areas.Api.Models {
         public bool SmokingArea { get; set; }
         public bool KidsArea { get; set; }
         public bool Delivery { get; set; }
-        public double Rating { get; set; }
+        public int RatingCount { get; set; }
+        public int Rating { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string CategoryCode { get; set; }
