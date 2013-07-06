@@ -18,6 +18,7 @@ namespace Cebritas.BusinessLogic.PlacesModule.Services {
         IEnumerable<Place> GetByParentCategory(long parentCategoryId, double latitude, double longitude, double? radius);
         IEnumerable<Place> GetByQuery(string query, double latitude, double longitude);
         IEnumerable<Place> GetByPrices(long parentCategoryId, double latitude, double longitude, int minPrice, int maxPrice);
+        IEnumerable<Place> GetByPriceAndQuery(double latitude, double longitude, int minPrice, int maxPrice, string query);
 
         Place Insert(Place place);
         int Update(Place place);

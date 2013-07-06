@@ -12,7 +12,38 @@ using Cebritas.Web.Areas.Api.Models;
 namespace Cebritas.Web.Areas.Api.Controllers {
     public class PlaceController : RestControllerBase {
         /// <summary>
-        /// Get all categories based in the longes parent category code
+        /// Update a place's rating
+        /// </summary>
+        /// <param name="code">Place code</param>
+        /// <param name="rating">Selected rating</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult RateProblem(string code, int? rating) {
+            IPlaceService placeService = PlaceService.CreatePlaceService(new PlaceRepository());
+            if (string.IsNullOrEmpty(code)) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "code"));
+            }
+            if (!rating.HasValue) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "rating"));
+            }
+            if (rating.Value <= 0) {
+                rating = 1;
+            }
+            if (rating.Value > 5) {
+                rating = 5;
+            }
+
+            Place place = placeService.Get(code);
+            if (place == null) {
+                throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ERROR_PLACE_NOT_FOUND);
+            }
+            place.Rating = place.Rating + ", " + rating.Value;
+            placeService.Update(place);
+
+            return SuccessResult(null, Messages.OK);
+        }
+        /// <summary>
+        /// Get all categories based in the longest parent category code
         /// this categories are in a 15 kilometers radius. In the future
         /// according to the lat and lng sended it should filter by region so
         /// it can reduce query cost (google maps services -geocoding)
@@ -106,6 +137,44 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             }
             return SuccessResult(result, Messages.OK);
         }
+        /// <summary>
+        /// Get places whose name is like query and its price
+        /// is between the range of the given parameters
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult GetPlacesByPriceAndQuery(string query, double? latitude, double? longitude, int? minPrice, int? maxPrice) {
+            Action<string, double?, double?, int?, int?> validate = (_query, _lat, _long, _minPrice, _maxPrice) => {
+                if (string.IsNullOrEmpty(_query)) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, string.Format(Messages.ERROR_PARAM_REQUIRED, "query"));
+                }
+                if (!_lat.HasValue || !_long.HasValue) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.FORMATO_COORDENADAS_INCORRECTO);
+                }
+                if (!_minPrice.HasValue || !_maxPrice.HasValue) {
+                    throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.ERROR_WALLET_PRICES);
+                }
+            };
+            validate(query, latitude, longitude, minPrice, maxPrice);
+
+            IPlaceService placeService = PlaceService.CreatePlaceService(new PlaceRepository());
+            IEnumerable<Place> places = placeService.GetByPriceAndQuery(latitude.Value, longitude.Value, minPrice.Value, maxPrice.Value, query);
+
+            List<PlaceViewModel> result = new List<PlaceViewModel>();
+            PlaceViewModel item;
+            foreach (Place place in places) {
+                item = new PlaceViewModel();
+                EntityToViewModel(place, item);
+
+                result.Add(item);
+            }
+            return SuccessResult(result, Messages.OK);
+        }
 
         #region "Utils"
         private void ValidateParamsGetPlacesByQuery(string query, double? latitude, double? longitude) {
@@ -120,7 +189,29 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 throw new CebraException(Constants.HTTP_BAD_REQUEST, Messages.FORMATO_COORDENADAS_INCORRECTO);
             }
         }
-        public void EntityToViewModel(Place place, PlaceViewModel item) {
+
+        private void GetRating(string items, out int rating, out int ratingLength) {
+            string[] rates = items.Split(new char[] { ' ', ',', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            int temp, sum = 0;
+            ratingLength = 0;
+            for (int i = 0; i < rates.Length; ++i) {
+                try {
+                    temp = Convert.ToInt32(rates[i]);
+                    sum += temp;
+                    ratingLength++;
+                } catch (Exception) { }
+            }
+            if (ratingLength != 0) {
+                rating = sum / ratingLength;
+            } else {
+                rating = 1;
+            }
+        }
+
+        private void EntityToViewModel(Place place, PlaceViewModel item) {
+            int rating, ratingLength;
+            GetRating(place.Rating, out rating, out ratingLength);
+
             item.Code = place.Code;
             item.Name = place.Name;
             item.Address = place.Address;
@@ -132,7 +223,8 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             item.SmokingArea = place.SmokingArea;
             item.KidsArea = place.KidsArea;
             item.Delivery = place.Delivery;
-            item.Rating = place.Rating;
+            item.Rating = rating;
+            item.RatingCount = ratingLength;
             item.Latitude = place.Latitude;
             item.Longitude = place.Longitude;
             if (place.Category != null) {

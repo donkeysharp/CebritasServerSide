@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Cebritas";
+    Layout = "~/Views/Shared/_CebritasLayout.cshtml";
+}
+<div class="problem-report">
+    <h3>
+        What's going on?</h3>
+    <div id='mapDiv' style="position: absolute; width: 75%; height: 430px;">
+    </div>
+    <div class="problem-details">
+        <div class="problem-list-title">
+            <h3>
+                Problems</h3>
+            Filter:
+            <select id="filter">
+                <option value="0">All</option>
+                <option value="1">Traffic Jam</option>
+                <option value="2">Manifestation</option>
+                <option value="3">Parade</option>
+                <option value="4">Blockade</option>
+                <option value="5">Accident</option>
+                <option value="6">Other</option>
+            </select>
+        </div>
+        <div class="problem-list" id="problems">
+        </div>
+    </div>
+</div>

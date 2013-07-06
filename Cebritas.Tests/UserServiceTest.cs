@@ -17,9 +17,10 @@ namespace Cebritas.Tests {
             Usuario x = new Usuario();
             x.Active = false;
             x.Email = "danieloo_123@hotmail.com";
-            x.Name = "Sergio Guillen Mantilla";
-            x.Rol = roleService.GetByName("admin");
+            x.Name = "Daniel Mendoza";
+            x.Rol = roleService.GetByName("media");
             x.Password = "none";
+            x.Country = "BO";
 
             Usuario result = service.Insert(x);
             Assert.AreEqual<string>(x.Email, result.Email);

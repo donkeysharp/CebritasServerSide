@@ -15,6 +15,8 @@ namespace Cebritas.General {
         public const int HTTP_NOT_AUTHORIZED = 403;
         public const int HTTP_INTERNAL_ERRROR = 500;
 
+        public const string SESSION_USER = "CebritaUser";
+
         public const string ALERTA_TIPO_TRAFICO = "trafico";
         public const string ALERTA_TIPO_MANIFESTACION = "manifestacion";
         public const string ALERTA_TIPO_DESFILE = "desfile";
@@ -31,10 +33,10 @@ namespace Cebritas.General {
         public const double REPORTED_PROBLEM_RADIUS = 150;
 
         // The max radius where application can get problems
-        public const double PROBLEM_MAX_NEAR_RADIUS_KM = 15.0;
+        public const double PROBLEM_MAX_NEAR_RADIUS_KM = 20.0;
 
         // Maximum place distance to be considered
-        public const double MAX_NEAR_PLACE_DISTANCE_METERS = 3000;
+        public const double MAX_NEAR_PLACE_DISTANCE_METERS = 20000;
     }
 
     public class Messages {
@@ -75,5 +77,6 @@ namespace Cebritas.General {
         // New messages
         public const string ERROR_PARAM_REQUIRED = "{0}_param_is_required";
         public const string ERROR_WALLET_PRICES = "minprice_and_maxprice_required";
+        public const string ERROR_PLACE_NOT_FOUND = "place_not_found";
     }
 }

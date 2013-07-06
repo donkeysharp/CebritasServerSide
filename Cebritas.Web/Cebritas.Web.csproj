@@ -81,23 +81,50 @@
     <Compile Include="Areas\Api\Models\ReportViewModel.cs" />
     <Compile Include="Controllers\CebraControllerBase.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Home\LogonViewModel.cs" />
     <Compile Include="Models\PlacesModule\CategoryModel.cs" />
     <Compile Include="Models\PlacesModule\PlaceModel.cs" />
+    <Compile Include="Models\Problems\ProblemViewModel.cs" />
+    <Compile Include="Models\Profile\ProfilePasswordViewModel.cs" />
+    <Compile Include="Models\Profile\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="api_cebritas.txt" />
     <Content Include="Cebra_Places.sql" />
-    <Content Include="Content\css\bootstrap-responsive.min.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\img\glyphicons-halflings-white.png" />
-    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\vendor\bootstrap.css" />
+    <Content Include="Content\css\vendor\bootstrap.min.css" />
+    <Content Include="Content\css\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\css\img\glyphicons-halflings.png" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\modules.css" />
+    <Content Include="Content\css\states.css" />
+    <Content Include="Content\img\cebra_metro.png" />
+    <Content Include="Content\img\earth.png" />
+    <Content Include="Content\img\help.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logoweb.png" />
+    <Content Include="Content\img\ppaccident.png" />
+    <Content Include="Content\img\ppblockade.png" />
+    <Content Include="Content\img\ppother.png" />
+    <Content Include="Content\img\ppparade.png" />
+    <Content Include="Content\img\ppriot.png" />
+    <Content Include="Content\img\pptraffic.png" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\maps.js" />
+    <Content Include="Content\js\mapuser.js" />
+    <Content Include="Content\js\maputils.js" />
+    <Content Include="Content\js\profile.js" />
     <Content Include="DatosIniciales.sql" />
     <Content Include="Global.asax" />
     <Content Include="http headers.txt" />
@@ -143,6 +170,10 @@
       <Project>{059D264B-47DC-44DA-8273-31B17F6CE1A9}</Project>
       <Name>Cebritas.General</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cebritas.Web.Authentication\Cebritas.Web.Authentication.csproj">
+      <Project>{FD2E05CD-D81F-41DA-BB9D-37CC6FE710C0}</Project>
+      <Name>Cebritas.Web.Authentication</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Category\ListForm.cshtml" />
@@ -155,6 +186,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Place\EditForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\fonts\LeagueGothic.otf" />
+    <Content Include="Content\fonts\OpenSans.woff" />
+    <None Include="Content\img\.gitkeep" />
+    <None Include="Properties\PublishProfiles\cebritas.pubxml" />
+    <Content Include="Views\Shared\_CebritasLayout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LogonPartial.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Home\Logon.cshtml" />
+    <Content Include="Views\UserReport\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

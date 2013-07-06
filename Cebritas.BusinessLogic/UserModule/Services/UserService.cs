@@ -87,12 +87,14 @@ namespace Cebritas.BusinessLogic.UserModule.Services {
             return db.Delete(item);
         }
 
-        public int Update(Usuario user) {
+        public int Update(Usuario user, bool updatePassword=false) {
             user.Validate();
             if (Get(user.Id) == null) {
                 throw new CebraException(Messages.USER_DOES_NOT_EXIST);
             }
-            user.Password = HashSumUtil.GetHashSum(user.Password, HashSumType.SHA1);
+            if (updatePassword) {
+                user.Password = HashSumUtil.GetHashSum(user.Password, HashSumType.SHA1);
+            }
             return db.Update(user);
         }
 

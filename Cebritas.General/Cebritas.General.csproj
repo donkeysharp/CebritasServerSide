@@ -47,6 +47,7 @@
     <Compile Include="Cryptography\RSAUtil.cs" />
     <Compile Include="Cryptography\SecurityTokenGenerator.cs" />
     <Compile Include="Geo\GeoCodeCalc.cs" />
+    <Compile Include="Geo\Regions.cs" />
     <Compile Include="Networking\EmailUtil.cs" />
     <Compile Include="Cryptography\MD5Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

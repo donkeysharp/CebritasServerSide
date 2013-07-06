@@ -19,6 +19,39 @@ namespace Cebritas.Web {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             RegisterPlacesModule(routes);
+            RegisterWebModules(routes);
+        }
+
+        private static void RegisterWebModules(RouteCollection routes) {
+            routes.MapRoute(
+                "HomePage",
+                "",
+                new { controller = "Home", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Logon",
+                "logon/",
+                new { controller = "Home", action = "Logon" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Profile",
+                "profile/",
+                new { controller = "Profile", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Reporter",
+                "reporter/",
+                new { controller = "UserReport", action = "Index" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}",
+                new { controller = "Home", action = "Index" }
+            );
         }
 
         private static void RegisterPlacesModule(RouteCollection routes) {
@@ -82,7 +115,8 @@ namespace Cebritas.Web {
                 new string[] { "Cebritas.Web.Controllers" }
             );
         }
-
+        public void Application_OnBeginRequest(object sender, EventArgs e) {
+        }
         protected void Application_Start() {
             // Must call the job scheduler to update alertas
             AreaRegistration.RegisterAllAreas();
