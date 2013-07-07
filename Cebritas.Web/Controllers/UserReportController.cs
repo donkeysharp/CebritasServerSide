@@ -29,6 +29,7 @@ namespace Cebritas.Web.Controllers {
 
             if (ViewModelToEntity(problemViewModel, problem)) {
                 problem.Verified = true;
+                problem.TimeZone = user.TimeZone;
                 problemService.Insert(problem, user.AuthenticationCode, problemViewModel.Description, problemViewModel.Type, timeZone);
 
                 return RedirectToAction("Index", "Home");

@@ -33,6 +33,11 @@ namespace Cebritas.BusinessModel {
         /// </summary>
         public DateTime ReportedDate { get; set; }
 
+        /// <summary>
+        /// TimeZone in which problem has been reported
+        /// </summary>
+        public int TimeZone { get; set; }
+
         public virtual ICollection<Report> Reports { get; set; }
     }
 }

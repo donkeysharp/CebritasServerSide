@@ -7,40 +7,192 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/account.js")"></script>
 }
 <div class="container account-container">
-    <h1>List of users</h1>
-    <table id="users" border="1" cellpadding="4" cellspacing="0">
-       <thead>
-        <tr>
-        <th style="width:35%">Email</th>
-        <th style="width:35%">Name</th>
-        <th style="width:15%">Country</th>
-        <th style="width:15%">Time Zone</th>
-        </tr>
-       </thead>
-       <tbody></tbody>
+    <h1>
+        List of users (<a id="new-user" href="#">New</a>)</h1>
+    <table id="users-table" border="1" cellpadding="4" cellspacing="0">
+        <thead>
+            <tr>
+                <th style="width: 35%">
+                    Email
+                </th>
+                <th style="width: 35%">
+                    Name
+                </th>
+                <th style="width: 10%">
+                    Country
+                </th>
+                <th style="width: 15%">
+                    Time Zone
+                </th>
+                <th style="width: 5%">
+                    Role
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 </div>
-
 <!--New User Modal-->
-<div id="new-user" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background:#eaeaea;">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">New User</h3>
-  </div>
-  <div class="modal-body">
-      <table>
-          <tr>
-              <td>Email</td>
-              <td><input type="email" /></td>
-          </tr>
-          <tr>
-              <td>Name</td>
-              <td><input type="text" /></td>
-          </tr>
-      </table>
-  </div>
-  <div class="modal-footer" style="background:#eaeaea;">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-success">Save changes</button>
-  </div>
+
+<div id="new-user-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="background: #eaeaea;">
+    @using (Html.BeginForm("CreateUser", "AccountPanel", FormMethod.Post, new { id = "create-user-form" })) {
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="myModalLabel">
+            New User</h3>
+    </div>
+    <div class="modal-body">
+
+        <table>
+            <tr>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <input name="Email" type="email" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input name="Name" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Role:</td>
+                <td>
+                    <select name="Role">
+                        <option value="1">Admin</option>
+                        <option value="2">Media</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>
+                    <select name="Country" id="new-country"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Time Zone:</td>
+                <td>
+                    <select name="TimeZoneId" id="new-timezone"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="password" id="new-password" name="Password" />
+                </td>
+            </tr>
+            <tr>
+                <td>Verify:</td>
+                <td>
+                    <input type="password" id="new-verify" name="VerifyPassword" />
+                </td>
+            </tr>
+            <tr>
+                <td>Information:</td>
+                <td>
+                    <textarea name="Description" id="new-information" rows="3"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div id="new-error" class="alert alert-error" style="display: none;margin:10px 0 10px 0;">
+            <a class="close" data-dismiss="alert" href="#">&times;</a> Invalid information
+        </div>
+    </div>
+    <div class="modal-footer" style="background: #eaeaea;">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">
+            Close</button>
+        <input type="submit" id="create-user-submit" class="btn btn-success" value="Save changes" />
+    </div>
+
+    }
+</div>
+<!-- UPDATE USER MODAL -->
+<div id="update-user-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="background: #eaeaea;">
+    @using (Html.BeginForm("UpdateUser", "AccountPanel", FormMethod.Post, new { id="update-user-form"})) {
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="myModalLabel">
+            Update User</h3>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" name="Code" id="update-code" />
+        <table>
+            <tr>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <span id="update-email" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input name="Name" type="text" id="update-name" />
+                </td>
+            </tr>
+            <tr>
+                <td>Role:</td>
+                <td>
+                    <select name="Role" id="update-role">
+                        <option value="1">Admin</option>
+                        <option value="2">Media</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td>
+                    <select name="Country" id="update-country"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Time Zone:</td>
+                <td>
+                    <select name="TimeZoneId" id="update-timezone"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="password" id="update-password" name="Password" />
+                </td>
+            </tr>
+            <tr>
+                <td>Verify:</td>
+                <td>
+                    <input type="password" id="update-verify" name="VerifyPassword" />
+                </td>
+            </tr>
+            <tr>
+                <td>Information:</td>
+                <td>
+                    <textarea name="Description" id="update-information" rows="3"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div id="update-error" class="alert alert-error" style="display: none; margin:10px 0 10px 0;">
+            <a class="close" data-dismiss="alert" href="#">&times;</a> Invalid information
+        </div>
+    </div>
+    <div class="modal-footer" style="background: #eaeaea;">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">
+            Close</button>
+        <input id="update-user-form" type="submit" class="btn btn-success" value="Save changes" />
+    </div>
+
+    }
 </div>

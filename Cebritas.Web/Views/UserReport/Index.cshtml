@@ -2,10 +2,15 @@
     ViewBag.Title = "Cebritas - Report Problem";
     Layout = "~/Views/Shared/_CebritasLayout.cshtml";
 }
+@{
+    var rnd = new Random();
+    var num = rnd.Next(1000);
+    var qs = "rnd=" + num;
+}
 @section CustomScripts {
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/maputils.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Content/js/mapuser.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/maputils.js")?@qs"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/mapuser.js")?@qs"></script>
 }
 <div class="problem-report">
     <h3>

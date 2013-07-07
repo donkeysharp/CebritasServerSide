@@ -27,6 +27,11 @@ namespace Cebritas.Web.Areas.Api.Controllers {
             TimeZoneInfo timeZoneInfo = TimeUtil.GetTimeZone(timeZone);
             Problem problem = new Problem();
             ViewModelToEntity(problemViewModel, problem);
+            if (timeZone == 0) {
+                problem.TimeZone = TimeZones.UTC_0;
+            } else {
+                problem.TimeZone = timeZone;
+            }
 
             problemService.Insert(problem, problemViewModel.FacebookCode, problemViewModel.Description, problemViewModel.Type, timeZoneInfo);
 
@@ -150,8 +155,8 @@ namespace Cebritas.Web.Areas.Api.Controllers {
                 viewModel.Type = 1;
                 viewModel.Description = string.Empty;
             }
-
-            DateTime reportedDate = TimeUtil.ConvertDateTimeToUtc(problem.ReportedAt, timeZone);
+            TimeZoneInfo aTimeZone = TimeUtil.GetTimeZone(problem.TimeZone);
+            DateTime reportedDate = TimeUtil.ConvertDateTimeToUtc(problem.ReportedAt, aTimeZone);
             viewModel.ReportedAt = TimeUtil.DateTimeToUnixTime(reportedDate, UnixTimeType.Seconds);
 
             viewModel.Reporters = new List<ReportViewModel>();

@@ -60,6 +60,12 @@ namespace Cebritas.Web {
                 new string[] { "Cebritas.Web.Controllers" }
             );
             routes.MapRoute(
+                "GetRegionalInfo",
+                "getregionalinfo/",
+                new { controller = "AccountPanel", action = "GetRegionalInfo" },
+                new string[] { "Cebritas.Web.Controllers" }
+            );
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}",
                 new { controller = "Home", action = "Index" }

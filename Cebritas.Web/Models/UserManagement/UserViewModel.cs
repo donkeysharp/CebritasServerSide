@@ -12,7 +12,8 @@ namespace Cebritas.Web.Models.UserManagement {
         public string Country { get; set; }
         public int TimeZoneId { get; set; }
         public string TimeZone { get; set; }
-        public int Role { get; set; }
+        public long Role { get; set; }
+        public string RoleName { get; set; }
         public string Password { get; set; }
         public string VerifyPassword { get; set; }
     }

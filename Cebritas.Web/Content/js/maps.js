@@ -24,7 +24,7 @@ window.Problems = [];
 
 function getMap() {
     var key = 'ApC8X7yE7vUrNbXZ72k68l9PoN0on80GyfOVMJKbsdtZuwqDUKy4HH6PKSnL0VrD';
-    var centerLocation = new Microsoft.Maps.Location(-16.504545, -68.130344);
+    var centerLocation = new Microsoft.Maps.Location(25.30623, -25.6006);
     window.map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
         credentials: key,
         showDashboard: true,
